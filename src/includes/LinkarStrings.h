@@ -85,7 +85,6 @@ DllEntry char** LkExtractRecordsDicts(const char* const lkString, uint32_t *coun
 DllEntry char** LkExtractRecordsCalculatedDicts(const char* const lkString, uint32_t *count);
 DllEntry char** LkExtractRecordsIdDicts(const char* const lkString, uint32_t* count);
 DllEntry char** LkExtractOriginalRecords(const char* const lkString, uint32_t* count);
-DllEntry char** LkExtractDictionaryIds(const char* const lkString, uint32_t* count);
 DllEntry char** LkExtractDictionaries(const char* const lkString, uint32_t* count);
 DllEntry char* LkExtractConversion(const char* const lkString);
 DllEntry char* LkExtractFormat(const char* const lkString);

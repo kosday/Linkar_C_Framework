@@ -389,48 +389,6 @@ DllEntry char** LkExtractOriginalRecords(const char* const lkString, uint32_t* c
 }
 
 /*
-	Function: LkExtractDictionaryIds
-		Extracts the codes from all the file dictionaries of an operation resultant <LkString>.
-		
-	Arguments:
-		lkString - Text string on which you are going to extract.
-		count - Output argument that inform about the size of the pointer array, that mean, how many strings contains.
-	
-	Returns:
-		Pointer array of string with the codes from all the file dictionaries from an operation resultant <LkString>.	
-	
-	Example:
-		--- Code
-		// lkStringResult it's a char * returned by a LkRead function
-		
-		uint32_t count;
-		char** dictionaryIds = LkExtractDictionaryIds(lkStringResult, &count);
-		for(int i=0; i<count; i++)
-		{
-			printf("%s\r\n", dictionaryIds[i]);
-		}
-		LkFreeMemoryStringArray(dictionaryIds, count);
-		---
-
-	Also See:
-		<LkString>
-		
-		<Release Memory>
-*/
-DllEntry char** LkExtractDictionaryIds(const char* const lkString, uint32_t* count)
-{
-	char* block = LkExtractData(lkString, RECORD_IDS_KEY, ASCII_FS, DBMV_Mark_AM);
-	if(block != NULL)
-	{
-		char** data = LkStrSplit(block, DBMV_Mark_AM, count);
-		free(block);
-		return data;
-	}
-	else
-		return NULL;
-}
-
-/*
 	Function: LkExtractDictionaries
 		Extracts all the file dictionaries of an operation resultant <LkString>.
 

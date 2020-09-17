@@ -96,6 +96,7 @@ DllEntry char** LkExtractRowHeaders(const char* const lkString, uint32_t *count)
 
 DllEntry char* LkComposeRecordIds(const char** const lstRecordIds, uint32_t count);
 DllEntry char* LkComposeRecords(const char** const lstRecords, uint32_t count);
+DllEntry char* LkComposeOriginalRecords(const char** const lstOriginalRecords, uint32_t count);
 DllEntry char* LkComposeDictionaries(const char** const lstDictionries, uint32_t count);
 DllEntry char* LkComposeExpressions(const char** const lstExpressions, uint32_t count);
 DllEntry char* LkComposeSubroutineArgs(const char** const lstArgs, uint32_t count);

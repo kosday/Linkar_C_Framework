@@ -658,10 +658,10 @@ DllEntry char** LkExtractRowHeaders(const char* const lkString, uint32_t *count)
 		
 /*
 	Function: LkComposeRecordIds
-		Composes the final string of various "recordsIds". Used by LkRead Operation and <LkComposeNewBuffer>, <LkComposeUpdateBuffer> and <LkComposeDeleteBuffer> functions in CRUD Operations.
+		Composes the final string of various "recordIds". Used by LkRead Operation and <LkComposeNewBuffer>, <LkComposeUpdateBuffer> and <LkComposeDeleteBuffer> functions in CRUD Operations.
 	
 	Arguments:
-		recordIds - Array (pointer to array of char pointers) with the "recordIds" to be joined.
+		lstRecordIds - Array (pointer to array of char pointers) with the "recordIds" to be joined.
 		count - The array size. 
 	
 	Returns:
@@ -681,9 +681,9 @@ DllEntry char** LkExtractRowHeaders(const char* const lkString, uint32_t *count)
 		
 		<Release Memory>
 */
-DllEntry char* LkComposeRecordIds(const char** const recordIds, uint32_t count)
+DllEntry char* LkComposeRecordIds(const char** const lstRecordIds, uint32_t count)
 {
-	return LkStrJoin(recordIds, count, ASCII_RS_str);
+	return LkStrJoin(lstRecordIds, count, ASCII_RS_str);
 }
 
 /*
@@ -691,7 +691,7 @@ DllEntry char* LkComposeRecordIds(const char** const recordIds, uint32_t count)
 		Composes the final string of various "records". Used by <LkComposeNewBuffer>, <LkComposeUpdateBuffer> and <LkComposeDeleteBuffer> functions in LkNew, LkUpdate and LkDelete Operations.
 	
 	Arguments:
-		records - Array (pointer to array of char pointers) with the "records" to be joined.
+		lstRecords - Array (pointer to array of char pointers) with the "records" to be joined.
 		count - The array size. 
 	
 	Returns:
@@ -726,9 +726,30 @@ DllEntry char* LkComposeRecordIds(const char** const recordIds, uint32_t count)
 		
 		<Release Memory>	
 */
-DllEntry char* LkComposeRecords(const char** const records, uint32_t count)
+DllEntry char* LkComposeRecords(const char** const lstRecords, uint32_t count)
 {
-    return LkStrJoin(records, count, ASCII_RS_str);
+    return LkStrJoin(lstRecords, count, ASCII_RS_str);
+}
+
+/*
+	Function: LkComposeOriginalRecords
+		Composes the final string of various "originalRecords". Used by <LkComposeUpdateBuffer> and <LkComposeDeleteBuffer> functions in LkUpdate and LkDelete Operations.
+	
+	Arguments:
+		lstOriginalRecords - Array (pointer to array of char pointers) with the "originalRecords" to be joined.
+		count - The array size. 
+	
+	Returns:
+		The final string of "originalRecords" to be used by CRUD Operations.
+	
+	Also See:
+		<LkString>
+		
+		<Release Memory>	
+*/
+DllEntry char* LkComposeOriginalRecords(const char** const lstOriginalRecords, uint32_t count)
+{
+    return LkStrJoin(lstOriginalRecords, count, ASCII_RS_str);
 }
 
 /*

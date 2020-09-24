@@ -87,8 +87,9 @@ DllEntry void LkLogout(char **error, char** connectionInfo, const char* const cu
 */
 DllEntry char* LkRead(char** error, char** connectionInfo, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, const char* const customVars, uint32_t receiveTimeout)
 {	
+	DataFormatTYPE inputFormat = DataFormatTYPE_MV;	
 	DataFormatCruTYPE outputFormat = DataFormatCruTYPE_MV;		
-	char* result = Base_LkRead(error, connectionInfo, filename, recordIds, dictionaries, readOptions, outputFormat, customVars, receiveTimeout);
+	char* result = Base_LkRead(error, connectionInfo, filename, recordIds, dictionaries, readOptions, inputFormat, outputFormat, customVars, receiveTimeout);
 		
 	return result;
 }

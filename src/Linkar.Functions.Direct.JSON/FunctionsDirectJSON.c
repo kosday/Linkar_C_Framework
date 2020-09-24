@@ -38,7 +38,8 @@
 */
 DllEntry char* LkRead(char** error, const char* const credentialOptions, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, JSON_FORMAT jsonFormat, const char* const customVars, uint32_t receiveTimeout)
 {	
-	char* result = Base_LkRead(error, credentialOptions, filename, recordIds, dictionaries, readOptions, jsonFormat, customVars, receiveTimeout);
+	DataFormatTYPE inputFormat = DataFormatTYPE_JSON;	
+	char* result = Base_LkRead(error, credentialOptions, filename, recordIds, dictionaries, readOptions, inputFormat, jsonFormat, customVars, receiveTimeout);
 		
 	return result;
 }

@@ -38,7 +38,8 @@
 DllEntry char* LkRead(char** error, const char* const credentialOptions, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, const char* const customVars, uint32_t receiveTimeout)
 {	
 	DataFormatTYPE outputFormat = DataFormatCruTYPE_MV;
-	char* result = Base_LkRead(error, credentialOptions, filename, recordIds, dictionaries, readOptions, outputFormat, customVars, receiveTimeout);
+	DataFormatTYPE inputFormat = DataFormatTYPE_MV;	
+	char* result = Base_LkRead(error, credentialOptions, filename, recordIds, dictionaries, readOptions, inputFormat, outputFormat, customVars, receiveTimeout);
 		
 	return result;
 }

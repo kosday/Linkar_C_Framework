@@ -38,7 +38,8 @@
 */
 DllEntry char* LkRead(char** error, const char* const credentialOptions, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, XML_FORMAT xmlFormat, const char* const customVars, uint32_t receiveTimeout)
 {	
-	char* result = Base_LkRead(error, credentialOptions, filename, recordIds, dictionaries, readOptions, xmlFormat, customVars, receiveTimeout);
+	DataFormatTYPE inputFormat = DataFormatTYPE_XML;	
+	char* result = Base_LkRead(error, credentialOptions, filename, recordIds, dictionaries, readOptions, inputFormat, xmlFormat, customVars, receiveTimeout);
 		
 	return result;
 }

@@ -55,10 +55,11 @@ void main(void)
 	char* recordIds = "1";
 	char* dictionaries = "";
 	char* readOptions = NULL;
+	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	DataFormatCruTYPE outputFormat = DataFormatCruTYPE_MV;
 	char* customVars = "";
 	uint32_t receiveTimeout = 10;
-	char* result = Base_LkRead(&error, credentialOptions, filename, recordIds, dictionaries, readOptions, outputFormat, customVars, receiveTimeout);
+	char* result = Base_LkRead(&error, credentialOptions, filename, recordIds, dictionaries, readOptions, inputFormat, outputFormat, customVars, receiveTimeout);
 	if(error != NULL)
 		printf("ERRORS: %s\n", error);
 	printf("result (MV): %s\n", result);

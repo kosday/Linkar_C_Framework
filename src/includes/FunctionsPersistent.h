@@ -6,7 +6,7 @@
 	--- Code
 	DllEntry char* Base_LkLogin(char** error, char* credentialOptions, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry void Base_LkLogout(char** error, char** connectionInfo, const char* const customVars, uint32_t receiveTimeout);
-	DllEntry char* Base_LkRead(char** error, char** credentialOptions, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout);
+	DllEntry char* Base_LkRead(char** error, char** credentialOptions, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* Base_LkUpdate(char** error,  char** credentialOptions, const char* const filename, const char* const records, const char* const updateOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* Base_LkNew(char** error, char** credentialOptions, const char* const filename, const char* const records, const char* const newOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* Base_LkDelete(char** error, char** credentialOptions, const char* const filename, const char* const records, const char* const deleteOptions, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout);
@@ -28,7 +28,7 @@
 
 DllEntry char* Base_LkLogin(char** error, char* credentialOptions, const char* const customVars, uint32_t receiveTimeout);
 DllEntry void Base_LkLogout(char** error, char** connectionInfo, const char* const customVars, uint32_t receiveTimeout);
-DllEntry char* Base_LkRead(char** error, char** credentialOptions, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout);
+DllEntry char* Base_LkRead(char** error, char** credentialOptions, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* Base_LkUpdate(char** error,  char** credentialOptions, const char* const filename, const char* const records, const char* const updateOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* Base_LkNew(char** error, char** credentialOptions, const char* const filename, const char* const records, const char* const newOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* Base_LkDelete(char** error, char** credentialOptions, const char* const filename, const char* const records, const char* const deleteOptions, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout);

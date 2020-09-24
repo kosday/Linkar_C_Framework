@@ -128,6 +128,7 @@ DllEntry void Base_LkLogout(char **error, char** connectionInfo, const char* con
 		recordIds - It's the records codes list to read, separated by the Record Separator character (30). Use <LkComposeRecordIds> to compose this string
 		dictionaries - List of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer.
 		readOptions - Object that defines the different reading options of the Function: Calculated, dictClause, conversion, formatSpec, originalRecords.
+		inputFormat - Indicates in what format you wish to send the record ids: MV, XML or JSON.
 		outputFormat - Indicates in what format you want to receive the data resulting from the Read, New, Update and Select operations: MV, XML, XML_DICT, XML_SCH, JSON, JSON_DICT or JSON_SCH.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely. Values less than or equal to 0, waits indefinitely.
@@ -146,11 +147,10 @@ DllEntry void Base_LkLogout(char **error, char** connectionInfo, const char* con
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkRead(char** error, char** connectionInfo, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkRead(char** error, char** connectionInfo, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {	
 	uint8_t operationCode = OP_CODE_READ;
 	char* operationArguments = LkGetReadArgs(filename, recordIds, dictionaries, readOptions, customVars);
-	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
 	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	

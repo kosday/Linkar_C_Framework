@@ -73,7 +73,7 @@ void main(void)
 	DataFormatCruTYPE outputFormat = DataFormatCruTYPE_MV;
 	uint32_t receiveTimeout = 10;
 	
-	char* result = Base_LkRead(&error, &connectionInfo, filename, recordIds, dictionaries, readOptions, inputFormat, outputFormat, customVars, receiveTimeout);
+	char* result = Base_LkRead(&error, connectionInfo, filename, recordIds, dictionaries, readOptions, inputFormat, outputFormat, customVars, receiveTimeout);
 	if(error != NULL)
 		printf("ERRORS: %s\n", error);
 	printf("result (MV): %s\n", result);
@@ -84,7 +84,7 @@ void main(void)
 	printf("\nOperation LkLogout example\n");
 	printf("connectionInfo BEFORE Logout: %s\n", connectionInfo);
 	
-	Base_LkLogout(&error, &connectionInfo, customVars, 30);
+	Base_LkLogout(&error, connectionInfo, customVars, 30);
 	printf("Logout result: %s\n", result);
 	
 	printf("connectionInfo AFTER Logout: %s\n", connectionInfo);

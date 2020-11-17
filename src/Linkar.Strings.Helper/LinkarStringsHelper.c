@@ -27,12 +27,13 @@ DllEntry char ** LkStrSplit(const char* const str, const char delim, uint32_t* c
 {
 	uint32_t i;
 	uint32_t len = strlen(str);
-
 	uint32_t c = 0;
+	unsigned char delim2 = delim & 0xFF;
+
 	for(i=0; i<len; i++)
-		if(str[i] == delim)
+		if((unsigned char)str[i] == delim2)
 			c++;
-	
+		
 	*count = c + 1;
 	
 	uint32_t size = sizeof(char*) * (c + 2);

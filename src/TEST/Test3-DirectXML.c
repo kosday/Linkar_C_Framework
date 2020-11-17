@@ -8,6 +8,7 @@
 #include "Types.h"
 
 #include "FunctionsDirectXML.h"
+#include "ReleaseMemory.h"
 
 void main(void)
 {	
@@ -17,7 +18,19 @@ void main(void)
 	printf("\nOperation LkRead XML example. LK.ORDERS Id 1\n");
 	char* error;
 	char* filename = "LK.ORDERS";
-	char* recordIds = "1";
+	
+	char* recordIds = 
+"<LINKAR>\
+    <RECORDS>\
+        <RECORD>\
+            <LKITEMID>1</LKITEMID>\
+        </RECORD>\
+        <RECORD>\
+            <LKITEMID>2</LKITEMID>\
+        </RECORD>\
+    </RECORDS>\
+</LINKAR>";
+		
 	char* dictionaries = "";
 	char* readOptions = NULL;
 	char* customVars = "";

@@ -52,7 +52,7 @@ DllEntry char* LkLogin(char** error, char* credentialOptions, const char* const 
 	See Also:
 		<LkLogin>	
 */
-DllEntry void LkLogout(char **error, char** connectionInfo, const char* const customVars, uint32_t receiveTimeout)
+DllEntry void LkLogout(char** error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout)
 {
 	Base_LkLogout(error, connectionInfo, customVars, receiveTimeout);
 }
@@ -85,7 +85,7 @@ DllEntry void LkLogout(char **error, char** connectionInfo, const char* const cu
 		
 		<Release Memory>
 */
-DllEntry char* LkRead(char** error, char** connectionInfo, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkRead(char** error, char* connectionInfo, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, const char* const customVars, uint32_t receiveTimeout)
 {	
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;	
 	DataFormatCruTYPE outputFormat = DataFormatCruTYPE_MV;		
@@ -123,7 +123,7 @@ DllEntry char* LkRead(char** error, char** connectionInfo, const char* const fil
 		
 		<Release Memory>
 */
-DllEntry char* LkUpdate(char** error, char** connectionInfo, const char* const filename, const char* const records, const char* const updateOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkUpdate(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const updateOptions, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;		
 	DataFormatCruTYPE outputFormat = DataFormatCruTYPE_MV;		
@@ -169,7 +169,7 @@ DllEntry char* LkUpdate(char** error, char** connectionInfo, const char* const f
 		
 		<Release Memory>
 */
-DllEntry char* LkNew(char** error, char** connectionInfo, const char* const filename, const char* const records, const char* const newOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkNew(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const newOptions, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;		
 	DataFormatCruTYPE outputFormat = DataFormatCruTYPE_MV;		
@@ -213,10 +213,11 @@ DllEntry char* LkNew(char** error, char** connectionInfo, const char* const file
 		
 		<Release Memory>
 */
-DllEntry char* LkDelete(char** error, char** connectionInfo, const char* const filename, const char* const records, const char* const deleteOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkDelete(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const deleteOptions, const char* const customVars, uint32_t receiveTimeout)
 {
-	DataFormatTYPE outputFormat = DataFormatTYPE_MV;		
-	char* result = Base_LkDelete(error, connectionInfo, filename, records, deleteOptions, outputFormat, customVars, receiveTimeout);
+	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
+	DataFormatTYPE outputFormat = DataFormatTYPE_MV;
+	char* result = Base_LkDelete(error, connectionInfo, filename, records, deleteOptions, inputFormat, outputFormat, customVars, receiveTimeout);
 	
 	return result;
 }
@@ -251,7 +252,7 @@ DllEntry char* LkDelete(char** error, char** connectionInfo, const char* const f
 		
 		<Release Memory>
 */
-DllEntry char* LkSelect(char** error, char** connectionInfo, const char* const filename, const char* const selectClause, const char* const sortClause, const char* const dictClause, const char* const preSelectClause, const char* const selectOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkSelect(char** error, char* connectionInfo, const char* const filename, const char* const selectClause, const char* const sortClause, const char* const dictClause, const char* const preSelectClause, const char* const selectOptions, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatCruTYPE outputFormat = DataFormatCruTYPE_MV;		
 	char* result = Base_LkSelect(error, connectionInfo, filename, selectClause, sortClause, dictClause, preSelectClause, selectOptions, outputFormat, customVars, receiveTimeout);
@@ -286,10 +287,11 @@ DllEntry char* LkSelect(char** error, char** connectionInfo, const char* const f
 		
 		<Release Memory>
 */
-DllEntry char* LkSubroutine(char** error, char** connectionInfo, const char* const subroutineName, uint32_t argsNumber, const char* const arguments, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkSubroutine(char** error, char* connectionInfo, const char* const subroutineName, uint32_t argsNumber, const char* const arguments, const char* const customVars, uint32_t receiveTimeout)
 {
+	DataFormatTYPE inputFormat = DataFormatTYPE_MV;			
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;			
-	char* result = Base_LkSubroutine(error, connectionInfo, subroutineName, argsNumber, arguments, outputFormat, customVars, receiveTimeout);
+	char* result = Base_LkSubroutine(error, connectionInfo, subroutineName, argsNumber, arguments, inputFormat, outputFormat, customVars, receiveTimeout);
 	
 	return result;	
 }
@@ -301,7 +303,7 @@ DllEntry char* LkSubroutine(char** error, char** connectionInfo, const char* con
 	Arguments:
 		error - System or communication errors with LinkarSERVER.
 		connectionInfo - String that is returned by the Login function and that contains all the necessary data of the connection.
-		conversionOptions - Indicates the conversion type, input or output: Input=ICONV(); OUTPUT=OCONV()
+		conversionType - Indicates the conversion type, input or output: Input=ICONV(); OUTPUT=OCONV()
 		expression - The data or expression to convert. It can have MV marks, in which case the conversion will execute in each value obeying the original MV mark.
 		code - The conversion code. It will have to obey the Database conversions specifications.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
@@ -321,10 +323,10 @@ DllEntry char* LkSubroutine(char** error, char** connectionInfo, const char* con
 		
 		<Release Memory>
 */
-DllEntry char* LkConversion(char** error, char** connectionInfo, const char* const expression, const char* const code, CONVERSION_TYPE conversionOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkConversion(char** error, char* connectionInfo, const char* const expression, const char* const code, CONVERSION_TYPE conversionType, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;			
-	char* result = Base_LkConversion(error, connectionInfo, expression, code, conversionOptions, outputFormat, customVars, receiveTimeout);
+	char* result = Base_LkConversion(error, connectionInfo, expression, code, conversionType, outputFormat, customVars, receiveTimeout);
 	
 	return result;	
 }
@@ -353,7 +355,7 @@ DllEntry char* LkConversion(char** error, char** connectionInfo, const char* con
 		
 		<Release Memory>
 */
-DllEntry char* LkFormat(char** error, char** connectionInfo, const char* const expression, const char* const formatSpec, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkFormat(char** error, char* connectionInfo, const char* const expression, const char* const formatSpec, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;		
 	char* result = Base_LkFormat(error, connectionInfo, expression, formatSpec, outputFormat, customVars, receiveTimeout);
@@ -384,7 +386,7 @@ DllEntry char* LkFormat(char** error, char** connectionInfo, const char* const e
 		
 		<Release Memory>
 */
-DllEntry char* LkDictionaries(char** error, char** connectionInfo, const char* const filename, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkDictionaries(char** error, char* connectionInfo, const char* const filename, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;		
 	char* result = Base_LkDictionaries(error, connectionInfo, filename, outputFormat, customVars, receiveTimeout);
@@ -415,7 +417,7 @@ DllEntry char* LkDictionaries(char** error, char** connectionInfo, const char* c
 		
 		<Release Memory>
 */
-DllEntry char* LkExecute(char** error, char** connectionInfo, const char* const statement, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkExecute(char** error, char* connectionInfo, const char* const statement, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;		
 	char* result = Base_LkExecute(error, connectionInfo, statement, outputFormat, customVars, receiveTimeout);
@@ -441,7 +443,7 @@ DllEntry char* LkExecute(char** error, char** connectionInfo, const char* const 
 		
 		<Release Memory>
 */
-DllEntry char* LkGetVersion(char** error, char** connectionInfo, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkGetVersion(char** error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;		
 	char* result = Base_LkGetVersion(error, connectionInfo, outputFormat, customVars, receiveTimeout);
@@ -478,7 +480,7 @@ DllEntry char* LkGetVersion(char** error, char** connectionInfo, const char* con
 		
 		<Release Memory>
 */
-DllEntry char* LkSchemas(char** error, char** connectionInfo, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkSchemas(char** error, char* connectionInfo, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;			
 	char* result = Base_LkSchemas(error, connectionInfo, lkSchemasOptions, outputFormat, customVars, receiveTimeout);
@@ -516,7 +518,7 @@ DllEntry char* LkSchemas(char** error, char** connectionInfo, const char* const 
 		
 		<Release Memory>
 */
-DllEntry char* LkProperties(char** error, char** connectionInfo, const char* const filename, const char* const lkPropertiesOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkPropertiesOptions, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;
 	char* result = Base_LkProperties(error, connectionInfo, filename, lkPropertiesOptions, outputFormat, customVars, receiveTimeout);
@@ -544,7 +546,7 @@ DllEntry char* LkProperties(char** error, char** connectionInfo, const char* con
 		
 		<LkCreateConnectionInfo>
 */
-DllEntry char* LkResetCommonBlocks(char** error, char** connectionInfo, uint32_t receiveTimeout)
+DllEntry char* LkResetCommonBlocks(char** error, char* connectionInfo, uint32_t receiveTimeout)
 {
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;	
 	char* result = Base_LkResetCommonBlocks(error, connectionInfo, outputFormat, receiveTimeout);

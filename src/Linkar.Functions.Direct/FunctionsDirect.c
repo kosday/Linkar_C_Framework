@@ -150,6 +150,7 @@ DllEntry char* Base_LkNew(char** error, const char* const credentialOptions, con
 		filename - It's the file name where the records are going to be deleted. DICT in case of deleting a record that belongs to a dictionary.
 		records - It's the records list to be deleted.
 		deleteOptions - Object that defines the different Function options: optimisticLockControl, recoverRecordIdType.
+		inputFormat - Indicates in what format you wish to send the resultant deleting data: MV, XML or JSON.
 		outputFormat - Indicates in what format you want to receive the data resulting from the operation: MV, XML or JSON.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
@@ -170,11 +171,10 @@ DllEntry char* Base_LkNew(char** error, const char* const credentialOptions, con
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkDelete(char** error, const char* const credentialOptions, const char* const filename, const char* const records, const char* const deleteOptions, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkDelete(char** error, const char* const credentialOptions, const char* const filename, const char* const records, const char* const deleteOptions, DataFormatTYPE inputFormat, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_DELETE;
 	char* operationArguments = LkGetDeleteArgs(filename, records, deleteOptions, customVars);
-	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
 	char* result = LkExecuteDirectOperation(error, credentialOptions, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
@@ -233,6 +233,7 @@ DllEntry char* Base_LkSelect(char** error, const char* const credentialOptions, 
 		subroutineName - Subroutine name you want to execute.
 		argsNumber - The number of arguments.
 		arguments - The subroutine arguments list.
+		inputFormat - Indicates in what format you wish to send the subroutine arguments: MV, XML or JSON.
 		outputFormat - Indicates in what format you want to receive the data resulting from the operation: MV, XML or JSON.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
@@ -247,11 +248,10 @@ DllEntry char* Base_LkSelect(char** error, const char* const credentialOptions, 
 
 		<Release Memory>
 */
-DllEntry char* Base_LkSubroutine(char** error, const char* const credentialOptions, const char* const subroutineName, uint32_t argsNumber, const char* const arguments, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkSubroutine(char** error, const char* const credentialOptions, const char* const subroutineName, uint32_t argsNumber, const char* const arguments, DataFormatTYPE inputFormat, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_SUBROUTINE;
 	char* operationArguments = LkGetSubroutineArgs(subroutineName, argsNumber, arguments, customVars);
-	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
 	char* result = LkExecuteDirectOperation(error, credentialOptions, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
@@ -267,7 +267,7 @@ DllEntry char* Base_LkSubroutine(char** error, const char* const credentialOptio
 	Arguments:
 		error - System or communication errors with LinkarSERVER.
 		credentialOptions - String that defines the necessary data to access to the Linkar Server: Username, Password, EntryPoint, Language, FreeText.
-		conversionOptions - Indicates the conversion type, input or output: Input=ICONV(); OUTPUT=OCONV()
+		conversionType - Indicates the conversion type, input or output: Input=ICONV(); OUTPUT=OCONV()
 		expression - The data or expression to convert. It can have MV marks, in which case the conversion will execute in each value obeying the original MV mark.
 		code - The conversion code. It will have to obey the Database conversions specifications.
 		outputFormat - Indicates in what format you want to receive the data resulting from the operation: MV, XML or JSON.
@@ -284,10 +284,10 @@ DllEntry char* Base_LkSubroutine(char** error, const char* const credentialOptio
 
 		<Release Memory>
 */
-DllEntry char* Base_LkConversion(char** error, const char* const credentialOptions, const char* const expression, const char* const code, CONVERSION_TYPE conversionOptions, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkConversion(char** error, const char* const credentialOptions, const char* const expression, const char* const code, CONVERSION_TYPE conversionType, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_CONVERSION;
-	char* operationArguments = LkGetConversionArgs(expression, code, conversionOptions, customVars);
+	char* operationArguments = LkGetConversionArgs(expression, code, conversionType, customVars);
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
 	char* result = LkExecuteDirectOperation(error, credentialOptions, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
@@ -386,7 +386,7 @@ DllEntry char* Base_LkDictionaries(char** error, const char* const credentialOpt
 */
 DllEntry char* Base_LkExecute(char** error, const char* const credentialOptions, const char* const statement, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
-	uint8_t operationCode = OP_CODE_DICTIONARIES;
+	uint8_t operationCode = OP_CODE_EXECUTE;
 	char* operationArguments = LkGetExecuteArgs(statement, customVars);
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
@@ -573,7 +573,7 @@ DllEntry char* Base_LkGetTable(char** error, const char* const credentialOptions
 */
 DllEntry char* Base_LkResetCommonBlocks(char** error, const char* const credentialOptions, DataFormatTYPE outputFormat, uint32_t receiveTimeout)
 {
-	uint8_t operationCode = OP_CODE_GETVERSION;
+	uint8_t operationCode = OP_CODE_RESETCOMMONBLOCKS;
 	char* operationArguments = LkGetResetCommonBlocksArgs();
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	

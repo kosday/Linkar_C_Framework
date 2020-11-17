@@ -486,13 +486,13 @@ static char* strReplace(const char* const str, uint32_t pos, uint32_t length, co
 
 /*
 	Function: LkChange
-		Replaces the occurrences of a substring inside a string, by other substring.
+		Replaces the occurrence of a substring inside a string, by other substring.
 		
 	Arguments:
 		str - The string on which the value is going to change.
 		oldStr - The value to change.
 		newStr - The new value.
-		occurrences - The number of times it will change.
+		occurrence - The number of times it will change.
 		start - The position from which you are going to start changing values.
 	
 	Returns:
@@ -501,7 +501,7 @@ static char* strReplace(const char* const str, uint32_t pos, uint32_t length, co
 	See Also:	
 		<Release Memory>
 */
-DllEntry char* LkChange(const char* const str, const char* const oldStr, const char* const newStr, int32_t occurrences, int32_t start)
+DllEntry char* LkChange(const char* const str, const char* const oldStr, const char* const newStr, int32_t occurrence, int32_t start)
 {	
 	int lenOldStr = strlen(oldStr);
 	int lenNewStr = strlen(newStr);
@@ -535,10 +535,10 @@ DllEntry char* LkChange(const char* const str, const char* const oldStr, const c
 	BOOL end = FALSE;
 	do
 	{
-		if(occurrences > 0)
+		if(occurrence > 0)
 		{
-			occurrences--;
-			if(occurrences == 0)
+			occurrence--;
+			if(occurrence == 0)
 				end = TRUE;
 		}
 			

@@ -79,7 +79,16 @@ DllEntry char** LkExtractRecordIds(const char* const lkString, uint32_t *count)
 	{
 		char** data = LkStrSplit(block, ASCII_RS, count);
 		free(block);
-		return data;
+
+		if(*count == 1 && (data[0] == NULL || strcmp(data[0], "") == 0))
+		{
+			*count = 0;
+			free(data[0]);
+			free(data);
+			return NULL;
+		}
+		else
+			return data;
 	}
 	else
 		return NULL;
@@ -122,7 +131,16 @@ DllEntry char** LkExtractRecords(const char* const lkString, uint32_t *count)
 	{
 		char** data = LkStrSplit(block, ASCII_RS, count);
 		free(block);
-		return data;
+
+		if(*count == 1 && (data[0] == NULL || strcmp(data[0], "") == 0))
+		{
+			*count = 0;
+			free(data[0]);
+			free(data);
+			return NULL;
+		}
+		else
+			return data;
 	}
 	else
 		return NULL;
@@ -165,7 +183,7 @@ DllEntry char** LkExtractErrors(const char* const lkString, uint32_t *count)
 	{
 		char** data = LkStrSplit(block, DBMV_Mark_AM, count);		
 		free(block);
-				
+
 		if(*count == 1 && (data[0] == NULL || strcmp(data[0], "") == 0))
 		{
 			*count = 0;
@@ -216,10 +234,19 @@ DllEntry char** LkExtractRecordsCalculated(const char* const lkString, uint32_t 
 	{
 		char** data = LkStrSplit(block, DBMV_Mark_AM, count);
 		free(block);
-		return data;
+
+		if(*count == 1 && (data[0] == NULL || strcmp(data[0], "") == 0))
+		{
+			*count = 0;
+			free(data[0]);
+			free(data);
+			return NULL;
+		}
+		else
+			return data;
 	}
 	else
-		return NULL;	
+		return NULL;
 }
 
 /*
@@ -258,7 +285,16 @@ DllEntry char** LkExtractRecordsDicts(const char* const lkString, uint32_t *coun
 	{
 		char** data = LkStrSplit(block, DBMV_Mark_AM, count);
 		free(block);
-		return data;
+
+		if(*count == 1 && (data[0] == NULL || strcmp(data[0], "") == 0))
+		{
+			*count = 0;
+			free(data[0]);
+			free(data);
+			return NULL;
+		}
+		else
+			return data;
 	}
 	else
 		return NULL;
@@ -298,7 +334,16 @@ DllEntry char** LkExtractRecordsCalculatedDicts(const char* const lkString, uint
 	{
 		char** data = LkStrSplit(block, DBMV_Mark_AM, count);
 		free(block);
-		return data;
+
+		if(*count == 1 && (data[0] == NULL || strcmp(data[0], "") == 0))
+		{
+			*count = 0;
+			free(data[0]);
+			free(data);
+			return NULL;
+		}
+		else
+			return data;
 	}
 	else
 		return NULL;
@@ -340,7 +385,16 @@ DllEntry char** LkExtractRecordsIdDicts(const char* const lkString, uint32_t* co
 	{
 		char** data = LkStrSplit(block, DBMV_Mark_AM, count);
 		free(block);
-		return data;
+
+		if(*count == 1 && (data[0] == NULL || strcmp(data[0], "") == 0))
+		{
+			*count = 0;
+			free(data[0]);
+			free(data);
+			return NULL;
+		}
+		else
+			return data;
 	}
 	else
 		return NULL;
@@ -382,7 +436,16 @@ DllEntry char** LkExtractOriginalRecords(const char* const lkString, uint32_t* c
 	{
 		char** data = LkStrSplit(block, ASCII_RS, count);
 		free(block);
-		return data;
+
+		if(*count == 1 && (data[0] == NULL || strcmp(data[0], "") == 0))
+		{
+			*count = 0;
+			free(data[0]);
+			free(data);
+			return NULL;
+		}
+		else
+			return data;
 	}
 	else
 		return NULL;
@@ -424,7 +487,16 @@ DllEntry char** LkExtractDictionaries(const char* const lkString, uint32_t* coun
 	{
 		char** data = LkStrSplit(block, ASCII_RS, count);
 		free(block);
-		return data;
+
+		if(*count == 1 && (data[0] == NULL || strcmp(data[0], "") == 0))
+		{
+			*count = 0;
+			free(data[0]);
+			free(data);
+			return NULL;
+		}
+		else
+			return data;
 	}
 	else
 		return NULL;
@@ -556,17 +628,22 @@ DllEntry char* LkExtractReturning(const char* const lkString)
 		
 	Arguments:
 		lkString - Text string on which you are going to extract.
-	
+		count - Output argument that inform about the size of the pointer array, that mean, how many strings contains.
+
 	Returns:
-		String ARGUMENTS value of the LkSubroutine functions resultant <LkString>.
+		Pointer array of string with the ARGUMENTS value of the LkSubroutine functions resultant <LkString>.
 		
 	Example:
 		--- Code
 		// lkStringResult it's a char * returned by a LkSubroutine function
 		
-		char* arguments = LkExtractSubroutineArgs(lkStringResult);
-		printf("%s\r\n", arguments);
-		LkFreeMemory(arguments);
+		uint32_t count;
+		char** arguments = LkExtractSubroutineArgs(lkStringResult, &count);
+		for(int i=0; i<count; i++)
+		{
+			printf("%s\r\n", arguments[i]);
+		}
+		LkFreeMemoryStringArray(arguments, count);
 		---
 
 	Also See:
@@ -574,10 +651,17 @@ DllEntry char* LkExtractReturning(const char* const lkString)
 		
 		<Release Memory>
 */
-DllEntry char* LkExtractSubroutineArgs(const char* const lkString)
+DllEntry char** LkExtractSubroutineArgs(const char* const lkString, uint32_t *count)
 {
-	char* data = LkExtractData(lkString, ARGUMENTS_KEY, ASCII_FS, DBMV_Mark_AM);
-	return data;
+	char* block = LkExtractData(lkString, ARGUMENTS_KEY, ASCII_FS, DBMV_Mark_AM);
+	if(block != NULL)
+	{
+		char** data = LkStrSplit(block, ASCII_DC4, count);
+		free(block);
+		return data;
+	}
+	else
+		return NULL;
 }
 
 /*
@@ -589,7 +673,7 @@ DllEntry char* LkExtractSubroutineArgs(const char* const lkString)
 		count - Output argument that inform about the size of the pointer array, that mean, how many strings contains.
 	
 	Returns:
-		String ROWPROPERTIES value of the Schemas functions resultant <LkString>.
+		Pointer array of string with the ROWPROPERTIES value of the Schemas functions resultant <LkString>.
 		
 	Example:
 		--- Code
@@ -627,7 +711,7 @@ DllEntry char** LkExtractRowProperties(const char* const lkString, uint32_t *cou
 		count - Output argument that inform about the size of the pointer array, that mean, how many strings contains.
 	
 	Returns:
-		String ROWHEADERS value of the Schemas functions resultant <LkString>.
+		Pointer array of string with the ROWHEADERS value of the Schemas functions resultant <LkString>.
 		
 	Example:
 		--- Code
@@ -816,7 +900,7 @@ DllEntry char* LkComposeDictionaries(const char** const lstDictionaries, uint32_
 */
 DllEntry char* LkComposeExpressions(const char** const lstExpressions, uint32_t count)
 {
-    return LkStrJoin(lstExpressions, count, DBMV_Mark_VM_str);
+    return LkStrJoin(lstExpressions, count, DBMV_Mark_AM_str);
 }
 
 /*

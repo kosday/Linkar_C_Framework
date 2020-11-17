@@ -3,7 +3,7 @@
 
 #include "CredentialOptions.h"
 #include "ConnectionInfo.h"
-#include "CommandsPersistentXML.h"
+#include "CommandsPersistent.h"
 
 static void mainProgram(char** connectionInfo)
 {	

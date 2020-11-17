@@ -153,8 +153,9 @@ DllEntry char* LkNew(char** error, const char* const credentialOptions, const ch
 */
 DllEntry char* LkDelete(char** error, const char* const credentialOptions, const char* const filename, const char* const records, const char* const deleteOptions, const char* const customVars, uint32_t receiveTimeout)
 {
-	DataFormatTYPE outputFormat = DataFormatTYPE_MV;	
-	char* result = Base_LkDelete(error, credentialOptions, filename, records, deleteOptions, outputFormat, customVars, receiveTimeout);
+	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
+	DataFormatTYPE outputFormat = DataFormatTYPE_MV;
+	char* result = Base_LkDelete(error, credentialOptions, filename, records, deleteOptions, inputFormat, outputFormat, customVars, receiveTimeout);
 	
 	return result;
 }
@@ -218,8 +219,9 @@ DllEntry char* LkSelect(char** error, const char* const credentialOptions, const
 */
 DllEntry char* LkSubroutine(char** error, const char* const credentialOptions, const char* const subroutineName, uint32_t argsNumber, const char* const arguments, const char* const customVars, uint32_t receiveTimeout)
 {
+	DataFormatTYPE intputFormat = DataFormatTYPE_MV;		
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;		
-	char* result = Base_LkSubroutine(error, credentialOptions, subroutineName, argsNumber, arguments, outputFormat, customVars, receiveTimeout);
+	char* result = Base_LkSubroutine(error, credentialOptions, subroutineName, argsNumber, arguments, intputFormat, outputFormat, customVars, receiveTimeout);
 	
 	return result;	
 }
@@ -231,7 +233,7 @@ DllEntry char* LkSubroutine(char** error, const char* const credentialOptions, c
 	Arguments:
 		error - System or communication errors with LinkarSERVER.
 		credentialOptions - String that defines the necessary data to access to the Linkar Server: Username, Password, EntryPoint, Language, FreeText.
-		conversionOptions - Indicates the conversion type, input or output: Input=ICONV(); OUTPUT=OCONV()
+		conversionType - Indicates the conversion type, input or output: Input=ICONV(); OUTPUT=OCONV()
 		expression - The data or expression to convert. It can have MV marks, in which case the conversion will execute in each value obeying the original MV mark.
 		code - The conversion code. It will have to obey the Database conversions specifications.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
@@ -247,10 +249,10 @@ DllEntry char* LkSubroutine(char** error, const char* const credentialOptions, c
 		
 		<Release Memory>
 */
-DllEntry char* LkConversion(char** error, const char* const credentialOptions, const char* const expression, const char* const code, CONVERSION_TYPE conversionOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkConversion(char** error, const char* const credentialOptions, const char* const expression, const char* const code, CONVERSION_TYPE conversionType, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;
-	char* result = Base_LkConversion(error, credentialOptions, expression, code, conversionOptions, outputFormat, customVars, receiveTimeout);
+	char* result = Base_LkConversion(error, credentialOptions, expression, code, conversionType, outputFormat, customVars, receiveTimeout);
 	
 	return result;	
 }

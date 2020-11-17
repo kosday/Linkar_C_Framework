@@ -9,6 +9,27 @@ In this repository you can find the source code to generate the pubic libraries.
 There are scripts for Windows and Linux to help in the generation of the libraries.
 
 
+Building Linux Libraries
+------------------------
+
+Use the script "build_x64_x86.sh" to build the linux x64 and x86 libraries.
+
+The compiles libraries will be placed in "bin" folder. 
+
+This script was tested in Ubuntu 20.4
+
+
+Building Windows Libraries
+--------------------------
+
+Use the script "build_x64_x86.cmd" to build the Windows x64 and x86 libraries.
+
+You must execute the script from "x64 Native Tools Command Prompt for VS 2019" to build x64 Libraries
+and from "x86 Native Tools Command Prompt for VS 2019" to build x86 libraries
+
+The compiles libraries will be placed in "bin" folder. 
+
+
 Windows x64/x86 DINAMIC LIBRARIES
 ---------------------------------
 

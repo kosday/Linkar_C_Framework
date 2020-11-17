@@ -61,25 +61,10 @@ DllEntry char* Base_LkLogin(char** error, char* credentialOptions, const char* c
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;
 	
 	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
-	// After LOGIN, "connectionInfo" is modified with the new values of CONN_INFO_ID and CONN_INFO_PUBLIC_KEY
+	// After LOGIN, "connectionInfo" is modified with the new values of CONN_INFO_SESSION_ID, CONN_INFO_ID and CONN_INFO_PUBLIC_KEY
 	// LkExecutePersistentOperation always execute the Login operation with "inputFormat" and "outputFormat" MV.
 	if(connectionInfo != connectionInfoCopy)
 		free(connectionInfoCopy);
-
-	if(*error == NULL && result != NULL && *result != 0)
-	{
-		uint32_t *count = 0;
-		char* sessionId = LkExtractData(result, RECORD_IDS_KEY, ASCII_FS, DBMV_Mark_AM);
-					
-		if(sessionId != NULL)
-		{
-			// Add to "connectionInfo", in CONN_INFO_SESSION_ID	position, the value of sessionId
-			char* newConnectionInfo = LkChangeConnectionInfo(connectionInfo, CONN_INFO_SESSION_ID, sessionId);
-			
-			free(connectionInfo);
-			connectionInfo = newConnectionInfo;
-		}
-	}	
 
 	return connectionInfo;
 }
@@ -97,7 +82,7 @@ DllEntry char* Base_LkLogin(char** error, char* credentialOptions, const char* c
 	See Also:
 		<Base_LkLogin>	
 */
-DllEntry void Base_LkLogout(char **error, char** connectionInfo, const char* const customVars, uint32_t receiveTimeout)
+DllEntry void Base_LkLogout(char **error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_LOGOUT;
 	//operationArguments = customVars;
@@ -106,15 +91,7 @@ DllEntry void Base_LkLogout(char **error, char** connectionInfo, const char* con
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	DataFormatTYPE outputFormat = DataFormatTYPE_MV;
 	
-	LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
-	
-	char* newConnectionInfo = LkChangeConnectionInfo(*connectionInfo, CONN_INFO_SESSION_ID, "");
-	char* newConnectionInfo2 = LkChangeConnectionInfo(newConnectionInfo, CONN_INFO_ID, "");
-	free(newConnectionInfo);
-	char* newConnectionInfo3 = LkChangeConnectionInfo(newConnectionInfo2, CONN_INFO_PUBLIC_KEY, "");
-	free(newConnectionInfo2);
-	
-	*connectionInfo = newConnectionInfo3;
+	LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 }
 
 /*
@@ -147,12 +124,12 @@ DllEntry void Base_LkLogout(char **error, char** connectionInfo, const char* con
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkRead(char** error, char** connectionInfo, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkRead(char** error, char* connectionInfo, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {	
 	uint8_t operationCode = OP_CODE_READ;
 	char* operationArguments = LkGetReadArgs(filename, recordIds, dictionaries, readOptions, customVars);
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -188,12 +165,12 @@ DllEntry char* Base_LkRead(char** error, char** connectionInfo, const char* cons
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkUpdate(char** error, char** connectionInfo, const char* const filename, const char* const records, const char* const updateOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkUpdate(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const updateOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_UPDATE;
 	char* operationArguments = LkGetUpdateArgs(filename, records, updateOptions, customVars);
 
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -237,13 +214,13 @@ DllEntry char* Base_LkUpdate(char** error, char** connectionInfo, const char* co
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkNew(char** error, char** connectionInfo, const char* const filename, const char* const records, const char* const newOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkNew(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const newOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_NEW;
 	char* operationArguments = LkGetNewArgs(filename, records, newOptions, customVars);	
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);	
-	
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);	
+
 	free(operationArguments);
 	
 	return result;	
@@ -259,6 +236,7 @@ DllEntry char* Base_LkNew(char** error, char** connectionInfo, const char* const
 		filename - It's the file name where the records are going to be deleted. DICT in case of deleting a record that belongs to a dictionary.
 		records - It's the records list to be deleted.
 		deleteOptions - Object that defines the different Function options: optimisticLockControl, recoverRecordIdType.
+		inputFormat - Indicates in what format you wish to send the resultant deleting data: MV, XML or JSON.
 		outputFormat - Indicates in what format you want to receive the data resulting from the operation: MV, XML or JSON.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
@@ -283,13 +261,12 @@ DllEntry char* Base_LkNew(char** error, char** connectionInfo, const char* const
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkDelete(char** error, char** connectionInfo, const char* const filename, const char* const records, const char* const deleteOptions, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkDelete(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const deleteOptions, DataFormatTYPE inputFormat, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_DELETE;
 	char* operationArguments = LkGetDeleteArgs(filename, records, deleteOptions, customVars);
-	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -327,13 +304,13 @@ DllEntry char* Base_LkDelete(char** error, char** connectionInfo, const char* co
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkSelect(char** error, char** connectionInfo, const char* const filename, const char* const selectClause, const char* const sortClause, const char* const dictClause, const char* const preSelectClause, const char* const selectOptions, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkSelect(char** error, char* connectionInfo, const char* const filename, const char* const selectClause, const char* const sortClause, const char* const dictClause, const char* const preSelectClause, const char* const selectOptions, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_SELECT;
 	char* operationArguments = LkGetSelectArgs(filename, selectClause, sortClause, dictClause, preSelectClause, selectOptions, customVars);
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -350,6 +327,7 @@ DllEntry char* Base_LkSelect(char** error, char** connectionInfo, const char* co
 		subroutineName - Subroutine name you want to execute.
 		argsNumber - The number of arguments.
 		arguments - The subroutine arguments list.
+		inputFormat - Indicates in what format you wish to send the subroutine arguments: MV, XML or JSON.
 		outputFormat - Indicates in what format you want to receive the data resulting from the operation: MV, XML or JSON.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
@@ -368,13 +346,12 @@ DllEntry char* Base_LkSelect(char** error, char** connectionInfo, const char* co
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkSubroutine(char** error, char** connectionInfo, const char* const subroutineName, uint32_t argsNumber, const char* const arguments, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkSubroutine(char** error, char* connectionInfo, const char* const subroutineName, uint32_t argsNumber, const char* const arguments, DataFormatTYPE inputFormat, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_SUBROUTINE;
 	char* operationArguments = LkGetSubroutineArgs(subroutineName, argsNumber, arguments, customVars);
-	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -388,7 +365,7 @@ DllEntry char* Base_LkSubroutine(char** error, char** connectionInfo, const char
 	Arguments:
 		error - System or communication errors with LinkarSERVER.
 		connectionInfo - String that is returned by the Login function and that contains all the necessary data of the connection.
-		conversionOptions - Indicates the conversion type, input or output: Input=ICONV(); OUTPUT=OCONV()
+		conversionType - Indicates the conversion type, input or output: Input=ICONV(); OUTPUT=OCONV()
 		expression - The data or expression to convert. It can have MV marks, in which case the conversion will execute in each value obeying the original MV mark.
 		code - The conversion code. It will have to obey the Database conversions specifications.
 		outputFormat - Indicates in what format you want to receive the data resulting from the operation: MV, XML or JSON.
@@ -409,13 +386,13 @@ DllEntry char* Base_LkSubroutine(char** error, char** connectionInfo, const char
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkConversion(char** error, char** connectionInfo, const char* const expression, const char* const code, CONVERSION_TYPE conversionOptions, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkConversion(char** error, char* connectionInfo, const char* const expression, const char* const code, CONVERSION_TYPE conversionType, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_CONVERSION;
-	char* operationArguments = LkGetConversionArgs(expression, code, conversionOptions, customVars);
+	char* operationArguments = LkGetConversionArgs(expression, code, conversionType, customVars);
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -447,13 +424,13 @@ DllEntry char* Base_LkConversion(char** error, char** connectionInfo, const char
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkFormat(char** error, char** connectionInfo, const char* const expression, const char* const formatSpec, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkFormat(char** error, char* connectionInfo, const char* const expression, const char* const formatSpec, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_FORMAT;
 	char* operationArguments = LkGetFormatArgs(expression, formatSpec, customVars);
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -484,13 +461,13 @@ DllEntry char* Base_LkFormat(char** error, char** connectionInfo, const char* co
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkDictionaries(char** error, char** connectionInfo, const char* const filename, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkDictionaries(char** error, char* connectionInfo, const char* const filename, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_DICTIONARIES;
 	char* operationArguments = LkGetDictionariesArgs(filename, customVars);
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -521,13 +498,13 @@ DllEntry char* Base_LkDictionaries(char** error, char** connectionInfo, const ch
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkExecute(char** error, char** connectionInfo, const char* const statement, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkExecute(char** error, char* connectionInfo, const char* const statement, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
-	uint8_t operationCode = OP_CODE_DICTIONARIES;
+	uint8_t operationCode = OP_CODE_EXECUTE;
 	char* operationArguments = LkGetExecuteArgs(statement, customVars);
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -557,13 +534,13 @@ DllEntry char* Base_LkExecute(char** error, char** connectionInfo, const char* c
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkGetVersion(char** error, char** connectionInfo, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkGetVersion(char** error, char* connectionInfo, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_GETVERSION;
 	char* operationArguments = LkGetGetVersionArgs();
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -600,13 +577,13 @@ DllEntry char* Base_LkGetVersion(char** error, char** connectionInfo, DataFormat
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkSchemas(char** error, char** connectionInfo, const char* const lkSchemasOptions, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkSchemas(char** error, char* connectionInfo, const char* const lkSchemasOptions, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_LKSCHEMAS;
 	char* operationArguments = LkGetLkSchemasArgs(lkSchemasOptions, customVars);
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -644,13 +621,13 @@ DllEntry char* Base_LkSchemas(char** error, char** connectionInfo, const char* c
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkProperties(char** error, char** connectionInfo, const char* const filename, const char* const lkPropertiesOptions, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkPropertiesOptions, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_LKPROPERTIES;
 	char* operationArguments = LkGetLkPropertiesArgs(filename, lkPropertiesOptions, customVars);
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -691,14 +668,14 @@ DllEntry char* Base_LkProperties(char** error, char** connectionInfo, const char
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkGetTable(char** error, char** connectionInfo, const char* const filename, const char* const selectClause, const char* const dictClause, const char* const sortClause, const char* const tableOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkGetTable(char** error, char* connectionInfo, const char* const filename, const char* const selectClause, const char* const dictClause, const char* const sortClause, const char* const tableOptions, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_GETTABLE;
 	char* operationArguments = LkGetGetTableArgs(filename, selectClause, dictClause, sortClause, tableOptions, customVars);
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	DataFormatTYPE outputFormat = DataFormatSchTYPE_TABLE;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	
@@ -728,13 +705,13 @@ DllEntry char* Base_LkGetTable(char** error, char** connectionInfo, const char* 
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkResetCommonBlocks(char** error, char** connectionInfo, DataFormatTYPE outputFormat, uint32_t receiveTimeout)
+DllEntry char* Base_LkResetCommonBlocks(char** error, char* connectionInfo, DataFormatTYPE outputFormat, uint32_t receiveTimeout)
 {
-	uint8_t operationCode = OP_CODE_GETVERSION;
+	uint8_t operationCode = OP_CODE_RESETCOMMONBLOCKS;
 	char* operationArguments = LkGetResetCommonBlocksArgs();
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;
 	
-	char* result = LkExecutePersistentOperation(error, connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	char* result = LkExecutePersistentOperation(error, &connectionInfo, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
 	free(operationArguments);
 	

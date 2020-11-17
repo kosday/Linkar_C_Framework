@@ -8,6 +8,7 @@
 #include "Types.h"
 
 #include "FunctionsDirectJSON.h"
+#include "ReleaseMemory.h"
 
 void main(void)
 {	
@@ -17,7 +18,18 @@ void main(void)
 	printf("\nOperation LkRead JSON example. LK.ORDERS Id 1\n");
 	char* error;
 	char* filename = "LK.ORDERS";
-	char* recordIds = "1";
+	char* recordIds =
+"{\
+    \"RECORDS\": [\
+        {\
+            \"LKITEMID\": \"1\"\
+        },\
+        {\
+            \"LKITEMID\": \"2\"\
+        }\
+    ]\
+}";	
+	
 	char* dictionaries = "";
 	char* readOptions = NULL;
 	char* customVars = "";

@@ -334,18 +334,18 @@ DllEntry char* LkGetSubroutineArgs(const char* const subroutineName, uint32_t ar
 		
 		<Release Memory>
 */
-DllEntry char* LkGetConversionArgs(const char* const expression, const char* const code, CONVERSION_TYPE conversionOptions, const char* const customVars)
+DllEntry char* LkGetConversionArgs(const char* const expression, const char* const code, CONVERSION_TYPE conversionType, const char* const customVars)
 {
-	const char* options;
-	if(conversionOptions == CONVERSION_TYPE_ICONV)
-		options = "I";
+	const char* strConversionType;
+	if(conversionType == CONVERSION_TYPE_ICONV)
+		strConversionType = "I";
 	else
-		options = "O";
+		strConversionType = "O";
 		//inputData = code + ASCII_Chars.FS_str + expression;
 	char* inputData = LkCatString(code, expression, ASCII_FS_str);
 	
-	//operationArguments = customVars + ASCII_Chars.US_str + options + ASCII_Chars.US_str + inputData;
-	char* aux = LkCatString(customVars, options, ASCII_US_str);
+	//operationArguments = customVars + ASCII_Chars.US_str + strConversionType + ASCII_Chars.US_str + inputData;
+	char* aux = LkCatString(customVars, strConversionType, ASCII_US_str);
 	char* operationArguments = LkCatString(aux, inputData, ASCII_US_str);
 	free(aux);
 	free(inputData);

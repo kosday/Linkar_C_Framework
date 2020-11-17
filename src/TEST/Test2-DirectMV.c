@@ -9,6 +9,7 @@
 #include "FunctionsDirectMV.h"
 #include "MvOperations.h"
 #include "OperationOptions.h"
+#include "ReleaseMemory.h"
 
 void main(void)
 {	
@@ -17,11 +18,8 @@ void main(void)
 	// Operation LkNew MV example
 	printf("\n***Operation New MV example. LK.CUTOMERS Create Id TEST98 and TEST99\n");
 	char* filename = "LK.CUSTOMERS";
-	char** lstRecordIds = malloc(sizeof(char*) * 2);
-	lstRecordIds[0] = "TEST98";
-	lstRecordIds[1] = "TEST99";
 	
-	//const char* const lstRecordIds[2] = { "TEST98", "TEST99" };
+	const char* const lstNewRecordIds[2] = { "TEST98", "TEST99" };
 	
 	char record1 [100];
 	strcpy(record1, "CUSTOMER_TEST98"); // CUSTOMER NAME
@@ -37,27 +35,18 @@ void main(void)
 	strcat(record2, DBMV_Mark_AM_str);
 	strcat(record2, "99999999"); // CUSTOMER PHONE
 	
-	char** lstRecords = malloc(sizeof(char*) * 2);
-	lstRecords[0] = record1;
-	lstRecords[1] = record2;
-	printf("lstRecords[0] = %s\n", lstRecords[0]);
-	printf("lstRecords[1] = %s\n", lstRecords[1]);
+	//char** lstRecords = malloc(sizeof(char*) * 2);
+	char* lstNewRecords[2];
+	lstNewRecords[0] = record1;
+	lstNewRecords[1] = record2;
+	printf("lstRecords[0] = %s\n", lstNewRecords[0]);
+	printf("lstRecords[1] = %s\n", lstNewRecords[1]);
 		
-	char* recordIds = LkComposeRecordIds((const char** const)lstRecordIds, 2);
-	
-	
+	char* recordIds = LkComposeRecordIds((const char** const)lstNewRecordIds, 2);	
 	printf("recordIds: %s\n", recordIds);
 	
-	
-	
-	LkFreeMemoryStringArray(lstRecordIds, 2);
-	
-	printf("*************************\n");
-	
-	printf("recordIds: %s\n", recordIds);
-	
-	char* records = LkComposeRecords((const char** const)lstRecords, 2);
-	LkFreeMemory(lstRecords);
+	char* records = LkComposeRecords((const char** const)lstNewRecords, 2);
+	//LkFreeMemoryStringArray(lstRecords, 2);
 	printf("records: %s\n", records);
 	
 	char* newRecords = LkComposeNewBuffer(recordIds, records);
@@ -92,7 +81,7 @@ void main(void)
 	printf("result (MV): %s\n", result);
 
 	uint32_t count;
-	lstRecords = LkExtractRecords(result, &count);
+	char** lstRecords = LkExtractRecords(result, &count);
 	LkFreeMemory(result);
 	int i;
     for(i=0; i<count; i++)
@@ -163,7 +152,7 @@ void main(void)
 	}
 	printf("result (MV): %s\n", result);
 	
-	lstRecordIds = LkExtractRecordIds(result, &count);	
+	char** lstRecordIds = LkExtractRecordIds(result, &count);	
 	LkFreeMemory(result);
 	printf("Deleted Record Ids:\n");
 	for(i=0; i<count; i++)
@@ -173,7 +162,7 @@ void main(void)
 	// Operation LkSelect MV example
 	printf("\n***Operation LkSelect MV example.\n");
 	char* selectClause = "";
-	char* sortClause = "BY CODE";
+	char* sortClause = "BY ID";
 	char* dictClause = "";
 	char* preSelectClause = "";
 	char* selectOptions = NULL;	
@@ -191,21 +180,19 @@ void main(void)
 	LkFreeMemory(result);		
 	LkFreeMemoryStringArray(lstRecords, count);
 	LkFreeMemoryStringArray(lstRecordIds, count);
-		
-	
+			
 	// Operation LkSubroutine MV example
 	printf("\n***Operation LkSubroutine MV example.\n");
 	
 	char* subroutineName = "SUB.DEMOLINKAR";
 	
 	uint32_t argsNumber = 3;
-	char** lstArgs = malloc(sizeof(char*) * argsNumber);
+	char* lstArgs [3];
 	lstArgs[0] = "0";
 	lstArgs[1] = "aaaaaa";
 	lstArgs[2] = "";
 	
 	char* arguments = LkComposeSubroutineArgs((const char** const)lstArgs, argsNumber);
-	LkFreeMemory(lstArgs);
 	result = LkSubroutine(&error, credentialOptions, subroutineName, argsNumber, arguments, customVars, receiveTimeout);
 	LkFreeMemory(arguments);
 	if(error != NULL)
@@ -215,16 +202,12 @@ void main(void)
 	}
 	else
 	{
-		printf("result (MV): %s\n", result);		
-		char* resultArgs = LkExtractSubroutineArgs(result);
+		printf("result (MV): %s\n", result);	
+		char** resultArgs = LkExtractSubroutineArgs(result, &count);
 		LkFreeMemory(result);
-		printf("resultArgs: %s\n", resultArgs);
-		
-		lstArgs = LkStrSplit(resultArgs, ASCII_DC4, &argsNumber);
-		free(resultArgs);
-		for(i=0; i<argsNumber; i++)
-			printf("resultArg %d: %s\n", i, lstArgs[i]);
-		LkFreeMemoryStringArray(lstArgs, argsNumber);
+		for(i = 0; i < count; i++)
+			printf("resultArgs [%d]: %s\n", i, resultArgs[i]);
+		LkFreeMemoryStringArray(resultArgs, argsNumber);
 	}
 	
 	LkFreeMemory(credentialOptions);

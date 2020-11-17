@@ -7,7 +7,7 @@
 #include "Linkar.h"
 #include "OperationArguments.h"
 #include "ConnectionInfo.h"
-#include "CommandsPersistentXML.h"
+#include "CommandsPersistent.h"
 
 #include <malloc.h>
 

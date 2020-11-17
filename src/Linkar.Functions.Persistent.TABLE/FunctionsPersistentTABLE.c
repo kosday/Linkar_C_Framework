@@ -52,7 +52,7 @@ DllEntry char* LkLogin(char** error, char* credentialOptions, const char* const 
 	See Also:
 		<LkLogin>	
 */
-DllEntry void LkLogout(char **error, char** connectionInfo, const char* const customVars, uint32_t receiveTimeout)
+DllEntry void LkLogout(char **error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout)
 {
 	Base_LkLogout(error, connectionInfo, customVars, receiveTimeout);
 }
@@ -86,7 +86,7 @@ DllEntry void LkLogout(char **error, char** connectionInfo, const char* const cu
 		
 		<Release Memory>
 */
-DllEntry char* LkSchemas(char** error, char** connectionInfo, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkSchemas(char** error, char* connectionInfo, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatSchTYPE outputFormat = DataFormatSchTYPE_TABLE;			
 	char* result = Base_LkSchemas(error, connectionInfo, lkSchemasOptions, outputFormat, customVars, receiveTimeout);
@@ -124,7 +124,7 @@ DllEntry char* LkSchemas(char** error, char** connectionInfo, const char* const 
 		
 		<Release Memory>
 */
-DllEntry char* LkProperties(char** error, char** connectionInfo, const char* const filename, const char* const lkPropertiesOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkPropertiesOptions, const char* const customVars, uint32_t receiveTimeout)
 {
 	DataFormatSchTYPE outputFormat = DataFormatSchTYPE_TABLE;
 	char* result = Base_LkProperties(error, connectionInfo, filename, lkPropertiesOptions, outputFormat, customVars, receiveTimeout);
@@ -166,7 +166,7 @@ DllEntry char* LkProperties(char** error, char** connectionInfo, const char* con
 		
 		<Release Memory>
 */
-DllEntry char* LkGetTable(char** error, char** connectionInfo, const char* const filename, const char* const selectClause, const char* const dictClause, const char* const sortClause, const char* const tableOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkGetTable(char** error, char* connectionInfo, const char* const filename, const char* const selectClause, const char* const dictClause, const char* const sortClause, const char* const tableOptions, const char* const customVars, uint32_t receiveTimeout)
 {
 	char* result = Base_LkGetTable(error, connectionInfo, filename, selectClause, dictClause, sortClause, tableOptions, customVars, receiveTimeout);
 	

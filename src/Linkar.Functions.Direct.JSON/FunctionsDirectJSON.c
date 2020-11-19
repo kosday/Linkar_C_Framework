@@ -28,7 +28,37 @@
 		
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyRead(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* options = lkCreateReadOptions(TRUE, FALSE, FALSE, FALSE);
+			JSON_FORMAT jsonFormat = JSON_FORMAT_JSON;
+			result = LkRead(error, credentials, "LK.CUSTOMERS",
+		"{
+			\"RECORDS\": [\
+				{\
+					\"LKITEMID\": \"2\"\
+				}\
+			]\
+		}",
+				"", options, jsonFormat, "", 600);		
+			
+			LkFreeMemory(options);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateReadOptions>
 		
@@ -61,6 +91,40 @@ DllEntry char* LkRead(char** error, const char* const credentialOptions, const c
 	Returns:
 		The results of the operation.
 
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
+		
+		char* MyUpdate(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			
+			char* options = LkCreateUpdateOptions(FALSE, TRUE, TRUE, FALSE, FALSE, FALSE);
+			JSON_FORMAT jsonFormat = JSON_FORMAT_JSON;
+			result = LkUpdate(error, credentials, "LK.CUSTOMERS",
+		"{\
+			\"RECORDS\": [\
+				{\
+					\"LKITEMID\": \"2\",\
+					\"NAME\": \"CUSTOMER 2\",\
+					\"ADDR\": \"ADDRESS 2\",\
+					\"PHONE\": \"444 - 444 - 002\"\
+				}\
+			]\
+		}",
+				options, jsonFormat, "", 600);
+
+			LkFreeMemory(options);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+		
 	See Also:
 		<LkCreateUpdateOptions>
 		
@@ -92,7 +156,41 @@ DllEntry char* LkUpdate(char** error, const char* const credentialOptions, const
 		
 	Returns:
 		The results of the operation.
-	
+
+	Exmaple:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
+		
+		char* MyNew(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* recordIdType = LkCreateNewRecordIdTypeNone();
+			char* newOptions = lkCreateNewOptions(recordIdType, TRUE, FALSE, FALSE, FALSE);
+			LkFreeMemory(recordIdType);
+			JSON_FORMAT jsonFormat = JSON_FORMAT_JSON;
+			result = LkNew(error, credentials, "LK.CUSTOMERS",
+		"{\
+			\"RECORDS\": [\
+				{\
+					\"LKITEMID\": \"2\",\
+					\"NAME\": \"CUSTOMER 2\",\
+					\"ADDR\": \"ADDRESS 2\",\
+					\"PHONE\": \"444 - 444 - 002\"\
+				}\
+			]\
+		}",
+				options, jsonFormat, "", 600);
+			LkFreeMemory(options);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateNewOptions>
 		
@@ -132,6 +230,36 @@ DllEntry char* LkNew(char** error, const char* const credentialOptions, const ch
 	Returns:
 		The results of the operation.
 		
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
+		
+		char* MyDelete(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* recoverRecordIdType = LkCreateRecoverRecordIdTypeNone();
+			char* options = lkCreateDeleteOptions(FALSE, recoverRecordIdType);
+			LkFreeMemory(recoverRecordIdType);
+			result = LkNew(error, credentials, "LK.CUSTOMERS",
+		"{\
+			\"RECORDS\": [\
+				{\
+					\"LKITEMID\": \"2\",\
+				}\
+			]\
+		}",
+				options, "", 600);
+			LkFreeMemory(options);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateDeleteOptions>
 		
@@ -173,7 +301,28 @@ DllEntry char* LkDelete(char** error, const char* const credentialOptions, const
 		
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		public char* MySelect(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* options = lkCreateSelectOptions(TRUE, FALSE, FALSE, FALSE);
+			JSON_FORMAT jsonFormat = JSON_FORMAT_JSON;
+			result = LkSelect(error, credentials, "LK.CUSTOMERS", "", "BY ID", "", "", options, jsonFormat, "", 600);
+			LkFreeMemory(options);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateSelectOptions>
 		
@@ -187,7 +336,7 @@ DllEntry char* LkSelect(char** error, const char* const credentialOptions, const
 	
 	return result;
 }
-		
+
 /*
 	Function: LkSubroutine
 		Executes a subroutine with JSON output format.
@@ -203,7 +352,33 @@ DllEntry char* LkSelect(char** error, const char* const credentialOptions, const
 		
 	Returns:
 		The results of the operation.
-				
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "LinkarStrings.h"
+		#include "ReleaseMemory.h"
+		
+		char* MySubroutine(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			
+			char* subroutineName = "SUB.DEMOLINKAR";
+
+			uint32_t argsNumber = 3;
+			char* lstArgs [3] = { "0", "aaaa", "" };
+			char* arguments = LkComposeSubroutineArgs((const char** const)lstArgs, argsNumber);
+			
+			result = LkSubroutine(&error, credentialOptions, subroutineName, argsNumber, arguments, "", 0);
+			LkFreeMemory(arguments);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkAddArgumentSubroutine>
 
@@ -235,7 +410,26 @@ DllEntry char* LkSubroutine(char** error, const char* const credentialOptions, c
 		
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyConversion(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			
+			result = LkConversion(error, credentials, CONVERSION_TYPE.INPUT,"31-12-2017","D2-", "", 600);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<CONVERSION_TYPE>
 		
@@ -265,7 +459,26 @@ DllEntry char* LkConversion(char** error, const char* const credentialOptions, c
 		
 	Returns:
 		The results of the operation..
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyFormat(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			
+			result = LkFormat(error, credentials, "123","R#10", "", 600);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateCredentialOptions>
 		
@@ -292,7 +505,26 @@ DllEntry char* LkFormat(char** error, const char* const credentialOptions, const
 		
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyDictionaries(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			
+			result = LkDictionaries(error, credentials, "LK.CUSTOMERS", "", 600);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateCredentialOptions>
 		
@@ -319,7 +551,27 @@ DllEntry char* LkDictionaries(char** error, const char* const credentialOptions,
 		
 	Returns:
 		The results of the operation..
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyExecute(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			
+			result = LkExecute(error, credentials, "WHO", "", 600);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
+
 	See Also:
 		<LkCreateCredentialOptions>
 		
@@ -345,7 +597,26 @@ DllEntry char* LkExecute(char** error, const char* const credentialOptions, cons
 		
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyGetVersion(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			
+			result = LkGetVersion(error, credentials, 600);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateCredentialOptions>
 		
@@ -372,7 +643,29 @@ DllEntry char* LkGetVersion(char** error, const char* const credentialOptions, c
 		
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyLkSchemas(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* options = LkCreateSchOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, 0, 0);
+			// char* options = LkCreateSchOptionsTypeSQLMODE (FALSE, FALSE, 0, 0);
+			// char* options = LkCreateSchOptionsTypeDICTIONARIES (RowHeadersTYPE _MAINLABEL, FALSE, 0, 0);
+			result = LkLkSchemas(error, credentials, options, "", "", 600);
+			LkFreeMemory(options);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateSchOptionsTypeLKSCHEMAS>
 		
@@ -406,7 +699,31 @@ DllEntry char* LkSchemas(char** error, const char* const credentialOptions, cons
 		
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyLkProperties(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* options = LkCreatePropOptionsTypeLKSCHEMAS (RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, 0, 0);
+			//char* options = LkCreatePropOptionsTypeSQLMODE(FALSE, FALSE, 0, 0);
+			//char* options = LkCreatePropOptionsTypeDICTIONARIES(RowHeadersTYPE_MAINLABEL, FALSE, 0, 0);
+
+			result = LkProperties(error, credentials, "LK.CUSTOMERS", options, "", 600);
+			LkFreeMemory(options);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
+
 	See Also:
 		<LkCreatePropOptionsTypeLKSCHEMAS>
 		
@@ -429,16 +746,35 @@ DllEntry char* LkProperties(char** error, const char* const credentialOptions, c
 /*
 	Function: LkResetCommonBlocks
 		Resets the COMMON variables with the 100 most used files with JSON output format.
-		
+
 	Arguments:
 		error - System or communication errors with LinkarSERVER.
 		credentialOptions - String that defines the necessary data to access to the Linkar Server: Username, Password, EntryPoint, Language, FreeText.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
-		
+
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsJSON.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyResetCommonBlocks(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			
+			result = LkResetCommonBlocks(error, credentials, 30);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateCredentialOptions>
 		

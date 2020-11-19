@@ -116,6 +116,43 @@ DllEntry void LkLogout(char **error, char** connectionInfo, const char* const cu
 	Returns:
 		The results of the operation.
 		
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "ConnectionInfo.h"
+		#include "CommandsDirect.h"
+		#include "ReleaseMemory.h"
+
+		char* MyCommandRead(char** error)
+		{
+			char* result;
+			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* connectionInfo = LkLogin(error, credentials, "", 600);
+			LkFreeMemory(credentials);
+			if(error == NULL && connectionInfo != NULL)
+			{
+				string command = 
+		"<COMMAND NAME=\"READ\">\
+			<CALCULATED>True</CALCULATED>\
+			<OUTPUT_FORMAT>XML_SCH</OUTPUT_FORMAT>\
+			<FILE_NAME>LK.CUSTOMERS</FILE_NAME>\
+				<RECORDS>\
+					<RECORD>\
+						<LKITEMID>2</LKITEMID>\
+					</RECORD>\
+				</RECORDS>\
+		</COMMAND>";
+
+				result = LkSendCommand(error, connectionInfo, command, 0);
+				LkLogout(error, connectionInfo, "", 0);
+				LkFreeMemory(connectionInfo);
+			}
+			return result;
+		}
+		---
+
 	See Also:
 		<Release Memory>
 */

@@ -19,10 +19,42 @@
 		credentialOptions - Object that defines the necessary data to access to the Linkar Server: Username, Password, EntryPoint, Language, FreeText.
 		command - Content of the operation you want to send.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. By default 0 (wait indefinitely).
-		
-	Returns:
+
+Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "CommandsDirect.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyCommandRead(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			
+			string command = 
+		"{\
+			\"NAME\" : \"READ\",
+			\"COMMAND\" : 
+			{\
+				\"CALCULATED\" : \"True\" ,\
+				\"OUTPUT_FORMAT\" : \"JSON_SCH\" ,\
+				\"FILE_NAME\" : \"LK.CUSTOMERS\" ,\
+				\"RECORDS\" : [ \
+					{ \"LKITEMID\" : \"2\" }\ 
+				]\
+			}\
+		}";
+
+			result = LkSendCommand(error, credentials, command, 600);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<Release Memory>
 */

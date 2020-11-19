@@ -24,7 +24,29 @@
 		
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsTABLE.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyLkSchemas(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* options = LkCreateSchOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, 0, 0);
+			// char* options = LkCreateSchOptionsTypeSQLMODE (FALSE, FALSE, 0, 0);
+			// char* options = LkCreateSchOptionsTypeDICTIONARIES (RowHeadersTYPE _MAINLABEL, FALSE, 0, 0);
+			result = LkLkSchemas(error, credentials, options, "", "", 600);
+			LkFreeMemory(options);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateSchOptionsTypeLKSCHEMAS>
 		
@@ -58,7 +80,30 @@ DllEntry char* LkSchemas(char** error, const char* const credentialOptions, cons
 		
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsTABLE.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
 		
+		char* MyLkProperties(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* options = LkCreatePropOptionsTypeLKSCHEMAS (RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, 0, 0);
+			//char* options = LkCreatePropOptionsTypeSQLMODE(FALSE, FALSE, 0, 0);
+			//char* options = LkCreatePropOptionsTypeDICTIONARIES(RowHeadersTYPE_MAINLABEL, FALSE, 0, 0);
+
+			result = LkProperties(error, credentials, "LK.CUSTOMERS", options, "", 600);
+			LkFreeMemory(options);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreatePropOptionsTypeLKSCHEMAS>
 		
@@ -94,7 +139,30 @@ DllEntry char* LkProperties(char** error, const char* const credentialOptions, c
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
 	Returns:
-	
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "DirectFunctionsTABLE.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
+		
+		char* MyGetTable(char** error)
+		{
+			char* result;
+			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* options = LkCreateTableOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0 );
+			//char* options = LkCreateTableOptionsTypeSQLMODE (FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0);
+			//char* options = LkCreateTableOptionsTypeDICTIONARIES (RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0);
+			//char* options = LkCreateTableOptionsTypeNONE (RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0);
+			result = LkGetTable(error, credentials, "LK.CUSTOMERS",options, "", 600);		
+			LkFreeMemory(options);
+			LkFreeMemory(credentials);
+			return result;
+		}
+		---
+
 	See Also:		
 		<LkCreateTableOptionsTypeLKSCHEMAS>
 		

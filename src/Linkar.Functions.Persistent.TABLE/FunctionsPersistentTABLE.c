@@ -70,7 +70,36 @@ DllEntry void LkLogout(char **error, char* connectionInfo, const char* const cus
 		
 	Returns:
 		The results of the operation.
+
+	Example:
+		--- Code
+	#include "Types.h"
+	#include "CredentialOptions.h"
+	#include "ConnectionInfo.h"
+	#include "PersistentFunctionsTABLE.h"
+	#include "OperationOptions.h"
+	#include "ReleaseMemory.h"
 		
+	char* MyLkSchemas(char** error)
+	{
+		char* result;
+		CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+		char* connectionInfo = LkLogin(error, credentials, "", 600);
+		LkFreeMemory(credentials);
+		if(error == NULL && connectionInfo != NULL)
+		{
+			char* options = LkCreateSchOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, 0, 0);
+			// char* options = LkCreateSchOptionsTypeSQLMODE (FALSE, FALSE, 0, 0);
+			// char* options = LkCreateSchOptionsTypeDICTIONARIES (RowHeadersTYPE _MAINLABEL, FALSE, 0, 0);
+			result = LkLkSchemas(error, connectionInfo, options, "", "", 0);
+			LkFreeMemory(options);
+			LkLogout(error, connectionInfo, "", 0);
+			LkFreeMemory(connectionInfo);
+		}
+		return result;
+	}
+		---
+
 	See Also:
 		<LkCreateSchOptionsTypeLKSCHEMAS>
 		
@@ -108,7 +137,37 @@ DllEntry char* LkSchemas(char** error, char* connectionInfo, const char* const l
 		
 	Returns:
 		The results of the operation.
-		
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "ConnectionInfo.h"
+		#include "PersistentFunctionsTABLE.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
+			
+		char* MyLkProperties(char** error)
+		{
+			char* result;
+			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* connectionInfo = LkLogin(error, credentials, "", 600);
+			LkFreeMemory(credentials);
+			if(error == NULL && connectionInfo != NULL)
+			{
+				char* options = LkCreatePropOptionsTypeLKSCHEMAS (RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, 0, 0);
+				//char* options = LkCreatePropOptionsTypeSQLMODE(FALSE, FALSE, 0, 0);
+				//char* options = LkCreatePropOptionsTypeDICTIONARIES(RowHeadersTYPE_MAINLABEL, FALSE, 0, 0);
+
+				result = LkProperties(error, connectionInfo, "LK.CUSTOMERS",options, "", "", 0);
+				LkFreeMemory(options);
+				LkLogout(error, connectionInfo, "", 0);
+				LkFreeMemory(connectionInfo);
+			}
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreatePropOptionsTypeLKSCHEMAS>
 		
@@ -148,7 +207,37 @@ DllEntry char* LkProperties(char** error, char* connectionInfo, const char* cons
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
 	Returns:
-	
+
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "ConnectionInfo.h"
+		#include "PersistentFunctionsTABLE.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
+			
+		char* MyGetTable(char** error)
+		{
+			char* result;
+			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* connectionInfo = LkLogin(error, credentials, "", 600);
+			LkFreeMemory(credentials);
+			if(error == NULL && connectionInfo != NULL)
+			{
+				char* options = LkCreateTableOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0 );
+				//char* options = LkCreateTableOptionsTypeSQLMODE (FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0);
+				//char* options = LkCreateTableOptionsTypeDICTIONARIES (RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0);
+				//char* options = LkCreateTableOptionsTypeNONE (RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0);
+				result = LkGetTable(error, connectionInfo, "LK.CUSTOMERS",options, "", 0);
+				LkFreeMemory(options);
+				LkLogout(error, connectionInfo, "", 0);
+				LkFreeMemory(connectionInfo);
+			}
+			return result;
+		}
+		---
+
 	See Also:
 		<LkCreateTableOptionsTypeLKSCHEMAS>
 		

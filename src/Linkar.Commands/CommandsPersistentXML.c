@@ -155,6 +155,8 @@ DllEntry void LkLogout(char **error, char** connectionInfo, const char* const cu
 
 	See Also:
 		<Release Memory>
+		
+		<Templates LkSendCommand>
 */
 DllEntry char* LkSendCommand(char** error, char** connectionInfo, const char* const command, uint32_t receiveTimeout)
 {

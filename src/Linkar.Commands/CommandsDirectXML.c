@@ -55,6 +55,9 @@
 
 	See Also:
 		<Release Memory>
+		
+		<Templates LkSendCommand>
+
 */
 DllEntry char* LkSendCommand(char** error, const char* const credentialOptions, const char* const command, uint32_t receiveTimeout)
 {

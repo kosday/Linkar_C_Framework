@@ -20,9 +20,6 @@ echo Running under "x86 Native Tools Command Prompt for VS 2019"
 goto START
 
 :START
-pause
-cls
-
 set STOP=N
 
 if "%1%"=="/P" set STOP=Y
@@ -210,48 +207,25 @@ cd ..
 
 if %STOP%==Y pause & cls
 
-rem Linkar.Commands.Direct.JSON Libraries
+rem Linkar.Commands.Direct Libraries
 cd Linkar.Commands
 
-rem Linkar.Commands.Direct.JSON Static Library
+rem Linkar.Commands.Direct Static Library
 echo.
-echo *** Linkar.Commands.Direct.JSON Static Library
+echo *** Linkar.Commands.Direct Static Library
 CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% OperationArguments.c /Fo"OperationArguments_st.obj"
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% CommandsDirectJSON.c /Fo"DirectCommandsJSON_st.obj"
-LIB %BIN_DIR_LIB%Linkar.lib %BIN_DIR_LIB%Linkar.Strings.Helper.lib OperationArguments_st.obj DirectCommandsJSON_st.obj /OUT:%BIN_DIR_LIB%Linkar.Commands.Direct.JSON.lib
+CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% CommandsDirect.c /Fo"DirectCommands_st.obj"
+LIB %BIN_DIR_LIB%Linkar.lib %BIN_DIR_LIB%Linkar.Strings.Helper.lib OperationArguments_st.obj DirectCommands_st.obj /OUT:%BIN_DIR_LIB%Linkar.Commands.Direct.lib
 
-rem Linkar.Commands.Direct.JSON Dynamic Library
+rem Linkar.Commands.Direct Dynamic Library
 echo.
-echo *** Linkar.Commands.Direct.JSON Dynamic Library
+echo *** Linkar.Commands.Direct Dynamic Library
 CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% OperationArguments.c /Fo"OperationArguments_dy.obj"
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% CommandsDirectJSON.c /Fo"DirectCommandsJSON_dy.obj"
-LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib OperationArguments_dy.obj DirectCommandsJSON_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Commands.Direct.JSON.dll
+CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% CommandsDirect.c /Fo"DirectCommands_dy.obj"
+LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib OperationArguments_dy.obj DirectCommands_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Commands.Direct.dll
 
-del %BIN_DIR_DLL%Linkar.Commands.Direct.JSON.map
-del %BIN_DIR_DLL%Linkar.Commands.Direct.JSON.exp
-cd ..
-
-if %STOP%==Y pause & cls
-
-rem Linkar.Commands.Direct.XML Libraries
-cd Linkar.Commands
-
-rem Linkar.Commands.Direct.XML Static Library
-echo.
-echo *** Linkar.Commands.Direct.XML Static Library
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% OperationArguments.c /Fo"OperationArguments_st.obj"
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% CommandsDirectXML.c /Fo"DirectCommandsXML_st.obj"
-LIB %BIN_DIR_LIB%Linkar.lib %BIN_DIR_LIB%Linkar.Strings.Helper.lib OperationArguments_st.obj DirectCommandsXML_st.obj /OUT:%BIN_DIR_LIB%Linkar.Commands.Direct.XML.lib
-
-rem Linkar.Commands.Direct.XML Dynamic Library
-echo.
-echo *** Linkar.Commands.Direct.XML Dynamic Library
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% OperationArguments.c /Fo"OperationArguments_dy.obj"
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% CommandsDirectXML.c /Fo"DirectCommandsXML_dy.obj"
-LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib OperationArguments_dy.obj DirectCommandsXML_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Commands.Direct.XML.dll
-
-del %BIN_DIR_DLL%Linkar.Commands.Direct.XML.map
-del %BIN_DIR_DLL%Linkar.Commands.Direct.XML.exp
+del %BIN_DIR_DLL%Linkar.Commands.Direct.map
+del %BIN_DIR_DLL%Linkar.Commands.Direct.exp
 cd ..
 
 if %STOP%==Y pause & cls
@@ -361,52 +335,29 @@ cd ..
 
 if %STOP%==Y pause & cls
 
-rem Linkar.Commands.Persistent.JSON Libraries
+rem Linkar.Commands.Persistent Libraries
 cd Linkar.Commands
 
-rem Linkar.Commands.Persistent.JSON Static Library
+rem Linkar.Commands.Persistent Static Library
 echo.
-echo *** Linkar.Commands.Persistent.JSON Static Library
+echo *** Linkar.Commands.Persistent Static Library
 CL %COMPILER_OPTIONS_STATIC_LIB% ..\Linkar.Strings.Helper\LinkarStringsHelper.c /Fo".\LinkarStringsHelper_st.obj"
 CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% OperationArguments.c /Fo"OperationArguments_st.obj"
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% CommandsPersistentJSON.c /Fo"PersistentCommandsJSON_st.obj"
-LIB %BIN_DIR_LIB%Linkar.lib LinkarStringsHelper_st.obj OperationArguments_st.obj PersistentCommandsJSON_st.obj /OUT:%BIN_DIR_LIB%Linkar.Commands.Persistent.JSON.lib
+CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% CommandsPersistent.c /Fo"PersistentCommands_st.obj"
+LIB %BIN_DIR_LIB%Linkar.lib LinkarStringsHelper_st.obj OperationArguments_st.obj PersistentCommands_st.obj /OUT:%BIN_DIR_LIB%Linkar.Commands.Persistent.lib
 
-rem Linkar.Commands.Persistent.JSON Dynamic Library
+rem Linkar.Commands.Persistent Dynamic Library
 echo.
-echo *** Linkar.Commands.Persistent.JSON Dynamic Library
+echo *** Linkar.Commands.Persistent Dynamic Library
 CL %COMPILER_OPTIONS_DYNAMIC_LIB% ..\Linkar.Strings.Helper\LinkarStringsHelper.c /Fo".\LinkarStringsHelper_dy.obj"
 CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% OperationArguments.c /Fo"OperationArguments_dy.obj"
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% CommandsPersistentJSON.c /Fo"PersistentCommandsJSON_dy.obj"
-LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib LinkarStringsHelper_dy.obj OperationArguments_dy.obj PersistentCommandsJSON_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Commands.Persistent.JSON.dll
+CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% CommandsPersistent.c /Fo"PersistentCommands_dy.obj"
+LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib LinkarStringsHelper_dy.obj OperationArguments_dy.obj PersistentCommands_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Commands.Persistent.dll
 
-del %BIN_DIR_DLL%Linkar.Commands.Persistent.JSON.map
-del %BIN_DIR_DLL%Linkar.Commands.Persistent.JSON.exp
+del %BIN_DIR_DLL%Linkar.Commands.Persistent.map
+del %BIN_DIR_DLL%Linkar.Commands.Persistent.exp
 cd ..
 
 if %STOP%==Y pause & cls
-
-rem Linkar.Commands.Persistent.XML Libraries
-cd Linkar.Commands
-
-rem Linkar.Commands.Persistent.XML Static Library
-echo.
-echo *** Linkar.Commands.Persistent.XML Static Library
-CL %COMPILER_OPTIONS_STATIC_LIB% ..\Linkar.Strings.Helper\LinkarStringsHelper.c /Fo".\LinkarStringsHelper_st.obj"
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% OperationArguments.c /Fo"OperationArguments_st.obj"
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% CommandsPersistentXML.c /Fo"PersistentCommandsXML_st.obj"
-LIB %BIN_DIR_LIB%Linkar.lib LinkarStringsHelper_st.obj OperationArguments_st.obj PersistentCommandsXML_st.obj /OUT:%BIN_DIR_LIB%Linkar.Commands.Persistent.XML.lib
-
-rem Linkar.Commands.Persistent.XML Dynamic Library
-echo.
-echo *** Linkar.Commands.Persistent.XML Dynamic Library
-CL %COMPILER_OPTIONS_DYNAMIC_LIB% ..\Linkar.Strings.Helper\LinkarStringsHelper.c /Fo".\LinkarStringsHelper_dy.obj"
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% OperationArguments.c /Fo"OperationArguments_dy.obj"
-CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% CommandsPersistentXML.c /Fo"PersistentCommandsXML_dy.obj"
-LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib LinkarStringsHelper_dy.obj OperationArguments_dy.obj PersistentCommandsXML_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Commands.Persistent.XML.dll
-
-del %BIN_DIR_DLL%Linkar.Commands.Persistent.XML.map
-del %BIN_DIR_DLL%Linkar.Commands.Persistent.XML.exp
-cd ..
 
 :END

@@ -57,18 +57,18 @@ if %STOP%==Y pause & cls
 echo *** Test5-DirectCmdJSON Static and Dynamic
 echo.
 REM Test5-DirectCmdJSON program with Static Libraries
-CL Test5-DirectCmdJSON.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Commands.Direct.JSON.lib /Fe%BIN_DIR_LIB%Test5-DirectCmdJSON.exe
+CL Test5-DirectCmdJSON.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Commands.Direct.lib /Fe%BIN_DIR_LIB%Test5-DirectCmdJSON.exe
 REM Test5-DirectCmdJSON program with Dynamic Libraries
-CL Test5-DirectCmdJSON.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Commands.Direct.JSON.lib %BIN_DIR_DLL%Linkar.lib /Fe%BIN_DIR_DLL%Test5-DirectCmdJSON.exe
+CL Test5-DirectCmdJSON.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Commands.Direct.lib %BIN_DIR_DLL%Linkar.lib /Fe%BIN_DIR_DLL%Test5-DirectCmdJSON.exe
 
 if %STOP%==Y pause & cls
 
 echo *** Test5-DirectCmdXML Static and Dynamic
 echo.
 REM Test5-DirectCmdXML program with Static Libraries
-CL Test5-DirectCmdXML.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Commands.Direct.XML.lib /Fe%BIN_DIR_LIB%Test5-DirectCmdXML.exe
+CL Test5-DirectCmdXML.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Commands.Direct.lib /Fe%BIN_DIR_LIB%Test5-DirectCmdXML.exe
 REM Test5-DirectCmdXML program with Dynamic Libraries
-CL Test5-DirectCmdXML.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Commands.Direct.XML.lib %BIN_DIR_DLL%Linkar.lib /Fe%BIN_DIR_DLL%Test5-DirectCmdXML.exe
+CL Test5-DirectCmdXML.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Commands.Direct.lib %BIN_DIR_DLL%Linkar.lib /Fe%BIN_DIR_DLL%Test5-DirectCmdXML.exe
 
 if %STOP%==Y pause & cls
 
@@ -93,18 +93,18 @@ if %STOP%==Y pause & cls
 echo *** Test5-PersistentCmdJSON Static and Dynamic
 echo.
 REM Test5-PersistentCmdJSON program with Static Libraries
-CL Test5-PersistentCmdJSON.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Commands.Persistent.JSON.lib %BIN_DIR_LIB%Linkar.Strings.lib /Fe%BIN_DIR_LIB%Test5-PersistentCmdJSON.exe
+CL Test5-PersistentCmdJSON.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Commands.Persistent.lib %BIN_DIR_LIB%Linkar.Strings.lib /Fe%BIN_DIR_LIB%Test5-PersistentCmdJSON.exe
 REM Test5-PersistentCmdJSON program with Dynamic Libraries
-CL Test5-PersistentCmdJSON.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Commands.Persistent.JSON.lib %BIN_DIR_DLL%Linkar.lib /Fe%BIN_DIR_DLL%Test5-PersistentCmdJSON.exe
+CL Test5-PersistentCmdJSON.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Commands.Persistent.lib %BIN_DIR_DLL%Linkar.lib /Fe%BIN_DIR_DLL%Test5-PersistentCmdJSON.exe
 
 if %STOP%==Y pause & cls
 
 echo *** Test5-PersistentCmdXML Static and Dynamic
 echo.
 REM Test5-PersistentCmdXML program with Static Libraries
-CL Test5-PersistentCmdXML.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Commands.Persistent.XML.lib %BIN_DIR_LIB%Linkar.Strings.lib /Fe%BIN_DIR_LIB%Test5-PersistentCmdXML.exe
+CL Test5-PersistentCmdXML.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Commands.Persistent.lib %BIN_DIR_LIB%Linkar.Strings.lib /Fe%BIN_DIR_LIB%Test5-PersistentCmdXML.exe
 REM Test5-PersistentCmdXML program with Dynamic Libraries
-CL Test5-PersistentCmdXML.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Commands.Persistent.XML.lib %BIN_DIR_DLL%Linkar.lib /Fe%BIN_DIR_DLL%Test5-PersistentCmdXML.exe
+CL Test5-PersistentCmdXML.c /I ..\..\includes\Linkar.Commands /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Commands.Persistent.lib %BIN_DIR_DLL%Linkar.lib /Fe%BIN_DIR_DLL%Test5-PersistentCmdXML.exe
 
 :FIN
 cd ..

@@ -33,7 +33,7 @@ void main(void)
 	printf("Command Template:\n%s\n", commandTemplate1);
 	char* error;
 	uint32_t receiveTimeout = 10;
-	char* result = LkSendCommand(&error, credentialOptions, commandTemplate1, receiveTimeout);
+	char* result = LkSendJsonCommand(&error, credentialOptions, commandTemplate1, receiveTimeout);
 	if(error != NULL)
 		printf("ERRORS: %s\n", error);
 	printf("result (JSON): \n%s\n", result);
@@ -58,7 +58,7 @@ void main(void)
 	}\n\
 }\n";	
 	printf("\n\nCommand Template:\n%s\n", commandTemplate2);
-	result = LkSendCommand(&error, credentialOptions, commandTemplate2, receiveTimeout);
+	result = LkSendJsonCommand(&error, credentialOptions, commandTemplate2, receiveTimeout);
 	if(error != NULL)
 		printf("ERRORS: %s\n", error);
 	printf("result (JSON_DICT): \n%s\n", result);
@@ -84,7 +84,7 @@ void main(void)
 }\n";
 	
 	printf("\n\nCommand Template:\n%s\n", commandTemplate3);
-	result = LkSendCommand(&error, credentialOptions, commandTemplate3, receiveTimeout);
+	result = LkSendJsonCommand(&error, credentialOptions, commandTemplate3, receiveTimeout);
 	if(error != NULL)
 		printf("ERRORS: %s\n", error);
 	printf("result (JSON_SCH): \n%s\n", result);

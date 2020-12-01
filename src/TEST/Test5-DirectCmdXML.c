@@ -34,7 +34,7 @@ void main(void)
 	printf("Command Template:\n%s\n", commandTemplate1);
 	char* error;
 	uint32_t receiveTimeout = 10;
-	char* result = LkSendCommand(&error, credentialOptions, commandTemplate1, receiveTimeout);
+	char* result = LkSendXmlCommand(&error, credentialOptions, commandTemplate1, receiveTimeout);
 	if(error != NULL)
 		printf("ERRORS: %s\n", error);
 	printf("result (XML): \n%s\n", result);
@@ -61,7 +61,7 @@ void main(void)
 </COMMAND>\n";
 	
 	printf("\n\nCommand Template:\n%s\n", commandTemplate2);
-	result = LkSendCommand(&error, credentialOptions, commandTemplate2, receiveTimeout);
+	result = LkSendXmlCommand(&error, credentialOptions, commandTemplate2, receiveTimeout);
 	if(error != NULL)
 		printf("ERRORS: %s\n", error);
 	printf("result (XML_DICT): \n%s\n", result);
@@ -88,7 +88,7 @@ void main(void)
 </COMMAND>\n";
 	
 	printf("\n\nCommand Template:\n%s\n", commandTemplate3);
-	result = LkSendCommand(&error, credentialOptions, commandTemplate3, receiveTimeout);
+	result = LkSendXmlCommand(&error, credentialOptions, commandTemplate3, receiveTimeout);
 	if(error != NULL)
 		printf("ERRORS: %s\n", error);
 	printf("result (XML_SCH): \n%s\n", result);

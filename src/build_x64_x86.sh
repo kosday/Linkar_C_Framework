@@ -48,15 +48,13 @@ ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.MV.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.JSON.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.XML.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.TABLE.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Direct.JSON.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Direct.XML.a LinkarStringsHelper.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Direct.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.MV.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.JSON.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.XML.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.TABLE.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Persistent.JSON.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Persistent.XML.a LinkarStringsHelper.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Persistent.a LinkarStringsHelper.o
 
 echo ""
 echo "Compiling x86 Static LinkarStringsHelper.c"
@@ -74,8 +72,7 @@ ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.MV.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.JSON.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.XML.a LinkarStringsHelper.o
 ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.TABLE.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Persistent.JSON.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Persistent.XML.a LinkarStringsHelper.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Persistent.a LinkarStringsHelper.o
 
 echo ""
 cd ..
@@ -286,42 +283,20 @@ if [ "$STOP" == "Y" ] ; then
 	clear
 fi
 
-#Linkar.Commands.Direct.JSON Static Libraries
-#============================================
+#Linkar.Commands.Direct Static Libraries
+#=======================================
 cd Linkar.Commands
 
-echo "Compiling x64 Static CommandsDirectJSON.c"
+echo "Compiling x64 Static CommandsDirect.c"
 gcc $COMPILER_OPTIONS_STATIC_LIB_x64 -o OperationArguments.o OperationArguments.c
-gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x64 -o CommandsDirectJSON.o CommandsDirectJSON.c
-ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Direct.JSON.a OperationArguments.o CommandsDirectJSON.o
+gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x64 -o CommandsDirect.o CommandsDirect.c
+ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Direct.a OperationArguments.o CommandsDirect.o
 
 echo ""
-echo "Compiling x86 Static CommandsDirectJSON.c"
+echo "Compiling x86 Static CommandsDirect.c"
 gcc $COMPILER_OPTIONS_STATIC_LIB_x86 -o OperationArguments.o OperationArguments.c
-gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x86 -o CommandsDirectJSON.o CommandsDirectJSON.c
-ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Direct.JSON.a OperationArguments.o CommandsDirectJSON.o
-
-echo ""
-cd ..
-if [ "$STOP" == "Y" ] ; then
-	read -p "Press any key to continue ..."
-	clear
-fi
-
-#Linkar.Commands.Direct.XML Static Libraries                            
-#===========================================
-cd Linkar.Commands
-
-echo "Compiling x64 Static CommandsDirectXML.c"
-gcc $COMPILER_OPTIONS_STATIC_LIB_x64 -o OperationArguments.o OperationArguments.c
-gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x64 -o CommandsDirectXML.o CommandsDirectXML.c
-ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Direct.XML.a OperationArguments.o CommandsDirectXML.o
-
-echo ""
-echo "Compiling x86 Static DirectCommandsXML.a"
-gcc $COMPILER_OPTIONS_STATIC_LIB_x86 -o OperationArguments.o OperationArguments.c
-gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x86 -o CommandsDirectXML.o CommandsDirectXML.c
-ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Direct.XML.a OperationArguments.o CommandsDirectXML.o
+gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x86 -o CommandsDirect.o CommandsDirect.c
+ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Direct.a OperationArguments.o CommandsDirect.o
 
 echo ""
 cd ..
@@ -438,20 +413,20 @@ if [ "$STOP" == "Y" ] ; then
 	clear
 fi
 
-#Linkar.Commands.Persistent.JSON Static Libraries
-#================================================
+#Linkar.Commands.Persistent Static Libraries
+#===========================================
 cd Linkar.Commands
 
-echo "Building x64 Static CommandsPersistentJSON.c"
+echo "Building x64 Static CommandsPersistent.c"
 gcc $COMPILER_OPTIONS_STATIC_LIB_x64 -o OperationArguments.o OperationArguments.c
-gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x64 -o CommandsPersistentJSON.o CommandsPersistentJSON.c
-ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Persistent.JSON.a OperationArguments.o CommandsPersistentJSON.o
+gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x64 -o CommandsPersistent.o CommandsPersistent.c
+ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Persistent.a OperationArguments.o CommandsPersistent.o
 
 echo ""
-echo "Building x86 Static CommandsPersistentJSON.c"
+echo "Building x86 Static CommandsPersistent.c"
 gcc $COMPILER_OPTIONS_STATIC_LIB_x86 -o OperationArguments.o OperationArguments.c
-gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x86 -o CommandsPersistentJSON.o CommandsPersistentJSON.c
-ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Persistent.JSON.a OperationArguments.o CommandsPersistentJSON.o
+gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x86 -o CommandsPersistent.o CommandsPersistent.c
+ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Persistent.a OperationArguments.o CommandsPersistent.o
 
 echo ""
 cd ..
@@ -459,29 +434,6 @@ if [ "$STOP" == "Y" ] ; then
 	read -p "Press any key to continue ..."
 	clear
 fi
-
-#Linkar.Commands.Persistent.XML Static Libraries
-#===============================================
-cd Linkar.Commands
-
-echo "Compiling x64 Static CommandsPersistentXML.c"
-gcc $COMPILER_OPTIONS_STATIC_LIB_x64 -o OperationArguments.o OperationArguments.c
-gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x64 -o CommandsPersistentXML.o CommandsPersistentXML.c
-ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Persistent.XML.a OperationArguments.o CommandsPersistentXML.o
-
-echo ""
-echo "Compiling x86 Static CommandsPersistentXML.c"
-gcc $COMPILER_OPTIONS_STATIC_LIB_x86 -o OperationArguments.o OperationArguments.c
-gcc -I../../includes/Linkar.Commands $COMPILER_OPTIONS_STATIC_LIB_x86 -o CommandsPersistentXML.o CommandsPersistentXML.c
-ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Persistent.XML.a OperationArguments.o CommandsPersistentXML.o
-
-echo ""
-cd ..
-if [ "$STOP" == "Y" ] ; then
-	read -p "Press any key to continue ..."
-	clear
-fi
-
 
 ##################################################################################################
 # DYNAMIC LIBRARIES
@@ -716,53 +668,25 @@ if [ "$STOP" == "Y" ] ; then
 	clear
 fi
 
-#Linkar.Commands.Direct.JSON Dynamic Libraries
-#=============================================
+#Linkar.Commands.Direct Dynamic Libraries
+#========================================
 cd Linkar.Commands
 
-echo "Building x64 Dynamic Library: libLinkar.Commands.Direct.JSON.so"
+echo "Building x64 Dynamic Library: libLinkar.Commands.Direct.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o OperationArguments.o -O -g OperationArguments.c
-gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o CommandsDirectJSON.o -O -g CommandsDirectJSON.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Commands.Direct.JSON.so OperationArguments.o CommandsDirectJSON.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
+gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o CommandsDirect.o -O -g CommandsDirect.c
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Commands.Direct.so OperationArguments.o CommandsDirect.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
 if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
-	ln -srf $BIN_DIR_SO_x64/libLinkar.Commands.Direct.JSON.so $LIB_DIR_SO_x64/libLinkar.Commands.Direct.JSON.so
+	ln -srf $BIN_DIR_SO_x64/libLinkar.Commands.Direct.so $LIB_DIR_SO_x64/libLinkar.Commands.Direct.so
 fi
 
 echo ""
-echo "Building x86 Dynamic Library: libLinkar.Commands.Direct.JSON.so"
+echo "Building x86 Dynamic Library: libLinkar.Commands.Direct.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o OperationArguments.o -O -g OperationArguments.c
-gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o CommandsDirectJSON.o -O -g CommandsDirectJSON.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Commands.Direct.JSON.so OperationArguments.o CommandsDirectJSON.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
+gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o CommandsDirect.o -O -g CommandsDirect.c
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Commands.Direct.so OperationArguments.o CommandsDirect.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
 if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
-	ln -srf $BIN_DIR_SO_x86/libLinkar.Commands.Direct.JSON.so $LIB_DIR_SO_x86/libLinkar.Commands.Direct.JSON.so
-fi
-
-echo ""
-cd ..
-if [ "$STOP" == "Y" ] ; then
-	read -p "Press any key to continue ..."
-	clear
-fi
-
-#Linkar.Commands.Direct.XML Dynamic Libraries
-#============================================
-cd Linkar.Commands
-
-echo "Building x64 Dynamic Library: libLinkar.Commands.Direct.XML.so"
-gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o OperationArguments.o -O -g OperationArguments.c
-gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o CommandsDirectXML.o -O -g CommandsDirectXML.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Commands.Direct.XML.so OperationArguments.o CommandsDirectXML.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
-if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
-	ln -srf $BIN_DIR_SO_x64/libLinkar.Commands.Direct.XML.so $LIB_DIR_SO_x64/libLinkar.Commands.Direct.XML.so
-fi
-
-echo ""
-echo "Building x86 Dynamic Library: libLinkar.Commands.Direct.XML.so"
-gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o OperationArguments.o -O -g OperationArguments.c
-gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o CommandsDirectXML.o -O -g CommandsDirectXML.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Commands.Direct.XML.so OperationArguments.o CommandsDirectXML.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
-if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
-	ln -srf $BIN_DIR_SO_x86/libLinkar.Commands.Direct.XML.so $LIB_DIR_SO_x86/libLinkar.Commands.Direct.XML.so
+	ln -srf $BIN_DIR_SO_x86/libLinkar.Commands.Direct.so $LIB_DIR_SO_x86/libLinkar.Commands.Direct.so
 fi
 
 echo ""
@@ -903,25 +827,25 @@ if [ "$STOP" == "Y" ] ; then
 	clear
 fi
 
-#Linkar.Commands.Persistent.JSON Dynamic Libraries
-#=================================================
+#Linkar.Commands.Persistent Dynamic Libraries
+#============================================
 cd Linkar.Commands
 
-echo "Building x64 Dynamic Library: libLinkar.Commands.Persistent.JSON.so"
+echo "Building x64 Dynamic Library: libLinkar.Commands.Persistent.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o OperationArguments.o -O -g OperationArguments.c
-gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o CommandsPersistentJSON.o -O -g CommandsPersistentJSON.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Commands.Persistent.JSON.so OperationArguments.o CommandsPersistentJSON.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
+gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o CommandsPersistent.o -O -g CommandsPersistent.c
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Commands.Persistent.so OperationArguments.o CommandsPersistent.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
 if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
-	ln -srf $BIN_DIR_SO_x64/libLinkar.Commands.Persistent.JSON.so $LIB_DIR_SO_x64/libLinkar.Commands.Persistent.JSON.so
+	ln -srf $BIN_DIR_SO_x64/libLinkar.Commands.Persistent.so $LIB_DIR_SO_x64/libLinkar.Commands.Persistent.so
 fi
 
 echo ""
-echo "Building x86 Dynamic Library: libLinkar.Commands.Persistent.JSON.so"
+echo "Building x86 Dynamic Library: libLinkar.Commands.Persistent.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o OperationArguments.o -O -g OperationArguments.c
-gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o CommandsPersistentJSON.o -O -g CommandsPersistentJSON.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Commands.Persistent.JSON.so OperationArguments.o CommandsPersistentJSON.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
+gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o CommandsPersistent.o -O -g CommandsPersistent.c
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Commands.Persistent.so OperationArguments.o CommandsPersistent.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
 if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
-	ln -srf $BIN_DIR_SO_x86/libLinkar.Commands.Persistent.JSON.so $LIB_DIR_SO_x86/libLinkar.Commands.Persistent.JSON.so
+	ln -srf $BIN_DIR_SO_x86/libLinkar.Commands.Persistent.so $LIB_DIR_SO_x86/libLinkar.Commands.Persistent.so
 fi
 
 echo ""
@@ -929,27 +853,6 @@ cd ..
 if [ "$STOP" == "Y" ] ; then
 	read -p "Press any key to continue ..."
 	clear
-fi
-
-#Linkar.Commands.Persistent.XML Dynamic Libraries
-#================================================
-cd Linkar.Commands
-
-echo "Building x64 Dynamic Library: libLinkar.Commands.Persistent.XML.so"
-gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o OperationArguments.o -O -g OperationArguments.c
-gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o CommandsPersistentXML.o -O -g CommandsPersistentXML.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Commands.Persistent.XML.so OperationArguments.o CommandsPersistentXML.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
-if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
-	ln -srf $BIN_DIR_SO_x64/libLinkar.Commands.Persistent.XML.so $LIB_DIR_SO_x64/libLinkar.Commands.Persistent.XML.so
-fi
-
-echo ""
-echo "Building x86 Dynamic Library: libLinkar.Commands.Persistent.XML.so"
-gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o OperationArguments.o -O -g OperationArguments.c
-gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o CommandsPersistentXML.o -O -g CommandsPersistentXML.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Commands.Persistent.XML.so OperationArguments.o CommandsPersistentXML.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
-if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
-	ln -srf $BIN_DIR_SO_x86/libLinkar.Commands.Persistent.XML.so $LIB_DIR_SO_x86/libLinkar.Commands.Persistent.XML.so
 fi
 
 echo ""

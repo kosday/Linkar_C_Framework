@@ -1,4 +1,4 @@
-File: LinkarStrings
+Title: LkString
 
 The functions can return the results expressed in 4 different ways.
 

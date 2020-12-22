@@ -1,5 +1,5 @@
 /*
-	File: PersistentFunctionsMV.c
+	File: FunctionsPersistentMV.c
 	
 	These functions perform persistent (establishing permanent session) operations with output format type MV.
 	
@@ -86,7 +86,7 @@ DllEntry void LkLogout(char** error, char* connectionInfo, const char* const cus
 		char* MyRead(char** error)
 		{
 			char* result;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -107,7 +107,7 @@ DllEntry void LkLogout(char** error, char* connectionInfo, const char* const cus
 
 		<LkComposeRecordIds>
 		
-		<LkExtractRecordIs>
+		<LkExtractRecordIds>
 		
 		<LkExtractRecords>
 
@@ -156,7 +156,7 @@ DllEntry char* LkRead(char** error, char* connectionInfo, const char* const file
 		char* MyUpdate(char** error)
 		{
 			char* result;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -237,7 +237,7 @@ DllEntry char* LkUpdate(char** error, char* connectionInfo, const char* const fi
 		char* MyNew(char** error)
 		{
 			char* result;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -325,7 +325,7 @@ DllEntry char* LkNew(char** error, char* connectionInfo, const char* const filen
 		char* MyDelete(char** error)
 		{
 			char* result;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -404,12 +404,12 @@ DllEntry char* LkDelete(char** error, char* connectionInfo, const char* const fi
 		public char* MySelect(char** error)
 		{
 			char* result;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
 			{
-				char* options = lkCreateSelectOptions(TRUE, FALSE, FALSE, FALSE);
+				char* options = lkCreateSelectOptions(FALSE, FALSE, 0, 0, TRUE, FALSE, FALSE, FALSE);
 				result = LkSelect(error, connectionInfo, "LK.CUSTOMERS", "", "BY ID", "", "", options, "", 0);
 				LkFreeMemory(options);
 				LkLogout(error, connectionInfo, "", 0);
@@ -466,7 +466,7 @@ DllEntry char* LkSelect(char** error, char* connectionInfo, const char* const fi
 		char* MySubroutine(char** error)
 		{
 			char* result = NULL;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -487,7 +487,7 @@ DllEntry char* LkSelect(char** error, char* connectionInfo, const char* const fi
 		---
 
 	See Also:
-		<LkAddArgumentSubroutine>
+		<LkComposeSubroutineArgs>
 		
 		<LkLogin>
 		
@@ -534,7 +534,7 @@ DllEntry char* LkSubroutine(char** error, char* connectionInfo, const char* cons
 		char* MyConversion(char** error)
 		{
 			char* result = NULL;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -593,7 +593,7 @@ DllEntry char* LkConversion(char** error, char* connectionInfo, const char* cons
 		char* MyFormat(char** error)
 		{
 			char* result = NULL;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -649,7 +649,7 @@ DllEntry char* LkFormat(char** error, char* connectionInfo, const char* const ex
 		char* MyDictionaries(char** error)
 		{
 			char* result = NULL;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -706,7 +706,7 @@ DllEntry char* LkDictionaries(char** error, char* connectionInfo, const char* co
 		char* MyExecute(char** error)
 		{
 			char* result = NULL;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -762,7 +762,7 @@ DllEntry char* LkExecute(char** error, char* connectionInfo, const char* const s
 		char* MyGetVersion(char** error)
 		{
 			char* result = NULL;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -814,7 +814,7 @@ DllEntry char* LkGetVersion(char** error, char* connectionInfo, const char* cons
 	char* MyLkSchemas(char** error)
 	{
 		char* result;
-		CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+		CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 		char* connectionInfo = LkLogin(error, credentials, "", 600);
 		LkFreeMemory(credentials);
 		if(error == NULL && connectionInfo != NULL)
@@ -881,7 +881,7 @@ DllEntry char* LkSchemas(char** error, char* connectionInfo, const char* const l
 		char* MyLkProperties(char** error)
 		{
 			char* result;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -947,7 +947,7 @@ DllEntry char* LkProperties(char** error, char* connectionInfo, const char* cons
 		char* MyResetCommonBlocks(char** error)
 		{
 			char* result = NULL;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 30);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)

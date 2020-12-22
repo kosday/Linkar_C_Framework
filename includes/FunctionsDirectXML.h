@@ -1,6 +1,6 @@
 /*
 	File: DirectFunctionsXML.h
-	Header file for DirectFunctionsXML.c
+	Header file for <DirectFunctionsXML.c>
 
 	Prototype Functions:
 	--- Code

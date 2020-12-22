@@ -1,6 +1,6 @@
 /*
 	File: ReleaseMemory.h
-	Header file for ReleaseMemory.c
+	Header file for <ReleaseMemory.c>
 
 	Prototype Functions:
 	--- Code
@@ -9,6 +9,7 @@
 	DllEntry void WrapperPy_LkFreeMemoryStringArray(char *ptr, uint32_t count);
 	---
 */
+
 #include "CompilerOptions.h"
 #include "Types.h"
 

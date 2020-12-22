@@ -1,0 +1,9 @@
+Title: Library Overview
+
+Dependencies: *Linkar.Functions.Direct*
+
+This library consists of functions that perform Direct operations against Linkar Server using TABLE as the output format.
+
+There are only 3 operations that have this output format: LkSchemas, LkProperties, and GetTable.
+
+It requires the Linkar.Functions.Direct library.

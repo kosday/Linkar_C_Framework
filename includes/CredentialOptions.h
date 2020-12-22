@@ -1,3 +1,7 @@
+/*
+	File: CredentialOptions.h
+	Header file for CredentialOptions private functions.
+*/
 #include "CompilerOptions.h"
 #include "Types.h"
 /*
@@ -47,11 +51,7 @@
 	Returns:
 		A coded string that contains the connection credentials.
 		
-	See Also:
-		<LkLogin>
-		
-		<Direct Functions>
-		
+	See Also:		
 		<Release Memory>
 */
 DllEntry char* LkCreateCredentialOptions(char* host, char* entrypoint, uint32_t port, char* username, char* password, char* language, char* freetext);
@@ -79,11 +79,7 @@ DllEntry char* LkCreateCredentialOptions(char* host, char* entrypoint, uint32_t 
 	Returns:
 		A coded string that contains the connection credentials.
 		
-	See Also:
-		<LkLogin>
-		
-		<Direct Functions>
-		
+	See Also:		
 		<Release Memory>
 */
 DllEntry char* LkCreateCredentialOptionsPlugin(char* host, char* entrypoint, uint32_t port, char* username, char* password, char* language, char* freetext, char* pluginId);
@@ -124,7 +120,7 @@ DllEntry char** LkExtractAllDataFromCredentialOptions(const char* const credenti
 		The extracted element from credentialOptions string.
 		
 	See Also:
-		<LkComposeCredentialOptions>
+		<LkCreateCredentialOptions>
 		
 		<Release Memory>
 */

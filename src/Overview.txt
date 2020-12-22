@@ -1,0 +1,279 @@
+File: Linkar C Libraries
+
+The Linkar Libraries allow the exchange of information with the server when they are included in compatible Projects. 
+
+They contain many functions that can be called from the application.
+
+C libraries for Windows:
+LinkarClientC.dll / LinkarClientC.lib
+
+C libraries for Linux:
+libLinkarClientC.so / libLinkarClientC.a	 
+ 
+ 
+Group: Types of Functions
+
+Topic: PERSISTENT FUNCTIONS
+ 
+It is necessary to  Login that, through a Session code; this allows it to make all the desired operations until a call to the Close method is produced or until the session expires because of inactivity. This is defined on its EntryPoint.
+They are useful for applications that require user identification, for instance, to log into an ERP session.
+
+ 
+Topic: DIRECT FUNCTIONS
+
+Used for direct and independent communication with the database.
+Its arguments contain the necessary information to identify the user before returning the required information.
+Unlike persistent functions, these do not have a Session Code, each call is completely independent of the others and does not have Login or Close functions.
+They are used for database access from public websites, for instance online shops.
+
+Topic: TEXT FUNCTIONS
+
+This type of function does not need to access the database.
+They are executed in the client and their goal is to ease the management of the MV buffers.
+They are grouped in the MV Functions and Data Functions chapters.
+
+ 
+
+Topic: C AUXILIARY FUNCTIONS
+
+C auxiliary Functions are exclusive for C libraries.
+These functions do not access the database.
+They are executed in the client and their goal is to allow easier management of other complex C functions.
+There are no classes in C, or objects , these functions are used to create encoded strings that emulate other languages.
+
+
+Group: LkString Types
+
+The functions can return the results expressed in 4 different ways.
+
+One of the available output formats is the denominated LkObject. In this format an object of the class is returned. (NOT available in C Library)
+
+The other 3 output formats are (string) type formats. These formats are the MV, XML and JSON formats. To these 3 formats, inside this manual we will name call them LkStrings formats.
+
+Topic: LkString MV
+
+To explain and better understand the information with this structure in this output format, we will use an example: the result of a reading operation.
+Specifically this is about the two reading records, with codes 2 and 3, from LK.CUSTOMERS record.
+
+In the example that is shown below, line breaks have been added for a better explanation of their structure. 
+Each different section is delimited by the ASCII 28 code.
+In Linkar TESTER, the 28 ASCII character is replaced by  : \u01c to make it more visual.
+In turn, inside each section, when there is an items list (as is our case, since 2 records have been read), the character ASCII 30 code  is used (in Linkar TESTER this is replaced by a \u01e )to separate the items.
+
+--- Code
+THIS_LISTþTOTAL_RECORDSþRECORD_IDþRECORD_ID_DICTSþRECORDþRECORD_DICTSþCALCULATEDþCALCULATED_DICTSþERRORS
+\u01c
+2
+\u01c
+2\u01e3
+\u01c
+@IDþCODE
+\u01c
+CUSTOMER 2þADDRESS 2þ444 - 444 - 002\u01eCUSTOMER 3þADDRESS 3þ444 - 444 - 003
+\u01c
+NAMEþADDRþPHONE
+\u01c
+\u01e
+\u01c
+\u01c
+---
+
+In the first section a list of labels appears with the character þ (@AM attribute mark).
+Each label corresponds to each name of the following session.
+This way, the first section is called THIS_LIST, the second section TOTAL_RECORS, the third RECOR_ID, the fourth RECORD_ID_DICTS etc.
+
+In the first section we find this first section and the rest of sections name.
+
+In the second section (TOTAL_RECORD) we find the 2 value, because a total of 2 records have been read.
+
+In the third section (RECORD_ID_DICTS) we find two dictionaries of Record Id. @ID and CODE.
+
+In the fourth section (RECORD_ID) we find a records ID list.
+Since it is a list, the 2 and 3 ID´s are separated by the items separator character (\u01e)
+
+In the fifth section (RECORD) we find the whole content of each  record read.
+Since it is also a list, the (\u01e) character is used to separate the content of each record.
+The record content is shown just like it was in the database, preserving all its original marks: attribute marks (@AM), multivalue (@MV), subvalue (@SM) or Text (@TM).
+
+In the sixth section (RECORD_DICTS) we find the names of the file dictionaries separated by the character þ (@AM attribute mark).
+
+In the seventh section (CALCULATED) we would find the data from the calculated fields in each one of the 2 records read.
+Since this file has no calculated fields there is nothing to show, just the items separator character \u01e.
+
+In the eighth section (CALCULATED_DICTS) the calculated field names. Since there are none this will be empty.
+
+In the last section (ERRORS), if there were any, the error message would be shown.
+
+More or less sections can appear depending on the operation and options of each operation.
+When the Read was executed, the result of which we are using in this example, the Calculated option was activated inside its ReadOptions.
+Due to that, in this example, there are CALCULATED and CALCULATED_DICTS sections, although they are empty
+
+If you wish you can experiment with the Linkar TESTER program, executing Read functions, with different <codeEntityReference>T:LinkarCommon.ReadOptions</codeEntityReference> to see the different results.
+With this program, you can execute all the available clients functions with all their options
+
+The complete list of MV labels is listed below:
+
+--- Code
+THIS_LIST
+RECORD_ID
+RECORD_ID_DICTS
+RECORD
+RECORD_DICTS
+CALCULATED
+CALCULATED_DICTS
+DICTIONARIES_ID
+DICTIONARIES
+ORIGINALRECORD
+TOTAL_RECORDS
+ARGUMENTS
+CAPTURING
+RETURNING
+CONVERSION
+FORMAT
+ROWHEADERS
+ERRORS
+---
+
+Topic: LkString XML
+To explain and better understand this structure with the information in this output format, we will use an example: the result of a reading operation.
+It is specifically about the two records read, with codes 2 and 3, from the LK.CUSTOMERS record.
+
+In the example that is shown below the line breaks have been added for a better explanation of their structure.
+
+--- Code
+<Linkar file="LK.CUSTOMERS" total_records="2">
+	<ERRORS/>
+	<RECORD>
+		<LKREG id="2">
+			<LKFL_1 field="1" dict="NAME" display="Name" assoc="" conversion="" formatspec="50L">CUSTOMER 2</LKFL_1>
+			<LKFL_2 field="2" dict="ADDR" display="Address" assoc="" conversion="" formatspec="40L">ADDRESS 2</LKFL_2>
+			<LKFL_3 field="3" dict="PHONE" display="Phone" assoc="" conversion="" formatspec="20L">444 - 444 - 002</LKFL_3>
+		</LKREG>
+		<LKREG id="3">
+			<LKFL_1 field="1" dict="NAME" display="Name" assoc="" conversion="" formatspec="50L">CUSTOMER 3</LKFL_1>
+			<LKFL_2 field="2" dict="ADDR" display="Address" assoc="" conversion="" formatspec="40L">ADDRESS 3</LKFL_2>
+			<LKFL_3 field="3" dict="PHONE" display="Phone" assoc="" conversion="" formatspec="20L">444 - 444 - 003</LKFL_3>
+		</LKREG>
+	</RECORD>
+	<CALCULATED>
+		<LKREG id="2"/>
+		<LKREG id="3">
+		</LKREG>
+	</CALCULATED>
+</Linkar>
+---
+
+The first node contains attributes to identify the file name and the total number of  records read.
+Inside this node we can see 3 more nodes.
+One is dedicated to the possible errors (ERROS), another to the content of the  records read (RECORD) and another to contain the calculated fields (CALCULATED).
+Inside the RECORD node there is a list with the  records read.
+The fields are listed for each record read and the additional information obtained from the dictionary corresponding from that field is shown, as well as the field content.
+
+More or less nodes can appear depending on the operation and on each operation options.
+When the Read function was executed, the result of which we are using in this example, the Calculated option was activated inside its <codeEntityReference>T:LinkarCommon.ReadOptions</codeEntityReference>.
+Due to that, in this example, the CALCULATED node, is empty.
+
+If you wish you can experiment with the Linkar TESTER program, executing Read functions, with different ReadOptions to see the different results.
+With this program, you can execute all the available clients functions with all their options
+
+Topic: LkString JSON
+To explain and better understand the information in this output format with this structure, we will use an example: the result of a reading operation.
+It is specifically about the two records read, with codes 2 and 3, from the LK.CUSTOMERS record.
+
+In the example that is shown below line breaks have been added for a better explanation of their structure.
+
+---Code
+{
+ "Linkar": {
+	            
+				"file": "LK.CUSTOMERS",
+				"total_records": "2",
+				"ERRORS": [],
+				"RECORD": [{
+								"LKREG": {
+											"id": "2",
+											"LKFL_1": {
+												"field": "1",
+												"dict": "NAME",
+												"display": "Name",
+												"assoc": "",
+												"conversion": "",
+												"formatspec": "50L",
+												"value": "CUSTOMER 2"
+											},
+											"LKFL_2": {
+												"field": "2",
+												"dict": "ADDR",
+												"display": "Address",
+												"assoc": "",
+												"conversion": "",
+												"formatspec": "40L",
+												"value": "ADDRESS 2"
+											},
+											"LKFL_3": {
+												"field": "3",
+												"dict": "PHONE",
+												"display": "Phone",
+												"assoc": "",
+												"conversion": "",
+												"formatspec": "20L",
+												"value": "444 - 444 - 002"
+											}
+								}
+				},
+				{
+								"LKREG": {
+											"id": "3",
+											"LKFL_1": {
+												"field": "1",
+												"dict": "NAME",
+												"display": "Name",
+												"assoc": "",
+												"conversion": "",
+												"formatspec": "50L",
+												"value": "CUSTOMER 3"
+											},
+											"LKFL_2": {
+												"field": "2",
+												"dict": "ADDR",
+												"display": "Address",
+												"assoc": "",
+												"conversion": "",
+												"formatspec": "40L",
+												"value": "ADDRESS 3"
+											},
+											"LKFL_3": {
+												"field": "3",
+												"dict": "PHONE",
+												"display": "Phone",
+												"assoc": "",
+												"conversion": "",
+												"formatspec": "20L",
+												"value": "444 - 444 - 003"
+											}
+								}
+				}],
+				"CALCULATED": [{
+								"LKREG": {
+											"id": "2"
+								}
+				},
+				{
+								"LKREG": {
+											"id": "3"
+								}
+				}]
+	}
+}
+---
+
+In this example we can see a property, list type call ERRORS in which the possible errors would be shown.
+Another list, called RECORD with the content of the records read and additional information of each record fields, obtained from that field´s dictionaries.
+And a final list, called CALCULATED which is empty in this example
+
+More or less properties can appear depending on the operation and on each operation options.
+When the Read function was executed, the result of which we are using in this example, inside its ReadOptions the Calculated option was activated.
+Due to that, in this example, the CALCULATED node, is empty
+
+If you wish you can experiment with the Linkar TESTER program, executing Read functions, with different ReadOptions to see the different results.
+With this program, you can execute all the available clients functions with all their options.

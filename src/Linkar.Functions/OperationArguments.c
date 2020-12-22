@@ -15,6 +15,10 @@
 	INPUT: The necesary data for perform every operation.
 
 	CUSTOMVARS US_char OPTIONS US_char INPUT
+	
+	Note:
+	All functions comments here, return a char* value. That memory was allocated dynamically, so once those string is not needed anymore, the memory assigned to them *must be released*.
+	See <Release Memory> for known how to do.1
 */
 
 #include "OperationArguments.h"

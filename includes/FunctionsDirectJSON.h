@@ -1,6 +1,6 @@
 /*
 	File: DirectFunctionsJSON.h
-	Header file for DirectFunctionsJSON.c
+	Header file for <DirectFunctionsJSON.c>
 
 	Prototype Functions:
 	--- Code

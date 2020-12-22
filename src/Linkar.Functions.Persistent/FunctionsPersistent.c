@@ -1,5 +1,5 @@
 /*
-	File: PersistentFunctions.c
+	File: FunctionsPersistent.c
 	
 	These functions perform persistent (establishing permanent session) operations with any kind of output format type.
 	This type of functions require a previous Login operation.
@@ -336,7 +336,7 @@ DllEntry char* Base_LkSelect(char** error, char* connectionInfo, const char* con
 		The results of the operation.
 		
 	See Also:		
-		<LkAddArgumentSubroutine>
+		<LkComposeSubroutineArgs>
 
 		<LkLogin>
 		

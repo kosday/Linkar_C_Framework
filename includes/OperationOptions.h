@@ -1,6 +1,6 @@
 /*
 	File: OperationOptions.h
-	Header file for OperationOptions.c
+	Header file for <OperationOptions.c>
 
 	Prototype Functions:
 	--- Code
@@ -23,8 +23,6 @@
 	
 	DllEntry char* LkCreateSelectOptions(BOOL onlyRecordId, BOOL pagination, uint32_t regPage, uint32_t numPage, BOOL calculated, BOOL conversion, BOOL formatSpec, BOOL originalRecords);
 	DllEntry char* LkAddArgumentSubroutine(const char* const arguments, const char* newArgument);
-	
-	//SCHEMAS
 	
 	static const char* const GetStrSchemaType(SchemaTYPE schemaType);
 	static const char* const GetStrRowHeadersType(RowHeadersTYPE rowHeadersType);
@@ -68,8 +66,6 @@ DllEntry char* LkCreateRecoverRecordIdTypeCustom();
 
 DllEntry char* LkCreateSelectOptions(BOOL onlyRecordId, BOOL pagination, uint32_t regPage, uint32_t numPage, BOOL calculated, BOOL conversion, BOOL formatSpec, BOOL originalRecords);
 DllEntry char* LkAddArgumentSubroutine(const char* const arguments, const char* newArgument);
-
-//SCHEMAS
 
 static const char* const GetStrSchemaType(SchemaTYPE schemaType);
 static const char* const GetStrRowHeadersType(RowHeadersTYPE rowHeadersType);

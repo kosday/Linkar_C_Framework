@@ -1,0 +1,6 @@
+Title: Library Overview
+
+Dependencies: *Linkar.Strings.Helper*
+
+Set of functions that help to manipulate the character strings that are used as input and output data in the MV type operations (Linkar.Functions.Direct.MV and Linkar.Functions.Persistent.MV libraries).
+For example, functions that help to compose lists of record IDs, lists of records, argument lists for subroutine operations, and inverse functions that help to extract elements from the responses of operations and from the result lists, etc.

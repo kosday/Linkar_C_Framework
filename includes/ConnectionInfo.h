@@ -1,3 +1,7 @@
+/*
+	File: ConnectionInfo.h
+	Header file for ConnectionInfo private functions.
+*/
 #include "CompilerOptions.h"
 #include "Types.h"
 
@@ -34,11 +38,7 @@
 		<LkCreateCredentialOptions>
 		
 		<LkCreateCredentialOptionsPlugin>
-		
-		<LkLogin>
-		
-		<Persistent Functions>
-		
+				
 		<Release Memory>
 */
 DllEntry char* LkCreateConnectionInfo(const char* const credentialOptions, uint32_t receiveTimeout);

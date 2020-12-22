@@ -1,5 +1,5 @@
 /*
-	File: DirectFunctionsTABLE.c
+	File: FunctionsDirectTABLE.c
 	
 	These functions perform direct (without establishing permanent session) operations with output format type TABLE.
 	
@@ -36,7 +36,7 @@
 		char* MyLkSchemas(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* options = LkCreateSchOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, 0, 0);
 			// char* options = LkCreateSchOptionsTypeSQLMODE (FALSE, FALSE, 0, 0);
 			// char* options = LkCreateSchOptionsTypeDICTIONARIES (RowHeadersTYPE _MAINLABEL, FALSE, 0, 0);
@@ -92,7 +92,7 @@ DllEntry char* LkSchemas(char** error, const char* const credentialOptions, cons
 		char* MyLkProperties(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* options = LkCreatePropOptionsTypeLKSCHEMAS (RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, 0, 0);
 			//char* options = LkCreatePropOptionsTypeSQLMODE(FALSE, FALSE, 0, 0);
 			//char* options = LkCreatePropOptionsTypeDICTIONARIES(RowHeadersTYPE_MAINLABEL, FALSE, 0, 0);
@@ -151,7 +151,7 @@ DllEntry char* LkProperties(char** error, const char* const credentialOptions, c
 		char* MyGetTable(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* options = LkCreateTableOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0 );
 			//char* options = LkCreateTableOptionsTypeSQLMODE (FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0);
 			//char* options = LkCreateTableOptionsTypeDICTIONARIES (RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0);

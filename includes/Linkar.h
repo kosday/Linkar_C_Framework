@@ -1,3 +1,7 @@
+/*
+	File: Linkar.h
+	Header file for Linkar private functions.
+*/
 #include "CompilerOptions.h"
 #include <stdint.h>
 

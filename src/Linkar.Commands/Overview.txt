@@ -1,0 +1,10 @@
+Title: Library Overview
+
+Dependencies: *Linkar*
+
+This library is the SendCommand function with small variants:
+
+	- Executing Persistent or Direct operations. 
+	- Executing the specified commands in XML or JSON.
+
+A command is nothing more than a string of characters where an operation is specified (f.i. Read) with all its mandatory and optional parameters described in XML or JSON format.

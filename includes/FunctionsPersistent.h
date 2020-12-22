@@ -1,6 +1,6 @@
 /*
 	File: PersistentFunctions.h
-	Header file for PersistentFunctions.c
+	Header file for <PersistentFunctions.c>
 
 	Prototype Functions:
 	--- Code

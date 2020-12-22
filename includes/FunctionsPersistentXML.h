@@ -1,6 +1,6 @@
 /*
 	File: PersistentFunctionsXML.h
-	Header file for PersistentFunctionsXML.c
+	Header file for <PersistentFunctionsXML.c>
 
 	Prototype Functions:
 	--- Code

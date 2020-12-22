@@ -1,6 +1,6 @@
 /*
 	File: DirectCommands.h
-	Header file for CommandsDirect.c
+	Header file for <CommandsDirect.c>
 
 	Prototype Functions:
 	--- Code

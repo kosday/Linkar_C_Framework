@@ -1,6 +1,6 @@
 /*
 	File: OperationArguments.h
-	Header file for OperationArguments.c
+	Header file for <OperationArguments.c>
 
 	Prototype Functions:
 	--- Code

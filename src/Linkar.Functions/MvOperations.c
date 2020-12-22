@@ -1,6 +1,10 @@
 /*	
 	File: MvOperations.c
 	This module contains the basic functions to work with strings of multivalues. These functions are locally executed.
+	
+	Note:
+	Some functions comments here, return a char* value. That memory was allocated dynamically, so once those string is not needed anymore, the memory assigned to them *must be released*.
+	See <Release Memory> for known how to do.1
 */
 
 #include "MvOperations.h"

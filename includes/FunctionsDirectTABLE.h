@@ -1,6 +1,6 @@
 /*
 	File: DirectFunctionsTABLE.h
-	Header file for DirectFunctionsTABLE.c
+	Header file for <DirectFunctionsTABLE.c>
 
 	Prototype Functions:
 	--- Code

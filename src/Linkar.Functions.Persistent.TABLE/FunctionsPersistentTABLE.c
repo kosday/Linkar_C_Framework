@@ -1,5 +1,5 @@
 /*
-	File: PersistentFunctionsTABLE.c
+	File: FunctionsPersistentTABLE.c
 	
 	These functions perform persistent (establishing permanent session) operations with output format type TABLE.
 	
@@ -83,7 +83,7 @@ DllEntry void LkLogout(char **error, char* connectionInfo, const char* const cus
 	char* MyLkSchemas(char** error)
 	{
 		char* result;
-		CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+		CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 		char* connectionInfo = LkLogin(error, credentials, "", 600);
 		LkFreeMemory(credentials);
 		if(error == NULL && connectionInfo != NULL)
@@ -150,7 +150,7 @@ DllEntry char* LkSchemas(char** error, char* connectionInfo, const char* const l
 		char* MyLkProperties(char** error)
 		{
 			char* result;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -220,7 +220,7 @@ DllEntry char* LkProperties(char** error, char* connectionInfo, const char* cons
 		char* MyGetTable(char** error)
 		{
 			char* result;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)

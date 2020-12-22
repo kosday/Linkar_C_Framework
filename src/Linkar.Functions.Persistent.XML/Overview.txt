@@ -1,0 +1,9 @@
+Title: Library Overview
+
+Dependencies: *Linkar.Functions.Persistent*
+
+This library consists of functions that perform Persistent operations against Linkar Server always in XML format for data input and output.
+
+Two functions are also included to carry out the “Login” and “Logout” operations.
+
+It requires the Linkar.Functions. Persistent library.

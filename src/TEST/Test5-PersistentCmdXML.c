@@ -96,7 +96,7 @@ static void mainProgram(char** connectionInfo)
 
 void main(void)
 {	
-	char* credentialOptions = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "ADMIN", "admin", "", "Test C Library");	
+	char* credentialOptions = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "ADMIN", "admin", "", "Test C Library");	
 	char* error;
 	char* customVars = "";
 	uint32_t receiveTimeout = 30;

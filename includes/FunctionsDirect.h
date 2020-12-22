@@ -1,6 +1,6 @@
 /*
 	File: DirectFunctions.h
-	Header file for DirectFunctions.c
+	Header file for <DirectFunctions.c>
 
 	Prototype Functions:
 	--- Code

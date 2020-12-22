@@ -1,5 +1,5 @@
 /*
-	File: DirectFunctions.c
+	File: FunctionsDirect.c
 	
 	These functions perform direct (without establishing permanent session) operations with any kind of output format type.
 	
@@ -242,7 +242,7 @@ DllEntry char* Base_LkSelect(char** error, const char* const credentialOptions, 
 		The results of the operation.
 		
 	See Also:
-		<LkAddArgumentSubroutine>
+		<LkComposeSubroutineArgs>
 		
 		<LkCreateCredentialOptions>
 

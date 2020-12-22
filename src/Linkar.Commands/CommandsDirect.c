@@ -1,5 +1,5 @@
 /*
-	File: DirectCommands.c
+	File: CommandsDirect.c
 	
 	These functions perform direct (without establishing permanent session) operations with output format type XML or JSON, and
 	through some templates in standard format XML or JSON.
@@ -75,7 +75,7 @@ DllEntry char* LkSendCommand(char** error, const char* const credentialOptions, 
 		char* MyCommandRead(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			
 			string command = 
 		"{\
@@ -132,7 +132,7 @@ DllEntry char* LkSendJsonCommand(char** error, const char* const credentialOptio
 		char* MyCommandRead(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			
 			string command = 
 		"<COMMAND NAME=\"READ\">\

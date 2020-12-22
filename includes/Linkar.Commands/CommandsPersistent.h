@@ -1,6 +1,6 @@
 /*
 	File: PersistentCommands.h
-	Header file for CommandsPersistentJSON.c and CommandsPersistentXML.c
+	Header file for <CommandsPersistent.c>
 
 	Prototype Functions:
 	--- Code

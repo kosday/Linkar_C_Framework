@@ -2,7 +2,7 @@
 	File: LinkarString.c
 	This module contains auxiliary functions to work with <LkStrings>.
 
-	All functions comments here, except <LkGetTotalRecordsFromLkString>, return a char* or char** value. That memory was allocated dynamically, so once those string is not needed anymore, the memory assigned to them *must be released*.
+	All functions comments here, except <LkExtractTotalRecords>, return a char* or char** value. That memory was allocated dynamically, so once those string is not needed anymore, the memory assigned to them *must be released*.
 	See <Release Memory> for known how to do.
 */
 

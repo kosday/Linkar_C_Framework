@@ -1,6 +1,6 @@
 /*
 	File: MvOperations.h
-	Header file for MvOperations.c
+	Header file for <MvOperations.c>
 
 	Prototype Functions:
 	--- Code

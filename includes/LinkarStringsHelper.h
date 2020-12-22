@@ -1,6 +1,6 @@
 /*
 	File: LinkarStringsHelper.h
-	Header file for LinkarStringsHelper.c
+	Header file for <LinkarStringsHelper.c>
 
 	Prototype Functions:
 	--- Code

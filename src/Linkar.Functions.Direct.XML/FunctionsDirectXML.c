@@ -1,5 +1,5 @@
 /*
-	File: DirectFunctionsXML.c
+	File: FunctionsDirectXML.c
 	
 	These functions perform direct (without establishing permanent session) operations with output format type XML.
 	
@@ -40,7 +40,7 @@
 		char* MyRead(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* options = lkCreateReadOptions(TRUE, FALSE, FALSE, FALSE);
 			XML_FORMAT xmlFormat = XML_FORMAT_XML;
 			result = LkRead(error, credentials, "LK.CUSTOMERS",
@@ -102,7 +102,7 @@ DllEntry char* LkRead(char** error, const char* const credentialOptions, const c
 		char* MyUpdate(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			
 			char* options = LkCreateUpdateOptions(FALSE, TRUE, TRUE, FALSE, FALSE, FALSE);
 			XML_FORMAT xmlFormat = XML_FORMAT_XML;
@@ -169,7 +169,7 @@ DllEntry char* LkUpdate(char** error, const char* const credentialOptions, const
 		char* MyNew(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* recordIdType = LkCreateNewRecordIdTypeNone();
 			char* newOptions = lkCreateNewOptions(recordIdType, TRUE, FALSE, FALSE, FALSE);
 			LkFreeMemory(recordIdType);
@@ -243,7 +243,7 @@ DllEntry char* LkNew(char** error, const char* const credentialOptions, const ch
 		char* MyDelete(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* recoverRecordIdType = LkCreateRecoverRecordIdTypeNone();
 			char* options = lkCreateDeleteOptions(FALSE, recoverRecordIdType);
 			LkFreeMemory(recoverRecordIdType);
@@ -316,8 +316,8 @@ DllEntry char* LkDelete(char** error, const char* const credentialOptions, const
 		public char* MySelect(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
-			char* options = lkCreateSelectOptions(TRUE, FALSE, FALSE, FALSE);
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
+			char* options = lkCreateSelectOptions(FALSE, FALSE, 0, 0, TRUE, FALSE, FALSE, FALSE);
 			XML_FORMAT xmlFormat = XML_FORMAT_XML;
 			result = LkSelect(error, credentials, "LK.CUSTOMERS", "","BY ID","","",options, xmlFormat, "", 600);
 			LkFreeMemory(options);
@@ -368,7 +368,7 @@ DllEntry char* LkSelect(char** error, const char* const credentialOptions, const
 		char* MySubroutine(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			
 			char* subroutineName = "SUB.DEMOLINKAR";
 
@@ -384,7 +384,7 @@ DllEntry char* LkSelect(char** error, const char* const credentialOptions, const
 		---
 
 	See Also:
-		<LkAddArgumentSubroutine>
+		<LkComposeSubroutineArgs>
 		
 		<LkCreateCredentialOptions>
 		
@@ -426,7 +426,7 @@ DllEntry char* LkSubroutine(char** error, const char* const credentialOptions, c
 		char* MyConversion(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			
 			result = LkConversion(error, credentials, CONVERSION_TYPE.INPUT,"31-12-2017","D2-", "", 600);
 			LkFreeMemory(credentials);
@@ -475,7 +475,7 @@ DllEntry char* LkConversion(char** error, const char* const credentialOptions, c
 		char* MyFormat(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			
 			result = LkFormat(error, credentials, "123","R#10", "", 600);
 			LkFreeMemory(credentials);
@@ -521,7 +521,7 @@ DllEntry char* LkFormat(char** error, const char* const credentialOptions, const
 		char* MyDictionaries(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			
 			result = LkDictionaries(error, credentials, "LK.CUSTOMERS", "", 600);
 			LkFreeMemory(credentials);
@@ -566,7 +566,7 @@ DllEntry char* LkDictionaries(char** error, const char* const credentialOptions,
 		char* MyExecute(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			
 			result = LkExecute(error, credentials, "WHO", "", 600);
 			LkFreeMemory(credentials);
@@ -611,7 +611,7 @@ DllEntry char* LkExecute(char** error, const char* const credentialOptions, cons
 		char* MyGetVersion(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			
 			result = LkGetVersion(error, credentials, 600);
 			LkFreeMemory(credentials);
@@ -657,7 +657,7 @@ DllEntry char* LkGetVersion(char** error, const char* const credentialOptions, c
 		char* MyLkSchemas(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* options = LkCreateSchOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, 0, 0);
 			// char* options = LkCreateSchOptionsTypeSQLMODE (FALSE, FALSE, 0, 0);
 			// char* options = LkCreateSchOptionsTypeDICTIONARIES (RowHeadersTYPE _MAINLABEL, FALSE, 0, 0);
@@ -713,7 +713,7 @@ DllEntry char* LkSchemas(char** error, const char* const credentialOptions, cons
 		char* MyLkProperties(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* options = LkCreatePropOptionsTypeLKSCHEMAS (RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, 0, 0);
 			//char* options = LkCreatePropOptionsTypeSQLMODE(FALSE, FALSE, 0, 0);
 			//char* options = LkCreatePropOptionsTypeDICTIONARIES(RowHeadersTYPE_MAINLABEL, FALSE, 0, 0);
@@ -768,7 +768,7 @@ DllEntry char* LkProperties(char** error, const char* const credentialOptions, c
 		char* MyResetCommonBlocks(char** error)
 		{
 			char* result;
-			char* credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			char* credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			
 			result = LkResetCommonBlocks(error, credentials, 30);
 			LkFreeMemory(credentials);

@@ -1,6 +1,6 @@
 /*
 	File: PersistentFunctionsJSON.h
-	Header file for PersistentFunctionsJSON.c
+	Header file for <PersistentFunctionsJSON.c>
 
 	Prototype Functions:
 	--- Code

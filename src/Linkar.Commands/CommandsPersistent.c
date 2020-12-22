@@ -1,5 +1,5 @@
 /*
-	File: PersistentCommandsJSON.c
+	File: CommandsPersistent.c
 	
 	These functions perform persistent (establishing permanent session) operations with output format type JSON, and
 	through some templates in standard format XML or JSON.
@@ -169,7 +169,7 @@ DllEntry char* LkSendCommand(char** error, char** connectionInfo, const char* co
 		char* MyCommandRead(char** error)
 		{
 			char* result;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)
@@ -233,7 +233,7 @@ DllEntry char* LkSendJsonCommand(char** error, char** connectionInfo, const char
 		char* MyCommandRead(char** error)
 		{
 			char* result;
-			CredentialOptions credentials = LkCreateCredentialOptions("192.168.100.101", "QMEP1", 11301, "admin", "admin", "", "");
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
 			char* connectionInfo = LkLogin(error, credentials, "", 600);
 			LkFreeMemory(credentials);
 			if(error == NULL && connectionInfo != NULL)

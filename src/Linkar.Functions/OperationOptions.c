@@ -340,7 +340,7 @@ DllEntry char* LkCreateNewRecordIdTypeLinkar(const char* const prefix, const cha
 /*
 	Function: LkCreateNewRecordIdTypeCustom
 		Creates a string that defines the type of ID to be used in <LkCreateNewOptions> function as Custom.
-		That mean, the type of ID will be of Custom type: defined by custom subroutines.
+		That mean, the type of ID will be of Custom type: defined by custom SUB.LK.MAIN.NEWRECOVERRECORDID.CUSTOM subroutine.
 	
 	Returns:
 		A string that defines the type of ID to be used in <LkCreateNewOptions> function as Custom.
@@ -541,7 +541,7 @@ DllEntry char* LkCreateRecoverRecordIdTypeLinkar(const char* const prefix, const
 /*
 	Function: LkCreateRecoverRecordIdTypeCustom
 		Creates a string that defines the type of recovery options for deleted codes that will be used in LkCreateDeleteOptions as Custom.
-		That mean, the recovery of deleted codes will be performed through the use of custom subroutines.
+		That mean, the recovery of deleted codes will be performed through the use of custom SUB.LK.MAIN.NEWRECOVERRECORDID.CUSTOM subroutine.
 		
 	Returns:
 		A string that defines the type of recovery options for deleted codes that will be used in LkCreateDeleteOptions as Custom.

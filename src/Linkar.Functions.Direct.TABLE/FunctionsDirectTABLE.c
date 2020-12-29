@@ -25,6 +25,14 @@
 	Returns:
 		The results of the operation.
 
+	Remarks:
+		TABLE output format uses the defined control characters in <EntryPoints Parameters: http://kosday.com/Manuals/en_web_linkar/lk_schemas_ep_parameters.html> Table Row Separator and Column Row Separator.
+		
+		By default:
+		
+		- TAB char (9) for columns.
+		- VT char (11) for rows.
+	
 	Example:
 		--- Code
 		#include "Types.h"
@@ -81,6 +89,14 @@ DllEntry char* LkSchemas(char** error, const char* const credentialOptions, cons
 	Returns:
 		The results of the operation.
 
+	Remarks:
+		TABLE output format uses the defined control characters in <EntryPoints Parameters: http://kosday.com/Manuals/en_web_linkar/lk_schemas_ep_parameters.html> Table Row Separator and Column Row Separator.
+		
+		By default:
+		
+		- TAB char (9) for columns.
+		- VT char (11) for rows.
+	
 	Example:
 		--- Code
 		#include "Types.h"
@@ -139,7 +155,8 @@ DllEntry char* LkProperties(char** error, const char* const credentialOptions, c
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
 	Returns:
-
+		The results of the operation.
+	
 	Example:
 		--- Code
 		#include "Types.h"

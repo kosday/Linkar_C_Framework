@@ -144,7 +144,14 @@ static char* LkCreateReadAfterCommonOptions(BOOL readAfter, BOOL calculated, BOO
 	
 	Returns:
 		A string with the Update Options codified inside. To use with <LkUpdate> and <LkUpdateD> functions.
-		
+	
+	Remarks:
+		If the OptimisticLock property is set to true, a copy of the record must be provided before the modification (originalRecords argument)
+		to use the Optimistic Lock technique. This copy can be obtained from a previous Read operation. The database, before executing the modification, 
+		reads the record and compares it with the copy in originalRecords, if they are equal the modified record is executed.
+		But if they are not equal, it means that the record has been modified by other user and its modification will not be saved.
+		The record will have to be read, modified and saved again.
+	
 	Example:
 		--- Code
 		BOOL calculated = TRUE;

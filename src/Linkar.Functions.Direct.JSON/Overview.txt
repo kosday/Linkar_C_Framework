@@ -2,6 +2,6 @@ Title: Library Overview
 
 Dependencies: *Linkar.Functions.Direct*
 
-This library consists of functions that perform direct operations against Linkar Server always in JSON format for data input and output.
+This library consists of functions that perform direct operations against the Linkar Server, which are always in JSON format for data input and output.
 
 It requires the Linkar.Functions.Direct library.

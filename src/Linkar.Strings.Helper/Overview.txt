@@ -1,4 +1,4 @@
 Title: Library Overview
 
-Set of functions that help to perform complex operations with character strings that are not available natively in C.
+Set of functions that help complex operations to be performed with character strings that are not available natively in C.
 For example, perform a “Split” of a character string.

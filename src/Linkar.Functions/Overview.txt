@@ -1,9 +1,9 @@
 Title: Library Overview
 
-In this library, there are several sets of auxiliary functions.
+There are several sets of auxiliary functions in this library.
 
-Some of them help to compose the arguments that the Primitives need to execute the operations.
+Some of them help to compose the arguments that the Primitives need so as to execute the operations.
 
-Also, auxiliary functions allow the creation of different options for each operation.
+Auxiliary functions also allow the creation of different options for each operation.
 
 Another group of functions allows the use of typical MV Database operations, such as Count, DCount, Replace, Change, … 

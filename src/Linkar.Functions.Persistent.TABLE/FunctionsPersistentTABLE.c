@@ -25,6 +25,9 @@
 		A complex string that contains data about the established session in LinkarSERVER.
 		You can extract data from this string using <LkExtractDataFromConnectionInfo> function.
 		
+	Remarks:
+		Login is actually a "virtual" operation which creates a new Client Session ID. No DBMS login is performed unless Linkar SERVER determines new Database Sessions are required. These operations are not related.
+
 	See Also:
 		<LkCreateCredentialOptions>
 		
@@ -49,6 +52,9 @@ DllEntry char* LkLogin(char** error, char* credentialOptions, const char* const 
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely. Values less than or equal to 0, waits indefinitely.
 				
+	Remarks:
+		Logout is actually a "virtual" operation which disposes the current Client Session ID. No DBMS logout is performed.
+	
 	See Also:
 		<LkLogin>	
 */
@@ -71,6 +77,14 @@ DllEntry void LkLogout(char **error, char* connectionInfo, const char* const cus
 	Returns:
 		The results of the operation.
 
+	Remarks:
+		TABLE output format uses the defined control characters in <EntryPoints Parameters: http://kosday.com/Manuals/en_web_linkar/lk_schemas_ep_parameters.html> Table Row Separator and Column Row Separator.
+		
+		By default:
+		
+		- TAB char (9) for columns.
+		- VT char (11) for rows.
+	
 	Example:
 		--- Code
 	#include "Types.h"
@@ -138,6 +152,14 @@ DllEntry char* LkSchemas(char** error, char* connectionInfo, const char* const l
 	Returns:
 		The results of the operation.
 
+	Remarks:
+		TABLE output format uses the defined control characters in <EntryPoints Parameters: http://kosday.com/Manuals/en_web_linkar/lk_schemas_ep_parameters.html> Table Row Separator and Column Row Separator.
+		
+		By default:
+		
+		- TAB char (9) for columns.
+		- VT char (11) for rows.
+	
 	Example:
 		--- Code
 		#include "Types.h"
@@ -207,7 +229,16 @@ DllEntry char* LkProperties(char** error, char* connectionInfo, const char* cons
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
 	Returns:
-
+		The results of the operation.
+		
+	Remarks:
+		TABLE output format uses the defined control characters in <EntryPoints Parameters: http://kosday.com/Manuals/en_web_linkar/lk_schemas_ep_parameters.html> Table Row Separator and Column Row Separator.
+		
+		By default:
+		
+		- TAB char (9) for columns.
+		- VT char (11) for rows.
+	
 	Example:
 		--- Code
 		#include "Types.h"

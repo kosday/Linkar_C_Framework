@@ -25,7 +25,10 @@
 	Returns:
 		A complex string that contains data about the established session in LinkarSERVER.
 		You can extract data from this string using <LkExtractDataFromConnectionInfo> function.
-		
+	
+	Remarks:
+		Login is actually a "virtual" operation which creates a new Client Session ID. No DBMS login is performed unless Linkar SERVER determines new Database Sessions are required. These operations are not related.
+
 	See Also:
 		<LkCreateCredentialOptions>
 		
@@ -80,7 +83,10 @@ DllEntry char* LkLogin(char** error, char* credentialOptions, const char* const 
 		connectionInfo - String that is returned by the Login function and that contains all the necessary data of the connection.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely. Values less than or equal to 0, waits indefinitely.
-				
+	
+	Remarks:
+		Logout is actually a "virtual" operation which disposes the current Client Session ID. No DBMS logout is performed.
+		
 	See Also:
 		<LkLogin>	
 */

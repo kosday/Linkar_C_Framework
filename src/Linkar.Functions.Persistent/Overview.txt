@@ -2,14 +2,16 @@ Title: Library Overview
 
 Dependencies: *Linkar*, *Linkar.Functions*
 
-This library consists of one function for each possible operation in Linkar Server (Read, New, Update, Select, Subroutine…)
+This library consists of one function for each possible operation in Linkar Server (Read, New, Update, Select, Subroutine…).
 
-The operation is of Persistent type.
+The operation is of a Persistent type.
 
 Two functions are also included to carry out the “Login” and “Logout” operations.
 
-In these operations, you can specify the desired output format, and in those operations that also allows it, the data input format.
+The desired output format can also be specified in these operations, and the data input format can be also specified in those operations that allow it.
 
-The basic input and output formats are XML, JSON, MV, or TABLE. You could even specify different formats for data input and output.
+The basic input and output formats are XML, JSON, MV, or TABLE.
+
+Different formats for data input and output can also be specified.
 
 Not all operations have all types of input/output formats.

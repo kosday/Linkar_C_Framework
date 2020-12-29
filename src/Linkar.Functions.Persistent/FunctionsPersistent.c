@@ -39,6 +39,9 @@
 		A complex string that contains data about the established session in LinkarSERVER.
 		You can extract data from this string using <LkExtractDataFromConnectionInfo> function.
 		
+	Remarks:
+		Login is actually a "virtual" operation which creates a new Client Session ID. No DBMS login is performed unless Linkar SERVER determines new Database Sessions are required. These operations are not related.
+		
 	See Also:
 		<LkCreateCredentialOptions>
 		
@@ -78,7 +81,10 @@ DllEntry char* Base_LkLogin(char** error, char* credentialOptions, const char* c
 		connectionInfo - String that is returned by the Login function and that contains all the necessary data of the connection.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely. Values less than or equal to 0, waits indefinitely.
-				
+	
+	Remarks:
+		Logout is actually a "virtual" operation which disposes the current Client Session ID. No DBMS logout is performed.
+	
 	See Also:
 		<Base_LkLogin>	
 */
@@ -154,6 +160,14 @@ DllEntry char* Base_LkRead(char** error, char* connectionInfo, const char* const
 	Returns:
 		The results of the operation.
 		
+	Remarks:
+		Inside the records argument, the recordIds and the modified records always must be specified. But the originalRecords not always.
+		When updateOptions argument is specified with its optimisticLock property set to true, a copy of the record must be provided before the modification (originalRecords argument)
+		to use the Optimistic Lock technique. This copy can be obtained from a previous <Base_LkRead> operation. The database, before executing the modification, 
+		reads the record and compares it with the copy in originalRecords, if they are equal the modified record is executed.
+		But if they are not equal, it means that the record has been modified by other user and its modification will not be saved.
+		The record will have to be read, modified and saved again.
+	
 	See Also:
 		<LkCreateUpdateOptions>
 
@@ -194,6 +208,9 @@ DllEntry char* Base_LkUpdate(char** error, char* connectionInfo, const char* con
 		
 	Returns:
 		The results of the operation.
+		
+	Remarks:
+		Inside the records argument, the records always must be specified. But the recordIds only must be specified when newOptions argument is null, or when the recordIdType argument of the newOptions argument is null.
 		
 	See Also:
 		<LkCreateNewOptions>
@@ -244,6 +261,15 @@ DllEntry char* Base_LkNew(char** error, char* connectionInfo, const char* const 
 	Returns:
 		The results of the operation.
 		
+	Remarks:
+		Inside the records argument, the recordIds always must be specified. But the originalRecords not always.
+		When deleteOptions argument is specified with its optimisticLock property set to true,
+		a copy of the record must be provided before the deletion (originalRecords argument) to use the Optimistic Lock technique.
+		This copy can be obtained from a previous <Base_LkRead> operation. The database, before executing the deletion, 
+		reads the record and compares it with the copy in originalRecords, if they are equal the record is deleted.
+		But if they are not equal, it means that the record has been modified by other user and the record will not be deleted.
+		The record will have to be read, and deleted again.
+		
 	See Also:		
 		<LkCreateDeleteOptions>
 		
@@ -293,6 +319,13 @@ DllEntry char* Base_LkDelete(char** error, char* connectionInfo, const char* con
 	Returns:
 		The results of the operation.
 		
+	Remarks:
+		In the preSelectClause argument these operations can be carried out before executing the Select statement:
+		
+		- Previously call to a saved list with the GET.LIST command to use it in the Main Select input.
+		- Make a previous Select to use the result as the Main Select input, with the SELECT or SSELECT commands.In this case the entire sentence must be indicated in the PreselectClause. For example:SSELECT LK.ORDERS WITH CUSTOMER = '1'
+		- Exploit a Main File index to use the result as a Main Select input, with the SELECTINDEX command. The syntax for all the databases is SELECTINDEX index.name.value. For example SELECTINDEX ITEM,"101691"
+
 	See Also:
 		<LkCreateSelectOptions>
 
@@ -525,6 +558,27 @@ DllEntry char* Base_LkExecute(char** error, char* connectionInfo, const char* co
 	Returns:
 		The results of the operation.
 		
+	Remarks:
+		This function returns the following information:
+		
+		LKMVCOMPONENTSVERSION - MV Components version.
+		LKSERVERVERSION - Linkar SERVER version.
+		LKCLIENTVERSION - Used client library version.
+		DATABASE - Database.
+		OS - Operating system.
+		DATEZERO - Date zero base in YYYYMMDD format.
+		DATEOUTPUTCONVERSION - Output conversion for date used by Linkar Schemas.
+		TIMEOUTPUTCONVERSION - Output conversion for time used by Linkar Schemas.
+		MVDATETIMESEPARATOR - DateTime used separator used by Linkar Schemas, for instance 18325,23000.
+		MVBOOLTRUE - Database used char for the Boolean true value used by Linkar Schemas.
+		MVBOOLFALSE - Database used char for the Boolean false value used by Linkar Schemas.
+		OUTPUTBOOLTRUE - Used char for the Boolean true value out of the database used by Linkar Schemas.
+		OUTPUTBOOLFALSE - Used char for the Boolean false value out of the database used by Linkar Schemas.
+		MVDECIMALSEPARATOR - Decimal separator in the database. May be point, comma or none when the database does not store decimal numbers. Used by Linkar Schemas.
+		OTHERLANGUAGES - Languages list separated by commas.
+		TABLEROWSEPARATOR - It is the decimal char that you use to separate the rows in the output table format. By default 11.
+		TABLECOLSEPARATOR - It is the decimal char that you use to separate the columns in the output table format. By default 9.
+	
 	See Also:
 		<LkLogin>
 		
@@ -562,6 +616,14 @@ DllEntry char* Base_LkGetVersion(char** error, char* connectionInfo, DataFormatT
 	Returns:
 		The results of the operation.
 		
+	Remarks:
+		TABLE output format uses the defined control characters in <EntryPoints Parameters: http://kosday.com/Manuals/en_web_linkar/lk_schemas_ep_parameters.html> Table Row Separator and Column Row Separator.
+		
+		By default:
+		
+		- TAB char (9) for columns.
+		- VT char (11) for rows.
+	
 	See Also:
 		<LkCreateSchOptionsTypeLKSCHEMAS>
 		
@@ -606,6 +668,14 @@ DllEntry char* Base_LkSchemas(char** error, char* connectionInfo, const char* co
 	Returns:
 		The results of the operation.
 		
+	Remarks:
+		TABLE output format uses the defined control characters in <EntryPoints Parameters: http://kosday.com/Manuals/en_web_linkar/lk_schemas_ep_parameters.html> Table Row Separator and Column Row Separator.
+		
+		By default:
+		
+		- TAB char (9) for columns.
+		- VT char (11) for rows.
+	
 	See Also:
 		<LkCreatePropOptionsTypeLKSCHEMAS>
 		
@@ -650,6 +720,15 @@ DllEntry char* Base_LkProperties(char** error, char* connectionInfo, const char*
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
 	Returns:
+		The results of the operation.
+		
+	Remarks:
+		TABLE output format uses the defined control characters in <EntryPoints Parameters: http://kosday.com/Manuals/en_web_linkar/lk_schemas_ep_parameters.html> Table Row Separator and Column Row Separator.
+		
+		By default:
+		
+		- TAB char (9) for columns.
+		- VT char (11) for rows.
 	
 	See Also:
 		<LkCreateTableOptionsTypeLKSCHEMAS>

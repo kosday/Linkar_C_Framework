@@ -169,7 +169,7 @@ DllEntry char* LkSendCommand(char** error, char** connectionInfo, const char* co
 		#include "Types.h"
 		#include "CredentialOptions.h"
 		#include "ConnectionInfo.h"
-		#include "CommandsDirect.h"
+		#include "CommandsPersistent.h"
 		#include "ReleaseMemory.h"
 
 		char* MyCommandRead(char** error)
@@ -233,7 +233,7 @@ DllEntry char* LkSendJsonCommand(char** error, char** connectionInfo, const char
 		#include "Types.h"
 		#include "CredentialOptions.h"
 		#include "ConnectionInfo.h"
-		#include "CommandsDirect.h"
+		#include "CommandsPersistent.h"
 		#include "ReleaseMemory.h"
 
 		char* MyCommandRead(char** error)

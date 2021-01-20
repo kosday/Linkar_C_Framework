@@ -65,13 +65,13 @@ DllEntry void LkLogout(char **error, char* connectionInfo, const char* const cus
 
 /*
 	Function: LkRead
-		Reads one or several records of a file with XML output format.
+		Reads one or several records of a file with XML input and output format.
 		
 	Arguments:
 		error - System or communication errors with LinkarSERVER.
 		connectionInfo - String that is returned by the Login function and that contains all the necessary data of the connection.
 		filename - File name to read.
-		recordIds - It's the records codes list to read, separated by the Record Separator character (30). Use <LkComposeRecordIds> to compose this string.
+		recordIds - It's the records codes list to read.
 		dictionaries - List of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer.
 		readOptions - String that defines the different reading options of the Function: Calculated, dictClause, conversion, formatSpec, originalRecords.
 		xmlFormat - Different XML output formats.
@@ -313,7 +313,7 @@ DllEntry char* LkNew(char** error, char* connectionInfo, const char* const filen
 
 /*
 	Function: LkDelete
-		Deletes one or several records in file with XML output format.
+		Deletes one or several records in file with XML input and output format.
 		
 	Arguments:
 		error - System or communication errors with LinkarSERVER.
@@ -475,7 +475,7 @@ DllEntry char* LkSelect(char** error, char* connectionInfo, const char* const fi
 
 /*
 	Function: LkSubroutine
-		Executes a subroutine with XML output format.
+		Executes a subroutine with XML input and output format.
 		
 	Arguments:
 		error - System or communication errors with LinkarSERVER.

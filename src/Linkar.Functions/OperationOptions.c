@@ -135,7 +135,7 @@ static char* LkCreateReadAfterCommonOptions(BOOL readAfter, BOOL calculated, BOO
 		Creates a string that contains the options for the LkUpdate functions.
 
 	Arguments:
-		optimisticLock - Checks out if the file has not been modified by other user.
+		optimisticLockControl - Checks out if the file has not been modified by other user.
 		readAfter - Reads the record again and returns it after the update. The calculated, dictionaries, conversion, formatSpec and originalBuffer arguments will only make effect if this option is true.
 		calculated - Return the resulting values from the calculated dictionaries.
 		conversion - Execute the defined conversions in the dictionaries before returning.
@@ -146,7 +146,7 @@ static char* LkCreateReadAfterCommonOptions(BOOL readAfter, BOOL calculated, BOO
 		A string with the Update Options codified inside. To use with <LkUpdate> and <LkUpdateD> functions.
 	
 	Remarks:
-		If the OptimisticLock property is set to true, a copy of the record must be provided before the modification (originalRecords argument)
+		If the OptimisticLockControl property is set to true, a copy of the record must be provided before the modification (originalRecords argument)
 		to use the Optimistic Lock technique. This copy can be obtained from a previous Read operation. The database, before executing the modification, 
 		reads the record and compares it with the copy in originalRecords, if they are equal the modified record is executed.
 		But if they are not equal, it means that the record has been modified by other user and its modification will not be saved.
@@ -154,19 +154,20 @@ static char* LkCreateReadAfterCommonOptions(BOOL readAfter, BOOL calculated, BOO
 	
 	Example:
 		--- Code
-		BOOL calculated = TRUE;
+		BOOL optimisticLockControl = FALSE;
 		BOOL readAfter = TRUE;
+		BOOL calculated = TRUE;
 		BOOL conversion = FALSE;
 		BOOL formatSpec = FALSE;
 		BOOL originalRecords = TRUE;
 		
-		char* readOptions = LkCreateUpdateOptions(calculated, readAfter, conversion, formatSpec, originalRecords);
+		char* readOptions = LkCreateUpdateOptions(optimisticLockControl, readAfter, calculated, conversion, formatSpec, originalRecords);
 		---
 
 	See Also:		
 		<Release Memory>
 */
-DllEntry char* LkCreateUpdateOptions(BOOL optimisticLock, BOOL readAfter, BOOL calculated, BOOL conversion, BOOL formatSpec, BOOL originalRecords)
+DllEntry char* LkCreateUpdateOptions(BOOL optimisticLockControl, BOOL readAfter, BOOL calculated, BOOL conversion, BOOL formatSpec, BOOL originalRecords)
 {
 	char* updateOpt = NULL;
 	char* readAfterCommOpt = LkCreateReadAfterCommonOptions(readAfter, calculated, conversion, formatSpec, originalRecords);
@@ -176,7 +177,7 @@ DllEntry char* LkCreateUpdateOptions(BOOL optimisticLock, BOOL readAfter, BOOL c
 		updateOpt = malloc(len + 1);
 		if(updateOpt)
 		{
-			strcpy(updateOpt, (optimisticLock? "1" : "0"));
+			strcpy(updateOpt, (optimisticLockControl? "1" : "0"));
 			strcat(updateOpt, DBMV_Mark_AM_str);
 			strcat(updateOpt, readAfterCommOpt);			
 		}
@@ -426,7 +427,7 @@ DllEntry char* LkCreateNewRecordIdTypeRandom(BOOL numeric, uint32_t length)
 		Creates a string that contains the options for the LkDelete functions.
 
 	Arguments:
-		optimisticLock - Checks out if the file has not been modified by other user.
+		optimisticLockControl - Checks out if the file has not been modified by other user.
 		recoverIdType - A string where is codified the options for code recovering. There are 3 options:
 			
 			- None. The recovery of deleted ID codes will not be used. Use <LkCreateRecoverRecordIdTypeNone> function to work with these options.
@@ -438,11 +439,18 @@ DllEntry char* LkCreateNewRecordIdTypeRandom(BOOL numeric, uint32_t length)
 	Returns:
 		A string with the Delete Options codified inside. To use with <LkDelete> and <LkDeleteD> functions.
 		
+	Remarks:
+		If the OptimisticLockControl property is set to true, a copy of the record must be provided before the deletion (originalRecords argument)
+		to use the Optimistic Lock technique. This copy can be obtained from a previous Read operation. The database, before executing the deletion, 
+		reads the record and compares it with the copy in originalRecords, if they are equal the deleted record is executed.
+		But if they are not equal, it means that the record has been modified by other user and the record will not be deleted.
+		The record will have to be read, modified and saved again.
+
 	Example:
 		--- Code
-		BOOL optimisticLock = TRUE;
+		BOOL optimisticLockControl = TRUE;
 		char* recoverRecordIdTypeLinkar = LkCreateRecoverRecordIdTypeLinkar("2020", "_");
-		char* deleteOptions = LkCreateDeleteOptions(optimisticLock, recoverRecordIdTypeLinkar);
+		char* deleteOptions = LkCreateDeleteOptions(optimisticLockControl, recoverRecordIdTypeLinkar);
 		---
 		
 	See Also:
@@ -454,7 +462,7 @@ DllEntry char* LkCreateNewRecordIdTypeRandom(BOOL numeric, uint32_t length)
 				
 		<Release Memory>
 */
-DllEntry char* LkCreateDeleteOptions(BOOL optimisticLock, const char* const recoverIdType)
+DllEntry char* LkCreateDeleteOptions(BOOL optimisticLockControl, const char* const recoverIdType)
 {
 	char* recoverIdType2;
 	if(recoverIdType == NULL)
@@ -466,7 +474,7 @@ DllEntry char* LkCreateDeleteOptions(BOOL optimisticLock, const char* const reco
 	char* deleteOpt = malloc(len + 1);
 	if(deleteOpt)
 	{
-		strcpy(deleteOpt, (optimisticLock? "1" : "0"));
+		strcpy(deleteOpt, (optimisticLockControl? "1" : "0"));
 		strcat(deleteOpt, DBMV_Mark_AM_str);
 		strcat(deleteOpt, recoverIdType2);
 	}

@@ -45,7 +45,7 @@
 		ICONV - Perform ICONV type conversions. 
 		OCONV - Perform OCONV type conversions. 
 	
-	Defined constants of RowHeadersTYPE::
+	Defined constants of CONVERSION_TYPE:
 		Used to define the options ICONV and OCONV.
 	
 		--- Code
@@ -67,7 +67,7 @@ typedef char CONVERSION_TYPE;
 		typedef uint8_t DataFormatTYPE;	
 		---
 		
-	Defined constants of DataFormatTYPE::
+	Defined constants of DataFormatTYPE:
 		Used to define the options MV, XML and JSON.
 	
 		--- Code
@@ -83,7 +83,7 @@ typedef uint8_t DataFormatTYPE;
 
 /*
 	typedef: DataFormatSchTYPE
-	Specify the output formats of LkSchemas and LkProperties operations(For other operations, see <DataFormatTYPE> )
+	Specify the output formats of LkSchemas and LkProperties operations.
 	Used only by LkSchemas and LkProperties functions.
 	There are 4 possible options: MV, XML, JSON and TABLE.
 		--- Code
@@ -108,7 +108,7 @@ typedef uint8_t DataFormatSchTYPE;
 
 /*
 	typedef: DataFormatCruTYPE
-	Specify the output formats of Read, Update, New and Select operations(For other operations, see <DataFormatTYPE> )
+	Specify the output formats of Read, Update, New and Select operations.
 	Used only by LkRead, LkUpdate, LkNew and LkSelect
 	There are 7 possible options: MV, XML, XML_DICT, XML_SCH, JSON, JSON_DICT and JSON_SCH.
 		--- Code
@@ -146,7 +146,7 @@ typedef uint8_t DataFormatCruTYPE;
 		typedef uint8_t EnvelopeFormatTYPE;	
 		---
 		
-	Defined constants of EnvelopeFormatTYPE::
+	Defined constants of EnvelopeFormatTYPE:
 		Used to define the options XML and JSON.
 	
 		--- Code

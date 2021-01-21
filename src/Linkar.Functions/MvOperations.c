@@ -23,6 +23,12 @@
 
 	Returns:
 		The number of occurrences found.
+
+	Example:
+	---Code
+		uint32_t result = LkCount("CUSTOMER UPDATE 2þADDRESS 2þ444", "þ");
+		printf("%d\n", result);
+	---
 */
 DllEntry uint32_t LkCount(const char* const str, char delimiter)
 {
@@ -51,6 +57,12 @@ DllEntry uint32_t LkCount(const char* const str, char delimiter)
 		
 	Returns:
 		The number of occurrences found.
+		
+	Example:
+	---Code
+		uint32_t result = LkDCount("CUSTOMER UPDATE 2þADDRESS 2þ444", "þ");
+		printf("%d\n", result);
+	---
 */
 DllEntry uint32_t LkDCount(const char* const str, char delimiter)
 {
@@ -70,6 +82,13 @@ DllEntry uint32_t LkDCount(const char* const str, char delimiter)
 	Returns:
 		A new string with the extracted value.
 		
+	Example:
+	---Code
+	char* result = LkExtract("CUSTOMER UPDATE 2þADDRESS 2þ444", 1);
+	printf("%s\n", result);
+	free(result);
+	---
+
 	See Also:	
 		<Release Memory>
 */
@@ -129,6 +148,10 @@ DllEntry char* LkExtract(const char* const str, int32_t field, int32_t value, in
 	Returns:
 		The new string with the added chars.
 		
+	Example:
+	---Code
+	---
+
 	See Also:	
 		<LkReplace>
 				
@@ -164,6 +187,12 @@ static char* AddMarks(const char* const str, int32_t count, char chr)
 	Returns:
 		A new string with the replaced value.
 		
+	---Code
+	char* result = LkReplace("CUSTOMER UPDATE 2þADDRESS 2þ444", "MYTEXT", 1, 1, 1);
+	printf("%s\n", result);
+	free(result);
+	---
+
 	See Also:	
 		<Release Memory>
 */
@@ -502,6 +531,13 @@ static char* strReplace(const char* const str, uint32_t pos, uint32_t length, co
 	Returns:
 		A new string with replaced text.
 		
+	Example:
+	---Code
+	char* result = LkChange("CUSTOMER UPDATE 2þADDRESS 2þ444", "UPDATE", "MYTEXT", 1, 1);
+	printf("%s\n", result);
+	free(result);
+	---
+
 	See Also:	
 		<Release Memory>
 */

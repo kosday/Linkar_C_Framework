@@ -497,10 +497,20 @@ DllEntry char* LkGetGetVersionArgs()
 DllEntry char* LkGetLkSchemasArgs(const char* const lkSchemasOptions, const char* const customVars)
 {
 	char* inputData = NULL;
+	
+	char* lkSchemasOpt;
+	if(lkSchemasOptions == NULL || *lkSchemasOptions == 0)
+		lkSchemasOpt = LkCreateSchOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, 0, 0);
+	else
+		lkSchemasOpt = (char*)lkSchemasOptions;
+
 	char* aux = LkCatString(customVars, lkSchemasOptions, ASCII_US_str);
 	char* operationArguments = LkCatString(aux, inputData, ASCII_US_str);
 	free(aux);
 	
+	if(lkSchemasOptions != lkSchemasOpt)
+		free(lkSchemasOpt);
+
 	return operationArguments;
 }
 
@@ -532,10 +542,19 @@ DllEntry char* LkGetLkSchemasArgs(const char* const lkSchemasOptions, const char
 */
 DllEntry char* LkGetLkPropertiesArgs(const char* const filename, const char* const lkPropertiesOptions, const char* const customVars)
 {
+	char* lkPropertiesOpt;
+	if(lkPropertiesOptions == NULL || *lkPropertiesOptions == 0)
+		lkPropertiesOpt = LkCreatePropOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, 0, 0);
+	else
+		lkPropertiesOpt = (char*)lkPropertiesOptions;
+
 	char* aux = LkCatString(customVars, lkPropertiesOptions, ASCII_US_str);
 	char* operationArguments = LkCatString(aux, filename, ASCII_US_str);
 	free(aux);
 	
+	if(lkPropertiesOptions != lkPropertiesOpt)
+		free(lkPropertiesOpt);
+
 	return operationArguments;	
 }
 
@@ -579,11 +598,22 @@ DllEntry char* LkGetGetTableArgs(const char* const filename, const char* const s
    aux = inputData;
    inputData = LkCatString(inputData, sortClause, DBMV_Mark_AM_str);
    free(aux);
+
+	char* tableOpt;
+	if(tableOptions == NULL || *tableOptions == 0)
+		tableOpt = LkCreateTableOptionsTypeLKSCHEMAS(RowHeadersTYPE_MAINLABEL, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 0, 0);
+		
+		
+	else
+		tableOpt = (char*)tableOptions;
    
    aux = LkCatString(customVars, tableOptions, ASCII_US_str);
    char* operationArguments = LkCatString(aux, inputData, ASCII_US_str);
    free(aux);
    free(inputData);
+
+	if(tableOptions != tableOpt)
+		free(tableOpt);
    
    return operationArguments;
 }

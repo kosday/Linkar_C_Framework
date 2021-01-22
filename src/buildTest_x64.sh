@@ -53,31 +53,41 @@ echo "============================================="
 echo ""
 
 echo "Compiling x64 Test1-DirectBase.c"
-gcc Test1-DirectBase.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test1-DirectBase -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions.Direct -lLinkar.Functions -lcrypto
+####gcc Test1-DirectBase.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test1-DirectBase -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions.Direct -lLinkar.Functions -lcrypto
+gcc Test1-DirectBase.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test1-DirectBase -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings -lLinkar.Functions.Direct -lLinkar.Functions -lcrypto
 
 echo "Compiling x64 Test1-PersistentBase.c"
-gcc Test1-PersistentBase.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test1-PersistentBase -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Persistent -lcrypto
+####gcc Test1-PersistentBase.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test1-PersistentBase -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Persistent -lcrypto
+gcc Test1-PersistentBase.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test1-PersistentBase -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Persistent -lcrypto
 
 echo "Compiling x64 Test2-DirectMV.c"
-gcc Test2-DirectMV.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test2-DirectMV -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Direct -lLinkar.Functions.Direct.MV -lcrypto
+####gcc Test2-DirectMV.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test2-DirectMV -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Direct -lLinkar.Functions.Direct.MV -lcrypto
+gcc Test2-DirectMV.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test2-DirectMV -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Direct -lLinkar.Functions.Direct.MV -lcrypto
 
 echo "Compiling x64 Test2-PersistentMV.c"
-gcc Test2-PersistentMV.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test2-PersistentMV -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Persistent -lLinkar.Functions.Persistent.MV -lcrypto
+####gcc Test2-PersistentMV.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test2-PersistentMV -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Persistent -lLinkar.Functions.Persistent.MV -lcrypto
+gcc Test2-PersistentMV.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test2-PersistentMV -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Persistent -lLinkar.Functions.Persistent.MV -lcrypto
 
 echo "Compiling x64 Test3-DirectXML.c"
-gcc Test3-DirectXML.c -D__LK_DYNAMIC_LIB__ -I../../includes  -o $BIN_DIR_SO_x64/Test3-DirectXML -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Direct -lLinkar.Functions.Direct.XML -lcrypto
+####gcc Test3-DirectXML.c -D__LK_DYNAMIC_LIB__ -I../../includes  -o $BIN_DIR_SO_x64/Test3-DirectXML -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Direct -lLinkar.Functions.Direct.XML -lcrypto
+gcc Test3-DirectXML.c -D__LK_DYNAMIC_LIB__ -I../../includes  -o $BIN_DIR_SO_x64/Test3-DirectXML -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Direct -lLinkar.Functions.Direct.XML -lcrypto
 
 echo "Compiling x64 Test4-DirectJSON.c"
-gcc Test4-DirectJSON.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test4-DirectJSON -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Direct -lLinkar.Functions.Direct.JSON -lcrypto
+####gcc Test4-DirectJSON.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test4-DirectJSON -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Direct -lLinkar.Functions.Direct.JSON -lcrypto
+gcc Test4-DirectJSON.c -D__LK_DYNAMIC_LIB__ -I../../includes -o $BIN_DIR_SO_x64/Test4-DirectJSON -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings -lLinkar.Functions -lLinkar.Functions.Direct -lLinkar.Functions.Direct.JSON -lcrypto
 
 echo "Compiling x64 Test5-DirectCmdJSON.c"
-gcc Test5-DirectCmdJSON.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-DirectCmdJSON -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Commands.Direct -lcrypto 
+####gcc Test5-DirectCmdJSON.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-DirectCmdJSON -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Commands.Direct -lcrypto 
+gcc Test5-DirectCmdJSON.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-DirectCmdJSON -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Commands.Direct -lcrypto 
 
 echo "Compiling x64 Test5-PersistentCmdJSON.c"
-gcc Test5-PersistentCmdJSON.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-PersistentCmdJSON -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Commands.Persistent -lcrypto 
+####gcc Test5-PersistentCmdJSON.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-PersistentCmdJSON -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Commands.Persistent -lcrypto 
+gcc Test5-PersistentCmdJSON.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-PersistentCmdJSON -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Commands.Persistent -lcrypto 
 
 echo "Compiling x64 Test5-DirectCmdXML.c"
-gcc Test5-DirectCmdXML.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-DirectCmdXML -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Commands.Direct -lcrypto
+####gcc Test5-DirectCmdXML.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-DirectCmdXML -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Commands.Direct -lcrypto
+gcc Test5-DirectCmdXML.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-DirectCmdXML -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Commands.Direct -lcrypto
 
 echo "Compiling x64 Test5-PersistentCmdXML.c"
-gcc Test5-PersistentCmdXML.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-PersistentCmdXML -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Commands.Persistent -lcrypto
+####gcc Test5-PersistentCmdXML.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-PersistentCmdXML -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Commands.Persistent -lcrypto
+gcc Test5-PersistentCmdXML.c -D__LK_DYNAMIC_LIB__ -I../../includes/Linkar.Commands -I../../includes -o $BIN_DIR_SO_x64/Test5-PersistentCmdXML -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Commands.Persistent -lcrypto

@@ -33,27 +33,6 @@ set BIN_DIR_LIB=%BIN_DIR%LIB\%VSCMD_ARG_TGT_ARCH%\
 set COMPILER_OPTIONS_STATIC_LIB=/c /I ..\..\includes /D__LK_STATIC_LIB__ /D__LK_EXPORT__
 set COMPILER_OPTIONS_DYNAMIC_LIB=/c /I ..\..\includes /LD /D__LK_DYNAMIC_LIB__ /D__LK_EXPORT__
 
-rem Linkar.Strings.Helper Libraries
-cd Linkar.Strings.Helper
-
-rem Linkar.Strings.Helper Static Library
-echo.
-echo *** Linkar.Strings.Helper Static Library
-CL %COMPILER_OPTIONS_STATIC_LIB% LinkarStringsHelper.c /Fo"LinkarStringsHelper_st.obj"
-LIB LinkarStringsHelper_st.obj /OUT:%BIN_DIR_LIB%Linkar.Strings.Helper.lib
-
-rem Linkar.Strings.Helper Dynamic Library
-echo.
-echo *** Linkar.Strings.Helper Dynamic Library
-CL %COMPILER_OPTIONS_DYNAMIC_LIB% LinkarStringsHelper.c /Fo"LinkarStringsHelper_dy.obj"
-LINK /DLL /MAP LinkarStringsHelper_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Strings.Helper.dll
-
-del %BIN_DIR_DLL%Linkar.Strings.Helper.map
-del %BIN_DIR_DLL%Linkar.Strings.Helper.exp
-cd ..
-
-if %STOP%==Y pause & cls
-
 rem Linkar.Strings Libraries
 cd Linkar.Strings
 
@@ -61,13 +40,13 @@ rem Linkar.Strings Static Library
 echo.
 echo *** Linkar.Strings Static Library
 CL %COMPILER_OPTIONS_STATIC_LIB% LinkarStrings.c /Fo"LinkarStrings_st.obj"
-LIB %BIN_DIR_LIB%Linkar.Strings.Helper.lib LinkarStrings_st.obj /OUT:%BIN_DIR_LIB%Linkar.Strings.lib
+LIB %BIN_DIR_LIB%Linkar.lib LinkarStrings_st.obj /OUT:%BIN_DIR_LIB%Linkar.Strings.lib
 
 rem Linkar.Strings Dynamic Library
 echo.
 echo *** Linkar.Strings Dynamic Library
 CL %COMPILER_OPTIONS_DYNAMIC_LIB% LinkarStrings.c /Fo"LinkarStrings_dy.obj"
-LINK /DLL /MAP %BIN_DIR_DLL%Linkar.Strings.Helper.lib LinkarStrings_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Strings.dll
+LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib LinkarStrings_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Strings.dll
 
 del %BIN_DIR_DLL%Linkar.Strings.map
 del %BIN_DIR_DLL%Linkar.Strings.exp
@@ -84,8 +63,7 @@ echo *** Linkar.Functions Static Library
 CL %COMPILER_OPTIONS_STATIC_LIB% MvOperations.c /Fo"MvOperations_st.obj"
 CL %COMPILER_OPTIONS_STATIC_LIB% OperationOptions.c /Fo"OperationOptions_st.obj"
 CL %COMPILER_OPTIONS_STATIC_LIB% OperationArguments.c /Fo"OperationArguments_st.obj"
-CL %COMPILER_OPTIONS_STATIC_LIB% ReleaseMemory.c /Fo"ReleaseMemory_st.obj"
-LIB %BIN_DIR_LIB%Linkar.Strings.Helper.lib MvOperations_st.obj OperationOptions_st.obj OperationArguments_st.obj ReleaseMemory_st.obj /OUT:%BIN_DIR_LIB%Linkar.Functions.lib
+LIB MvOperations_st.obj OperationOptions_st.obj OperationArguments_st.obj /OUT:%BIN_DIR_LIB%Linkar.Functions.lib
 
 rem Linkar.Functions Dynamic Library
 echo.
@@ -93,8 +71,7 @@ echo *** Linkar.Functions Dynamic Library
 CL %COMPILER_OPTIONS_DYNAMIC_LIB% MvOperations.c /Fo"MvOperations_dy.obj"
 CL %COMPILER_OPTIONS_DYNAMIC_LIB% OperationOptions.c /Fo"OperationOptions_dy.obj"
 CL %COMPILER_OPTIONS_DYNAMIC_LIB% OperationArguments.c /Fo"OperationArguments_dy.obj"
-CL %COMPILER_OPTIONS_DYNAMIC_LIB% ReleaseMemory.c /Fo"ReleaseMemory_dy.obj"
-LINK /DLL /MAP %BIN_DIR_DLL%Linkar.Strings.Helper.lib MvOperations_dy.obj OperationOptions_dy.obj OperationArguments_dy.obj ReleaseMemory_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Functions.dll
+LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib MvOperations_dy.obj OperationOptions_dy.obj OperationArguments_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Functions.dll
 
 del %BIN_DIR_DLL%Linkar.Functions.map
 del %BIN_DIR_DLL%Linkar.Functions.exp
@@ -215,7 +192,7 @@ echo.
 echo *** Linkar.Commands.Direct Static Library
 CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% OperationArguments.c /Fo"OperationArguments_st.obj"
 CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% CommandsDirect.c /Fo"DirectCommands_st.obj"
-LIB %BIN_DIR_LIB%Linkar.lib %BIN_DIR_LIB%Linkar.Strings.Helper.lib OperationArguments_st.obj DirectCommands_st.obj /OUT:%BIN_DIR_LIB%Linkar.Commands.Direct.lib
+LIB %BIN_DIR_LIB%Linkar.lib OperationArguments_st.obj DirectCommands_st.obj /OUT:%BIN_DIR_LIB%Linkar.Commands.Direct.lib
 
 rem Linkar.Commands.Direct Dynamic Library
 echo.
@@ -243,7 +220,7 @@ rem Linkar.Functions.Persistent Dynamic Library
 echo.
 echo *** Linkar.Functions.Persistent Dynamic Library
 CL %COMPILER_OPTIONS_DYNAMIC_LIB% FunctionsPersistent.c /Fo"PersistentFunctions_dy.obj"
-LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Functions.lib %BIN_DIR_DLL%Linkar.Strings.Helper.lib PersistentFunctions_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Functions.Persistent.dll
+LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Functions.lib PersistentFunctions_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Functions.Persistent.dll
 
 del %BIN_DIR_DLL%Linkar.Functions.Persistent.map
 del %BIN_DIR_DLL%Linkar.Functions.Persistent.exp
@@ -341,18 +318,16 @@ cd Linkar.Commands
 rem Linkar.Commands.Persistent Static Library
 echo.
 echo *** Linkar.Commands.Persistent Static Library
-CL %COMPILER_OPTIONS_STATIC_LIB% ..\Linkar.Strings.Helper\LinkarStringsHelper.c /Fo".\LinkarStringsHelper_st.obj"
 CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% OperationArguments.c /Fo"OperationArguments_st.obj"
 CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_STATIC_LIB% CommandsPersistent.c /Fo"PersistentCommands_st.obj"
-LIB %BIN_DIR_LIB%Linkar.lib LinkarStringsHelper_st.obj OperationArguments_st.obj PersistentCommands_st.obj /OUT:%BIN_DIR_LIB%Linkar.Commands.Persistent.lib
+LIB %BIN_DIR_LIB%Linkar.lib OperationArguments_st.obj PersistentCommands_st.obj /OUT:%BIN_DIR_LIB%Linkar.Commands.Persistent.lib
 
 rem Linkar.Commands.Persistent Dynamic Library
 echo.
 echo *** Linkar.Commands.Persistent Dynamic Library
-CL %COMPILER_OPTIONS_DYNAMIC_LIB% ..\Linkar.Strings.Helper\LinkarStringsHelper.c /Fo".\LinkarStringsHelper_dy.obj"
 CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% OperationArguments.c /Fo"OperationArguments_dy.obj"
 CL /I..\..\includes\Linkar.Commands %COMPILER_OPTIONS_DYNAMIC_LIB% CommandsPersistent.c /Fo"PersistentCommands_dy.obj"
-LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib LinkarStringsHelper_dy.obj OperationArguments_dy.obj PersistentCommands_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Commands.Persistent.dll
+LINK /DLL /MAP %BIN_DIR_DLL%Linkar.lib OperationArguments_dy.obj PersistentCommands_dy.obj /OUT:%BIN_DIR_DLL%Linkar.Commands.Persistent.dll
 
 del %BIN_DIR_DLL%Linkar.Commands.Persistent.map
 del %BIN_DIR_DLL%Linkar.Commands.Persistent.exp

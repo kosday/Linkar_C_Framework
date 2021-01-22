@@ -36,51 +36,6 @@ if [ "$STOP" == "Y" ] ; then
 	clear
 fi
 
-#Linkar.Strings.Helper Static Libraries
-#======================================
-cd Linkar.Strings.Helper
-
-echo "Compiling x64 Static LinkarStringsHelper.c"
-cc $COMPILER_OPTIONS_STATIC_LIB_x64 -o LinkarStringsHelper.o LinkarStringsHelper.c
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.MV.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.JSON.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.XML.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.TABLE.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Direct.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.MV.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.JSON.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.XML.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.TABLE.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Commands.Persistent.a LinkarStringsHelper.o
-
-echo ""
-echo "Compiling x86 Static LinkarStringsHelper.c"
-cc $COMPILER_OPTIONS_STATIC_LIB_x86 -o LinkarStringsHelper.o LinkarStringsHelper.c
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.MV.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.JSON.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.XML.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.TABLE.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Direct.JSON.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Direct.XML.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.MV.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.JSON.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.XML.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.TABLE.a LinkarStringsHelper.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Commands.Persistent.a LinkarStringsHelper.o
-
-echo ""
-cd ..
-if [ "$STOP" == "Y" ] ; then
-	read -p "Press any key to continue ..."
-	clear
-fi
-
 #Linkar.Strings Static Libraries
 #===============================
 cd Linkar.Strings
@@ -131,20 +86,18 @@ echo "Compiling x64 Static Functions (OperationOptions.c)"
 gcc $COMPILER_OPTIONS_STATIC_LIB_x64 -o OperationOptions.o OperationOptions.c
 echo "Compiling x64 Static Functions (OperationArguments.c)"
 gcc $COMPILER_OPTIONS_STATIC_LIB_x64 -o OperationArguments.o OperationArguments.c
-echo "Compiling x64 Static Functions (ReleaseMemory.c)"
-gcc $COMPILER_OPTIONS_STATIC_LIB_x64 -o ReleaseMemory.o ReleaseMemory.c
 
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.MV.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.JSON.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.XML.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.TABLE.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.MV.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.JSON.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.XML.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.TABLE.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.MV.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.JSON.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.XML.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.TABLE.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.MV.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.JSON.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.XML.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.TABLE.a MvOperations.o OperationOptions.o OperationArguments.o
 
 echo ""
 echo "Compiling x86 Static Functions (MvOperations.c)"
@@ -153,20 +106,18 @@ echo "Compiling x86 Static Functions (OperationOptions.c)"
 gcc $COMPILER_OPTIONS_STATIC_LIB_x86 -o OperationOptions.o OperationOptions.c
 echo "Compiling x86 Static Functions (OperationArguments.c)"
 gcc $COMPILER_OPTIONS_STATIC_LIB_x86 -o OperationArguments.o OperationArguments.c
-echo "Compiling x86 Static Functions (ReleaseMemory.c)"
-gcc $COMPILER_OPTIONS_STATIC_LIB_x86 -o ReleaseMemory.o ReleaseMemory.c
 
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.MV.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.JSON.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.XML.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.TABLE.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.MV.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.JSON.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.XML.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
-ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.TABLE.a MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.MV.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.JSON.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.XML.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.TABLE.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.MV.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.JSON.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.XML.a MvOperations.o OperationOptions.o OperationArguments.o
+ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Persistent.TABLE.a MvOperations.o OperationOptions.o OperationArguments.o
 
 echo ""
 cd ..
@@ -446,30 +397,6 @@ if [ "$STOP" == "Y" ] ; then
 	clear
 fi
 
-#Linkar.Strings.Helper Dynamic Libraries
-#=======================================
-cd Linkar.Strings.Helper
-
-echo "Building x64 Dynamic Library: libLinkar.Strings.Helper.so"
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Strings.Helper.so LinkarStringsHelper.c
-if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
-	ln -srf $BIN_DIR_SO_x64/libLinkar.Strings.Helper.so $LIB_DIR_SO_x64/libLinkar.Strings.Helper.so ;
-fi
-
-echo ""
-echo "Building x86 Dynamic Library: libLinkar.Strings.Helper.so"
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Strings.Helper.so LinkarStringsHelper.c
-if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
-	ln -srf $BIN_DIR_SO_x86/libLinkar.Strings.Helper.so $LIB_DIR_SO_x86/libLinkar.Strings.Helper.so ;
-fi
-
-echo ""
-cd ..
-if [ "$STOP" == "Y" ] ; then
-	read -p "Press any key to continue ..."
-	clear
-fi
-
 #Linkar.Strings Dynamic Libraries
 #================================
 cd Linkar.Strings
@@ -477,14 +404,14 @@ cd Linkar.Strings
 #Linkar.Strings Dynamic Libraries
 echo "Building x64 Dynamic Library: libLinkar.Strings.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o LinkarStrings.o -O -g LinkarStrings.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Strings.so LinkarStrings.o -L$BIN_DIR_SO_x64 -lLinkar.Strings.Helper
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Strings.so LinkarStrings.o -L$BIN_DIR_SO_x64 -lLinkar
 if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
 	ln -srf $BIN_DIR_SO_x64/libLinkar.Strings.so $LIB_DIR_SO_x64/libLinkar.Strings.so
 fi
 
 echo ""
 echo "Building x86 Dynamic Library: libLinkar.Strings.so"
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Strings.so LinkarStrings.c -L$BIN_DIR_SO_x86 -lLinkar.Strings.Helper
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Strings.so LinkarStrings.c -L$BIN_DIR_SO_x86 -lLinkar
 if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
 	ln -srf $BIN_DIR_SO_x86/libLinkar.Strings.so $LIB_DIR_SO_x86/libLinkar.Strings.so
 fi
@@ -506,11 +433,9 @@ echo "Compiling x64 Dynamic OperationOptions.c"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o OperationOptions.o -O -g OperationOptions.c
 echo "Compiling x64 Dynamic OperationArguments.c"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o OperationArguments.o -O -g OperationArguments.c
-echo "Compiling x64 Dynamic ReleaseMemory.c"
-gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o ReleaseMemory.o -O -g ReleaseMemory.c
 
 echo "Building x64 Dynamic Library: libLinkar.Functions.so"
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Functions.so MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o -L$BIN_DIR_SO_x64 -lLinkar.Strings.Helper -lLinkar.Strings
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Functions.so MvOperations.o OperationOptions.o OperationArguments.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings
 if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
 	ln -srf $BIN_DIR_SO_x64/libLinkar.Functions.so $LIB_DIR_SO_x64/libLinkar.Functions.so
 fi
@@ -522,11 +447,9 @@ echo "Compiling x86 Dynamic OperationOptions.c"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o OperationOptions.o -O -g OperationOptions.c
 echo "Compiling x86 Dynamic OperationArguments.c"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o OperationArguments.o -O -g OperationArguments.c
-echo "Compiling x86 Dynamic ReleaseMemory.c"
-gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o ReleaseMemory.o -O -g ReleaseMemory.c
 
 echo "Building x86 Dynamic Library: libLinkar.Functions.so"
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Functions.so MvOperations.o OperationOptions.o OperationArguments.o ReleaseMemory.o -L$BIN_DIR_SO_x86 -lLinkar.Strings.Helper -lLinkar.Strings
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Functions.so MvOperations.o OperationOptions.o OperationArguments.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings
 if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
 	ln -srf $BIN_DIR_SO_x86/libLinkar.Functions.so $LIB_DIR_SO_x86/libLinkar.Functions.so
 fi
@@ -544,7 +467,7 @@ cd Linkar.Functions.Direct
 
 echo "Building x64 Dynamic Library: libLinkar.Functions.Direct.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o FunctionsDirect.o -O -g FunctionsDirect.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Functions.Direct.so FunctionsDirect.o -L$BIN_DIR_SO_x64 -lLinkar.Strings.Helper -lLinkar -lLinkar.Strings -lLinkar.Functions
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Functions.Direct.so FunctionsDirect.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings -lLinkar.Functions
 if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
 	ln -srf $BIN_DIR_SO_x64/libLinkar.Functions.Direct.so $LIB_DIR_SO_x64/libLinkar.Functions.Direct.so
 fi
@@ -552,7 +475,7 @@ fi
 echo ""
 echo "Building x86 Dynamic Library: libLinkar.Functions.Direct.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o FunctionsDirect.o -O -g FunctionsDirect.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Functions.Direct.so FunctionsDirect.o -L$BIN_DIR_SO_x86 -lLinkar.Strings.Helper -lLinkar -lLinkar.Strings -lLinkar.Functions
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Functions.Direct.so FunctionsDirect.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings -lLinkar.Functions
 if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
 	ln -srf $BIN_DIR_SO_x86/libLinkar.Functions.Direct.so $LIB_DIR_SO_x86/libLinkar.Functions.Direct.so
 fi
@@ -675,7 +598,7 @@ cd Linkar.Commands
 echo "Building x64 Dynamic Library: libLinkar.Commands.Direct.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o OperationArguments.o -O -g OperationArguments.c
 gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o CommandsDirect.o -O -g CommandsDirect.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Commands.Direct.so OperationArguments.o CommandsDirect.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Commands.Direct.so OperationArguments.o CommandsDirect.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings
 if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
 	ln -srf $BIN_DIR_SO_x64/libLinkar.Commands.Direct.so $LIB_DIR_SO_x64/libLinkar.Commands.Direct.so
 fi
@@ -684,7 +607,7 @@ echo ""
 echo "Building x86 Dynamic Library: libLinkar.Commands.Direct.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o OperationArguments.o -O -g OperationArguments.c
 gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o CommandsDirect.o -O -g CommandsDirect.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Commands.Direct.so OperationArguments.o CommandsDirect.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Commands.Direct.so OperationArguments.o CommandsDirect.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings
 if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
 	ln -srf $BIN_DIR_SO_x86/libLinkar.Commands.Direct.so $LIB_DIR_SO_x86/libLinkar.Commands.Direct.so
 fi
@@ -702,7 +625,7 @@ cd Linkar.Functions.Persistent
 
 echo "Building x64 Dynamic Library: libLinkar.Functions.Persistent.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o FunctionsPersistent.o -O -g FunctionsPersistent.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Functions.Persistent.so FunctionsPersistent.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Functions.Persistent.so FunctionsPersistent.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings -lLinkar.Functions
 if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
 	ln -srf $BIN_DIR_SO_x64/libLinkar.Functions.Persistent.so $LIB_DIR_SO_x64/libLinkar.Functions.Persistent.so
 fi
@@ -710,7 +633,7 @@ fi
 echo ""
 echo "Building x86 Dynamic Library: libLinkar.Functions.Persistent.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o FunctionsPersistent.o -O -g FunctionsPersistent.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Functions.Persistent.so FunctionsPersistent.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings -lLinkar.Functions
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Functions.Persistent.so FunctionsPersistent.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings -lLinkar.Functions
 if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
 	ln -srf $BIN_DIR_SO_x86/libLinkar.Functions.Persistent.so $LIB_DIR_SO_x86/libLinkar.Functions.Persistent.so
 fi
@@ -834,7 +757,7 @@ cd Linkar.Commands
 echo "Building x64 Dynamic Library: libLinkar.Commands.Persistent.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o OperationArguments.o -O -g OperationArguments.c
 gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o CommandsPersistent.o -O -g CommandsPersistent.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Commands.Persistent.so OperationArguments.o CommandsPersistent.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x64 -o $BIN_DIR_SO_x64/libLinkar.Commands.Persistent.so OperationArguments.o CommandsPersistent.o -L$BIN_DIR_SO_x64 -lLinkar -lLinkar.Strings
 if [ ! -z "${LIB_DIR_SO_x64}" ] ; then
 	ln -srf $BIN_DIR_SO_x64/libLinkar.Commands.Persistent.so $LIB_DIR_SO_x64/libLinkar.Commands.Persistent.so
 fi
@@ -843,7 +766,7 @@ echo ""
 echo "Building x86 Dynamic Library: libLinkar.Commands.Persistent.so"
 gcc -c $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o OperationArguments.o -O -g OperationArguments.c
 gcc -c -I../../includes/Linkar.Commands $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o CommandsPersistent.o -O -g CommandsPersistent.c
-gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Commands.Persistent.so OperationArguments.o CommandsPersistent.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings.Helper -lLinkar.Strings
+gcc -shared $COMPILER_OPTIONS_DYNAMIC_LIB_x86 -o $BIN_DIR_SO_x86/libLinkar.Commands.Persistent.so OperationArguments.o CommandsPersistent.o -L$BIN_DIR_SO_x86 -lLinkar -lLinkar.Strings
 if [ ! -z "${LIB_DIR_SO_x86}" ] ; then
 	ln -srf $BIN_DIR_SO_x86/libLinkar.Commands.Persistent.so $LIB_DIR_SO_x86/libLinkar.Commands.Persistent.so
 fi

@@ -22,7 +22,8 @@ REM Test1-DirectBase program with Static Libraries
 CL Test1-DirectBase.c /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Functions.Direct.lib /Fe%BIN_DIR_LIB%Test1-DirectBase.exe
 
 REM Test1-DirectBase program with Dynamic Libraries
-CL Test1-DirectBase.c /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Functions.Direct.lib %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Strings.Helper.lib %BIN_DIR_DLL%Linkar.Strings.lib /Fe%BIN_DIR_DLL%Test1-DirectBase.exe
+REM ****CL Test1-DirectBase.c /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Functions.Direct.lib %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Strings.Helper.lib %BIN_DIR_DLL%Linkar.Strings.lib /Fe%BIN_DIR_DLL%Test1-DirectBase.exe
+CL Test1-DirectBase.c /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Functions.Direct.lib %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Strings.lib /Fe%BIN_DIR_DLL%Test1-DirectBase.exe
 
 
 if %STOP%==Y pause & cls
@@ -32,7 +33,8 @@ echo.
 REM Test2-DirectMV program with Static Libraries
 CL Test2-DirectMV.c /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Functions.Direct.MV.lib %BIN_DIR_DLL%Linkar.Strings.lib /Fe%BIN_DIR_LIB%Test2-DirectMV.exe
 REM Test2-DirectMV program with Dynamic Libraries
-CL Test2-DirectMV.c /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Functions.Direct.MV.lib %BIN_DIR_DLL%Linkar.Functions.lib %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Strings.lib %BIN_DIR_DLL%Linkar.Strings.Helper.lib /Fe%BIN_DIR_DLL%Test2-DirectMV.exe
+REM ****CL Test2-DirectMV.c /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Functions.Direct.MV.lib %BIN_DIR_DLL%Linkar.Functions.lib %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Strings.lib %BIN_DIR_DLL%Linkar.Strings.Helper.lib /Fe%BIN_DIR_DLL%Test2-DirectMV.exe
+CL Test2-DirectMV.c /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_DLL%Linkar.Functions.Direct.MV.lib %BIN_DIR_DLL%Linkar.Functions.lib %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Strings.lib /Fe%BIN_DIR_DLL%Test2-DirectMV.exe
 
 if %STOP%==Y pause & cls
 
@@ -86,7 +88,8 @@ echo.
 REM Test2-PersistentMV program with Static Libraries
 CL Test2-PersistentMV.c /I..\..\includes /D__LK_STATIC_LIB__ %BIN_DIR_LIB%Linkar.Functions.lib %BIN_DIR_LIB%Linkar.Functions.Persistent.MV.lib %BIN_DIR_LIB%\Linkar.Strings.lib /Fe%BIN_DIR_LIB%Test2-PersistentMV.exe
 REM Test2-PersistentMV program with Dynamic Libraries
-CL Test2-PersistentMV.c /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_LIB%Linkar.Functions.lib %BIN_DIR_DLL%Linkar.Functions.Persistent.MV.lib %BIN_DIR_DLL%Linkar.Functions.Persistent.lib %BIN_DIR_DLL%Linkar.Functions.lib %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Strings.lib %BIN_DIR_DLL%Linkar.Strings.Helper.lib /Fe%BIN_DIR_DLL%Test2-PersistentMV.exe
+REM ****CL Test2-PersistentMV.c /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_LIB%Linkar.Functions.lib %BIN_DIR_DLL%Linkar.Functions.Persistent.MV.lib %BIN_DIR_DLL%Linkar.Functions.Persistent.lib %BIN_DIR_DLL%Linkar.Functions.lib %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Strings.lib %BIN_DIR_DLL%Linkar.Strings.Helper.lib /Fe%BIN_DIR_DLL%Test2-PersistentMV.exe
+CL Test2-PersistentMV.c /I..\..\includes /D__LK_DYNAMIC_LIB__ %BIN_DIR_LIB%Linkar.Functions.lib %BIN_DIR_DLL%Linkar.Functions.Persistent.MV.lib %BIN_DIR_DLL%Linkar.Functions.Persistent.lib %BIN_DIR_DLL%Linkar.Functions.lib %BIN_DIR_DLL%Linkar.lib %BIN_DIR_DLL%Linkar.Strings.lib /Fe%BIN_DIR_DLL%Test2-PersistentMV.exe
 
 if %STOP%==Y pause & cls
 

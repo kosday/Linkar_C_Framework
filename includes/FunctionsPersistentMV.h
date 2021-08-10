@@ -8,6 +8,7 @@
 	DllEntry void LkLogout(char** error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkRead(char** error, char* connectionInfo, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkUpdate(char** error,  char** connectionInfo, const char* const filename, const char* const records, const char* const updateOptions, const char* const customVars, uint32_t receiveTimeout);
+	DllEntry char* LkUpdatePartial(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const dictionaries, const char* const updateOptions, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkNew(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const newOptions, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkDelete(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const deleteOptions, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkSelect(char** error, char* connectionInfo, const char* const filename, const char* const selectClause, const char* const sortClause, const char* const dictClause, const char* const preSelectClause, const char* const selectOptions, const char* const customVars, uint32_t receiveTimeout);
@@ -29,6 +30,7 @@ DllEntry char* LkLogin(char** error, char* credentialOptions, const char* const 
 DllEntry void LkLogout(char** error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkRead(char** error, char* connectionInfo, const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkUpdate(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const updateOptions, const char* const customVars, uint32_t receiveTimeout);
+DllEntry char* LkUpdatePartial(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const dictionaries, const char* const updateOptions, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkNew(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const newOptions, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkDelete(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const deleteOptions, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkSelect(char** error, char* connectionInfo, const char* const filename, const char* const selectClause, const char* const sortClause, const char* const dictClause, const char* const preSelectClause, const char* const selectOptions, const char* const customVars, uint32_t receiveTimeout);

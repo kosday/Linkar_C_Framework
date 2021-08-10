@@ -29,7 +29,7 @@
 		credentialOptions - String that defines the necessary data to access to the Linkar Server: Username, Password, EntryPoint, Language, FreeText.
 		filename - File name to read.
 		recordIds - It's the records codes list to read, separated by the Record Separator character (30). Use <LkComposeRecordIds> to compose this string.
-		dictionaries - List of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer.
+		dictionaries - List of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. You may use the format LKFLDx where x is the attribute number.
 		readOptions - String that defines the different reading options of the Function: Calculated, dictClause, conversion, formatSpec, originalRecords.
 		inputFormat - Indicates in what format you wish to send the record ids: MV, XML or JSON.
 		outputFormat - Indicates in what format you want to receive the data resulting from the Read, New, Update and Select operations: MV, XML, XML_DICT, XML_SCH, JSON, JSON_DICT or JSON_SCH
@@ -95,6 +95,52 @@ DllEntry char* Base_LkUpdate(char** error, const char* const credentialOptions, 
 {
 	uint8_t operationCode = OP_CODE_UPDATE;
 	char* operationArguments = LkGetUpdateArgs(filename, records, updateOptions, customVars);
+
+	char* result = LkExecuteDirectOperation(error, credentialOptions, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
+	
+	free(operationArguments);
+	
+	return result;	
+}
+
+/*
+	Function: Base_LkUpdatePartial
+		Update one or more attributes of one or more file records.
+		
+	Arguments:
+		error - System or communication errors with LinkarSERVER.
+		credentialOptions - String that defines the necessary data to access to the Linkar Server: Username, Password, EntryPoint, Language, FreeText.
+		filename - File name where you are going to write.
+		records - Are the records you want to update. Inside this string are the recordIds, the records, and the originalRecords.
+		dictionaries - List of dictionaries to write, separated by space. In MV output format is mandatory. You may use the format LKFLDx where x is the attribute number.
+		updateOptions - Object that defines the different writing options of the Function: optimisticLockControl, readAfter, calculated, dictionaries, conversion, formatSpec, originalRecords.
+		inputFormat - Indicates in what format you wish to send the resultant writing data: MV, XML or JSON.
+		outputFormat - Indicates in what format you want to receive the data resulting from the Read, New, Update and Select operations: MV, XML, XML_DICT, XML_SCH, JSON, JSON_DICT or JSON_SCH.
+		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
+		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
+		
+	Returns:
+		The results of the operation.
+	
+	Remarks:
+		Inside the records argument, the recordIds and the modified records always must be specified. But the originalRecords not always.
+		When updateOptions argument is specified with its optimisticLock property set to true, a copy of the record must be provided before the modification (originalRecords argument)
+		to use the Optimistic Lock technique. This copy can be obtained from a previous <Base_LkRead> operation. The database, before executing the modification, 
+		reads the record and compares it with the copy in originalRecords, if they are equal the modified record is executed.
+		But if they are not equal, it means that the record has been modified by other user and its modification will not be saved.
+		The record will have to be read, modified and saved again.
+	
+	See Also:
+		<LkCreateUpdateOptions>
+		
+		<LkCreateCredentialOptions>
+		
+		<Release Memory>
+*/
+DllEntry char* Base_LkUpdatePartial(char** error, const char* const credentialOptions, const char* const filename, const char* const records, const char* const dictionaries, const char* const updateOptions, DataFormatTYPE inputFormat, DataFormatCruTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+{
+	uint8_t operationCode = OP_CODE_UPDATEPARTIAL;
+	char* operationArguments = LkGetUpdatePartialArgs(filename, records, dictionaries, updateOptions, customVars);
 
 	char* result = LkExecuteDirectOperation(error, credentialOptions, operationCode, operationArguments, inputFormat, outputFormat, receiveTimeout);
 	
@@ -213,7 +259,7 @@ DllEntry char* Base_LkDelete(char** error, const char* const credentialOptions, 
 		filename - File name where the select operation will be perform. For example LK.ORDERS
 		selectClause - Fragment of the phrase that indicate the selection condition. For example WITH CUSTOMER = '1'
 		sortClause - Fragment of the phrase that indicates the selection order. If there is a selection rule, Linkar will execute a SSELECT, otherwise Linkar will execute a SELECT. For example BY CUSTOMER
-		dictClause - Is the list of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. For example CUSTOMER DATE ITEM
+		dictClause - Is the list of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. For example CUSTOMER DATE ITEM. You may use the format LKFLDx where x is the attribute number.
 		preSelectClause - It's an optional statement that will execute before the main Select.
 		selectOptions - String that defines the different reading options of the Function: calculated, dictionaries, conversion, formatSpec, originalRecords, onlyItemId, pagination, regPage, numPage.
 		outputFormat - Indicates in what format you want to receive the data resulting from the Read, New, Update and Select operations: MV, XML, XML_DICT, XML_SCH, JSON, JSON_DICT or JSON_SCH.
@@ -581,7 +627,7 @@ DllEntry char* Base_LkProperties(char** error, const char* const credentialOptio
 		credentialOptions - String that defines the necessary data to access to the Linkar Server: Username, Password, EntryPoint, Language, FreeText.
         filename - File or table name defined in Linkar Schemas. Table notation is: MainTable[.MVTable[.SVTable]]
         selectClause - Fragment of the phrase that indicate the selection condition. For example WITH CUSTOMER = '1'
-        dictClause - Is the list of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. For example CUSTOMER DATE ITEM
+        dictClause - Is the list of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. For example CUSTOMER DATE ITEM. In NONE mode you may use the format LKFLDx where x is the attribute number.
         sortClause - Fragment of the phrase that indicates the selection order. If there is a selection rule Linkar will execute a SSELECT, otherwise Linkar will execute a SELECT. For example BY CUSTOMER
         tableOptions - Different function options: rowHeaders, rowProperties, onlyVisibe, usePropertyNames, repeatValues, applyConversion, applyFormat, calculated, pagination, regPage, numPage
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.

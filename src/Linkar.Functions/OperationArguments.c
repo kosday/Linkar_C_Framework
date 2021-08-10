@@ -126,6 +126,54 @@ DllEntry char* LkGetUpdateArgs(const char* const filename, const char* const rec
 	return operationArguments;
 }
 
+/* 
+	Function: LkGetUpdatePartialArgs
+		Compose the 3 items ( CUSTOMVARS, OPTIONS and INPUTDATA) of the UpdatePartial operation.
+	
+	Arguments:
+		filename - File name where you are going to write.
+		records - Are the records you want to update. Inside this string are the recordIds, the records, and the originalRecords. Use <LkComposeUpdateBuffer> function to compose this string.
+		dictionaries - List of dictionaries to write, separated by space. In MV output format is mandatory.
+		updateOptions - String that defines the different writing options of the Function: optimisticLockControl, readAfter, calculated, dictionaries, conversion, formatSpec, originalRecords.
+		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
+   
+	Returns:      
+		A string ready to be used in <LkExecuteDirectOperation> and <LkExecutePersistentOperation>.
+		
+	See Also:
+		<LkComposeUpdateBuffer>
+		
+		<LkExecuteDirectOperation>
+		
+		<LkExecutePersistentOperation>
+		
+		<Release Memory>
+*/
+DllEntry char* LkGetUpdatePartialArgs(const char* const filename, const char* const records, const char* const dictionaries, const char* const updateOptions, const char* const customVars)
+{
+	char* updateOpt;
+	if(updateOptions == NULL || *updateOptions == 0)
+		updateOpt = LkCreateUpdateOptions(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
+	else
+		updateOpt = (char*)updateOptions;
+	
+	//inputData = filename + DBMV_Mark.AM + records + ASCII_Chars.FS_str + dictionaries;
+	char* partialInputData = LkCatString(filename, records, DBMV_Mark_AM_str);
+	char* inputData = LkCatString(partialInputData, dictionaries, ASCII_FS_str);
+	free(partialInputData);
+
+	//operationArguments = customVars + ASCII_Chars.US_str + options + ASCII_Chars.US_str + inputData;
+	char*aux = LkCatString(customVars, updateOpt, ASCII_US_str);
+	char* operationArguments= LkCatString(aux, inputData, ASCII_US_str);
+	free(aux);
+	free(inputData);
+	
+	if(updateOptions != updateOpt)
+		free(updateOpt);
+	
+	return operationArguments;
+}
+
 
 /* 
 	Function: LkGetNewArgs

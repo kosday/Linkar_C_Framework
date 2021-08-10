@@ -6,6 +6,7 @@
 	--- Code
 	DllEntry char* LkGetReadArgs(const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, const char* const customVars);
 	DllEntry char* LkGetUpdateArgs(const char* const filename, const char* const records, const char* const updateOptions, const char* const customVars);
+	DllEntry char* LkGetUpdatePartialArgs(const char* const filename, const char* const records, const char* const dictionaries, const char* const updateOptions, const char* const customVars);
 	DllEntry char* LkGetNewArgs(const char* const filename, const char* const records, const char* const newOptions, const char* const customVars);
 	DllEntry char* LkGetDeleteArgs(const char* const filename, const char* const records, const char* deleteOptions, const char* const customVars);
 	DllEntry char* LkGetSelectArgs(const char* const filename, const char* const selectClause, const char* const sortClause, const char* const dictClause, const char* const preSelectClause, const char* const selectOptions, const char* const customVars);
@@ -28,6 +29,7 @@
 
 DllEntry char* LkGetReadArgs(const char* const filename, const char* const recordIds, const char* const dictionaries, const char* const readOptions, const char* const customVars);
 DllEntry char* LkGetUpdateArgs(const char* const filename, const char* const records, const char* const updateOptions, const char* const customVars);
+DllEntry char* LkGetUpdatePartialArgs(const char* const filename, const char* const records, const char* const dictionaries, const char* const updateOptions, const char* const customVars);
 DllEntry char* LkGetNewArgs(const char* const filename, const char* const records, const char* const newOptions, const char* const customVars);
 DllEntry char* LkGetDeleteArgs(const char* const filename, const char* const records, const char* deleteOptions, const char* const customVars);
 DllEntry char* LkGetSelectArgs(const char* const filename, const char* const selectClause, const char* const sortClause, const char* const dictClause, const char* const preSelectClause, const char* const selectOptions, const char* const customVars);

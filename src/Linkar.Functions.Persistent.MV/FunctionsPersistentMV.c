@@ -72,7 +72,7 @@ DllEntry void LkLogout(char** error, char* connectionInfo, const char* const cus
 		connectionInfo - String that is returned by the Login function and that contains all the necessary data of the connection.
 		filename - File name to read.
 		recordIds - It's the records codes list to read, separated by the Record Separator character (30). Use <LkComposeRecordIds> to compose this string
-		dictionaries - List of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer.
+		dictionaries - List of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. You may use the format LKFLDx where x is the attribute number.
 		readOptions - Object that defines the different reading options of the Function: Calculated, dictClause, conversion, formatSpec, originalRecords.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely. Values less than or equal to 0, waits indefinitely.
@@ -219,6 +219,96 @@ DllEntry char* LkUpdate(char** error, char* connectionInfo, const char* const fi
 	DataFormatTYPE inputFormat = DataFormatTYPE_MV;		
 	DataFormatCruTYPE outputFormat = DataFormatCruTYPE_MV;		
 	char* result = Base_LkUpdate(error, connectionInfo, filename, records, updateOptions, inputFormat, outputFormat, customVars, receiveTimeout);
+	
+	return result;	
+}
+
+/*
+	Function: LkUpdatePartial
+		Update one or more attributes of one or more file records with MV input and output format.
+		
+	Arguments:
+		error - System or communication errors with LinkarSERVER.
+		connectionInfo - String that is returned by the Login function and that contains all the necessary data of the connection.
+		filename - File name where you are going to write.
+		records - Are the records you want to update. Inside this string are the recordIds, the records, and the originalRecords. Use <LkComposeUpdateBuffer> function to compose this string.
+		dictionaries - List of dictionaries to write, separated by space. In MV output format is mandatory. You may use the format LKFLDx where x is the attribute number.
+		updateOptions - Object that defines the different writing options of the Function: optimisticLockControl, readAfter, calculated, dictionaries, conversion, formatSpec, originalRecords.
+		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
+		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
+		
+	Returns:
+		The results of the operation.
+
+	Remarks:
+		Inside the records argument, the recordIds and the modified records always must be specified. But the originalRecords not always.
+		When updateOptions argument is specified with its optimisticLock property set to true, a copy of the record must be provided before the modification (originalRecords argument)
+		to use the Optimistic Lock technique. This copy can be obtained from a previous <LkRead> operation. The database, before executing the modification, 
+		reads the record and compares it with the copy in originalRecords, if they are equal the modified record is executed.
+		But if they are not equal, it means that the record has been modified by other user and its modification will not be saved.
+		The record will have to be read, modified and saved again.
+	
+	Example:
+		--- Code
+		#include "Types.h"
+		#include "CredentialOptions.h"
+		#include "ConnectionInfo.h"
+		#include "PersistentFunctionsMV.h"
+		#include "OperationOptions.h"
+		#include "ReleaseMemory.h"
+			
+		char* MyUpdatePartial(char** error)
+		{
+			char* result;
+			CredentialOptions credentials = LkCreateCredentialOptions("127.0.0.1", "EPNAME", 11300, "admin", "admin", "", "");
+			char* connectionInfo = LkLogin(error, credentials, "", 600);
+			LkFreeMemory(credentials);
+			if(error == NULL && connectionInfo != NULL)
+			{
+				char* recordId = "2";												// For multirecords, use LkComposeRecordIds
+				// "\xFE" is the AM Mark
+				char* record = "FCUSTOMER 2";		// For multirecords, use LkComposeRecords
+				char* originalRecord = "";											// For multirecords, use LkComposeRecords
+				char* updateBufffer = LkComposeUpdateBuffer(recordId, records, originalRecord);
+				
+				char* options = LkCreateUpdateOptions(FALSE, TRUE, TRUE, FALSE, FALSE, FALSE);
+				result = LkUpdatePartial(error, connectionInfo, "LK.CUSTOMERS", updateBufffer, "NAME", options, "", 0);
+				LkFreeMemory(options);
+				LkFreeMemory(updateBufffer);
+				
+				LkLogout(error, connectionInfo, "", 0);
+				LkFreeMemory(connectionInfo);
+			}
+			return result;
+		}
+		---
+
+	See Also:
+		<LkCreateUpdateOptions>
+		
+		<LkComposeUpdateBuffer>
+		
+		<LkComposeRecordIds>
+
+		<LkComposeRecords>
+		
+		<LkExtractRecordIds>
+		
+		<LkExtractRecords>
+
+		<LkCreateConnectionInfo>
+		
+		<LkLogin>
+		
+		<LkLogout>
+
+		<Release Memory>
+*/
+DllEntry char* LkUpdatePartial(char** error, char* connectionInfo, const char* const filename, const char* const records, const char* const dictionaries, const char* const updateOptions, const char* const customVars, uint32_t receiveTimeout)
+{
+	DataFormatTYPE inputFormat = DataFormatTYPE_MV;		
+	DataFormatCruTYPE outputFormat = DataFormatCruTYPE_MV;		
+	char* result = Base_LkUpdatePartial(error, connectionInfo, filename, records, dictionaries, updateOptions, inputFormat, outputFormat, customVars, receiveTimeout);
 	
 	return result;	
 }
@@ -409,7 +499,7 @@ DllEntry char* LkDelete(char** error, char* connectionInfo, const char* const fi
 		filename - File name where the select operation will be perform. For example LK.ORDERS
 		selectClause - Fragment of the phrase that indicate the selection condition. For example WITH CUSTOMER = '1'
 		sortClause - Fragment of the phrase that indicates the selection order. If there is a selection rule, Linkar will execute a SSELECT, otherwise Linkar will execute a SELECT. For example BY CUSTOMER
-		dictClause - Is the list of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. For example CUSTOMER DATE ITEM
+		dictClause - Is the list of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. For example CUSTOMER DATE ITEM. You may use the format LKFLDx where x is the attribute number.
 		preSelectClause - It's an optional statement that will execute before the main Select.
 		selectOptions - String that defines the different reading options of the Function: calculated, dictionaries, conversion, formatSpec, originalRecords, onlyItemId, pagination, regPage, numPage.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.

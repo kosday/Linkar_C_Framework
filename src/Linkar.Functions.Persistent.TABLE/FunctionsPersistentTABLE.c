@@ -222,7 +222,7 @@ DllEntry char* LkProperties(char** error, char* connectionInfo, const char* cons
 		connectionInfo - String that is returned by the Login function and that contains all the necessary data of the connection.
         filename - File or table name defined in Linkar Schemas. Table notation is: MainTable[.MVTable[.SVTable]]
         selectClause - Fragment of the phrase that indicate the selection condition. For example WITH CUSTOMER = '1'
-        dictClause - Is the list of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. For example CUSTOMER DATE ITEM
+        dictClause - Is the list of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. For example CUSTOMER DATE ITEM. In NONE mode you may use the format LKFLDx where x is the attribute number.
         sortClause - Fragment of the phrase that indicates the selection order. If there is a selection rule Linkar will execute a SSELECT, otherwise Linkar will execute a SELECT. For example BY CUSTOMER
         tableOptions - Different function options: rowHeaders, rowProperties, onlyVisibe, usePropertyNames, repeatValues, applyConversion, applyFormat, calculated, pagination, regPage, numPage
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.

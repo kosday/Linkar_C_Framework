@@ -504,6 +504,7 @@ DllEntry char* Base_LkExecute(char** error, const char* const credentialOptions,
 		OTHERLANGUAGES - Languages list separated by commas.
 		TABLEROWSEPARATOR - It is the decimal char that you use to separate the rows in the output table format. By default 11.
 		TABLECOLSEPARATOR - It is the decimal char that you use to separate the columns in the output table format. By default 9.
+		CONVERTNUMBOOLJSON - Switch to create numeric and boolean data in JSON strings. Default is false.
 	
 	See Also:
 		<LkCreateCredentialOptions>
@@ -579,7 +580,7 @@ DllEntry char* Base_LkSchemas(char** error, const char* const credentialOptions,
 		credentialOptions - String that defines the necessary data to access to the Linkar Server: Username, Password, EntryPoint, Language, FreeText.
 		filename - File name to LkProperties.
 		lkPropertiesOptions - This string defines the different options in base of the asked Schema Type: LKSCHEMAS, SQLMODE o DICTIONARIES.
-		outputFormat - Indicates in what format you want to receive the data resulting from the operation: MV, XML, JSON or TABLE
+		outputFormat - Indicates in what format you want to receive the data resulting from the operation: MV, XML, XML_DIC, XML_SCH, JSON, JSON_DICT, JSON_SCH or TABLE
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
@@ -605,7 +606,7 @@ DllEntry char* Base_LkSchemas(char** error, const char* const credentialOptions,
 		
 		<Release Memory>
 */
-DllEntry char* Base_LkProperties(char** error, const char* const credentialOptions, const char* const filename, const char* const lkPropertiesOptions, DataFormatTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* Base_LkProperties(char** error, const char* const credentialOptions, const char* const filename, const char* const lkPropertiesOptions, DataFormatSchPropTYPE outputFormat, const char* const customVars, uint32_t receiveTimeout)
 {
 	uint8_t operationCode = OP_CODE_LKPROPERTIES;
 	char* operationArguments = LkGetLkPropertiesArgs(filename, lkPropertiesOptions, customVars);

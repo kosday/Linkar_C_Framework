@@ -84,8 +84,8 @@ typedef uint8_t DataFormatTYPE;
 
 /*
 	typedef: DataFormatSchTYPE
-	Specify the output formats of LkSchemas and LkProperties operations.
-	Used only by LkSchemas and LkProperties functions.
+	Specify the output formats of LkSchemas operations.
+	Used only by LkSchemas functions.
 	There are 4 possible options: MV, XML, JSON and TABLE.
 		--- Code
 		typedef uint8_t DataFormatSchTYPE;
@@ -137,6 +137,78 @@ typedef uint8_t DataFormatCruTYPE;
 #define DataFormatCruTYPE_XML_SCH 0x06
 #define DataFormatCruTYPE_JSON_DICT 0x07
 #define DataFormatCruTYPE_JSON_SCH 0x08
+
+/*
+	typedef: DataFormatSchPropTYPE
+	Indicates the format of the data returned by LkProperties functions: MV, XML, JSON,JSON_DICT, JSON_SCH, XML_DICT, XML_SCH or TABLE
+		--- Code
+		typedef uint8_t DataFormatSchPropTYPE;
+		---
+		
+	Defined constants of DataFormatSchPropTYPE:
+		Used to define the options MV, XML, JSON,JSON_DICT, JSON_SCH, XML_DICT, XML_SCH or TABLE
+	
+		--- Code
+			#define DataFormatCruTYPE_MV 0x01
+			#define DataFormatCruTYPE_XML 0x02
+			#define DataFormatCruTYPE_JSON 0x03
+			#define DataFormatSchPropTYPE_TABLE 0x04
+			#define DataFormatCruTYPE_XML_DICT 0x05
+			#define DataFormatCruTYPE_XML_SCH 0x06
+			#define DataFormatCruTYPE_JSON_DICT 0x07
+			#define DataFormatCruTYPE_JSON_SCH 0x08
+		---			
+*/
+typedef uint8_t DataFormatSchPropTYPE;
+#define DataFormatSchPropTYPE_MV 0x01
+#define DataFormatSchPropTYPE_XML 0x02
+#define DataFormatSchPropTYPE_JSON 0x03
+#define DataFormatSchPropTYPE_TABLE 0x04
+#define DataFormatSchPropTYPE_XML_DICT 0x05
+#define DataFormatSchPropTYPE_XML_SCH 0x06
+#define DataFormatSchPropTYPE_JSON_DICT 0x07
+#define DataFormatSchPropTYPE_JSON_SCH 0x08
+
+/*
+	typedef: JSON_FORMAT
+	Specifies the desired output format: standard JSON, JSON_DICT format, or JSON_SCH format
+		--- Code
+		typedef uint8_t JSON_FORMAT;
+		---
+
+	Defined constants of JSON_FORMAT:
+		Used to define the options JSON, JSON_DICT and JSON_SCH
+	
+		--- Code
+			#define JSON_FORMAT_JSON 0x03
+			#define JSON_FORMAT_JSON_DICT 0x07
+			#define JSON_FORMAT_JSON_SCH 0x08
+		---
+*/
+typedef uint8_t JSON_FORMAT;
+#define JSON_FORMAT_JSON 0x03
+#define JSON_FORMAT_JSON_DICT 0x07
+#define JSON_FORMAT_JSON_SCH 0x08
+
+/*
+	typedef: XML_FORMAT
+	Specifies the desired output format: standard XML, XML_DICT format, or XML_SCH format
+		--- Code
+		typedef uint8_t XML_FORMAT;
+
+	Defined constants of XML_FORMAT:
+		Used to define the options XML, XML_DICT and XML_SCH
+	
+		--- Code
+			#define JSON_FORMAT_JSON 0x02
+			#define JSON_FORMAT_JSON_DICT 0x05
+			#define JSON_FORMAT_JSON_SCH 0x06
+		--- 
+*/
+typedef uint8_t XML_FORMAT;
+#define XML_FORMAT_XML 0x02
+#define XML_FORMAT_XML_DICT 0x05
+#define XML_FORMAT_XML_SCH 0x06
 
 /*
 	typedef: EnvelopeFormatTYPE

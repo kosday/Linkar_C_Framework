@@ -22,7 +22,7 @@
 		recordIds - It's the records codes list to read.
 		dictionaries - List of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. You may use the format LKFLDx where x is the attribute number.
 		readOptions - String that defines the different reading options of the Function: Calculated, dictClause, conversion, formatSpec, originalRecords.
-		jsonFormat - Different JSON output formats.
+		jsonFormat - Specifies the desired output format: standard JSON, JSON_DICT format, or JSON_SCH format.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
@@ -84,7 +84,7 @@ DllEntry char* LkRead(char** error, const char* const credentialOptions, const c
 		filename - File name where you are going to write.
 		records - Are the records you want to update. Inside this string are the recordIds, the records, and the originalRecords.
 		updateOptions - Object that defines the different writing options of the Function: optimisticLockControl, readAfter, calculated, dictionaries, conversion, formatSpec, originalRecords.
-		jsonFormat - Different JSON output formats.
+		jsonFormat - Specifies the desired output format: standard JSON, JSON_DICT format, or JSON_SCH format.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
@@ -158,7 +158,7 @@ DllEntry char* LkUpdate(char** error, const char* const credentialOptions, const
 		filename - File name where you are going to write.
 		records - Are the records you want to update. Inside this string are the recordIds, the records, and the originalRecords.
 		updateOptions - Object that defines the different writing options of the Function: optimisticLockControl, readAfter, calculated, dictionaries, conversion, formatSpec, originalRecords.
-		jsonFormat - Different JSON output formats.
+		jsonFormat - Specifies the desired output format: standard JSON, JSON_DICT format, or JSON_SCH format.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
@@ -230,7 +230,7 @@ DllEntry char* LkUpdatePartial(char** error, const char* const credentialOptions
 		filename - File name where you are going to write.
 		records - Are the records you want to write. Inside this string are the recordIds, and the records.
 		newOptions - String that defines the following writing options of the Function: recordIdType, readAfter, calculated, dictionaries, conversion, formatSpec, originalRecords.
-		jsonFormat - Different JSON output formats.
+		jsonFormat - Specifies the desired output format: standard JSON, JSON_DICT format, or JSON_SCH format.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
@@ -387,7 +387,7 @@ DllEntry char* LkDelete(char** error, const char* const credentialOptions, const
 		dictClause - Is the list of dictionaries to read, separated by space. If dictionaries are not indicated the function will read the complete buffer. For example CUSTOMER DATE ITEM. You may use the format LKFLDx where x is the attribute number.
 		preSelectClause - It's an optional statement that will execute before the main Select.
 		selectOptions - String that defines the different reading options of the Function: calculated, dictionaries, conversion, formatSpec, originalRecords, onlyItemId, pagination, regPage, numPage.
-		jsonFormat - Different JSON output formats.
+		jsonFormat - Specifies the desired output format: standard JSON, JSON_DICT format, or JSON_SCH format.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
@@ -717,6 +717,7 @@ DllEntry char* LkExecute(char** error, const char* const credentialOptions, cons
 		OTHERLANGUAGES - Languages list separated by commas.
 		TABLEROWSEPARATOR - It is the decimal char that you use to separate the rows in the output table format. By default 11.
 		TABLECOLSEPARATOR - It is the decimal char that you use to separate the columns in the output table format. By default 9.
+		CONVERTNUMBOOLJSON - Switch to create numeric and boolean data in JSON strings. Default is false.
 	
 	Example:
 		--- Code
@@ -822,19 +823,12 @@ DllEntry char* LkSchemas(char** error, const char* const credentialOptions, cons
 		credentialOptions - String that defines the necessary data to access to the Linkar Server: Username, Password, EntryPoint, Language, FreeText.
 		filename - File name to LkProperties.
 		lkPropertiesOptions - This string defines the different options in base of the asked Schema Type: LKSCHEMAS, SQLMODE o DICTIONARIES.
+		jsonFormat - Specifies the desired output format: standard JSON, JSON_DICT format, or JSON_SCH format.
 		customVars - It's a free text that will travel until the database to make the admin being able to manage additional behaviours in the standard routine SUB.LK.MAIN.CONTROL.CUSTOM. This routine will be called if the argument has content.
 		receiveTimeout - It's the maximum time in seconds that the client will keep waiting the answer by the server. Values less than or equal to 0, waits indefinitely.
 		
 	Returns:
 		The results of the operation.
-
-	Remarks:
-		TABLE output format uses the defined control characters in <EntryPoints Parameters: http://kosday.com/Manuals/en_web_linkar/lk_schemas_ep_parameters.html> Table Row Separator and Column Row Separator.
-		
-		By default:
-		
-		- TAB char (9) for columns.
-		- VT char (11) for rows.
 	
 	Example:
 		--- Code
@@ -852,7 +846,7 @@ DllEntry char* LkSchemas(char** error, const char* const credentialOptions, cons
 			//char* options = LkCreatePropOptionsTypeSQLMODE(FALSE, FALSE, 0, 0);
 			//char* options = LkCreatePropOptionsTypeDICTIONARIES(RowHeadersTYPE_MAINLABEL, FALSE, 0, 0);
 
-			result = LkProperties(error, credentials, "LK.CUSTOMERS", options, "", 600);
+			result = LkProperties(error, credentials, "LK.CUSTOMERS", options, JSON_FORMAT_JSON, "", 600);
 			LkFreeMemory(options);
 			LkFreeMemory(credentials);
 			return result;
@@ -871,10 +865,9 @@ DllEntry char* LkSchemas(char** error, const char* const credentialOptions, cons
 		
 		<Release Memory>
 */
-DllEntry char* LkProperties(char** error, const char* const credentialOptions, const char* const filename, const char* const lkPropertiesOptions, const char* const customVars, uint32_t receiveTimeout)
+DllEntry char* LkProperties(char** error, const char* const credentialOptions, const char* const filename, const char* const lkPropertiesOptions, JSON_FORMAT jsonFormat, const char* const customVars, uint32_t receiveTimeout)
 {
-	DataFormatTYPE outputFormat = DataFormatSchTYPE_JSON;	
-	char* result = Base_LkProperties(error, credentialOptions, filename, lkPropertiesOptions, outputFormat, customVars, receiveTimeout);
+	char* result = Base_LkProperties(error, credentialOptions, filename, lkPropertiesOptions, jsonFormat, customVars, receiveTimeout);
 	
 	return result;	
 }

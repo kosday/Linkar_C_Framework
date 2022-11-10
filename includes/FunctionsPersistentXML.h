@@ -19,35 +19,12 @@
 	DllEntry char* LkExecute(char** error, char* connectionInfo, const char* const statement, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkGetVersion(char** error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkSchemas(char** error, char* connectionInfo, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout);
-	DllEntry char* LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout);
+	DllEntry char* LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkPropertiesOptions, XML_FORMAT xmlFormat, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkResetCommonBlocks(char** error, char* connectionInfo, uint32_t receiveTimeout);
 	---
 */
 #include "CompilerOptions.h"
 #include "Types.h"
-
-/*
-	typedef: XML_FORMAT
-	XML output formats for Read, Update, New and Select
-	There are 3 possible options: XML, XML_DICT, and XML_SCG.
-	
-		--- Code
-		typedef uint8_t XML_FORMAT;	
-		---
-		
-	Defined constants of XML_FORMAT::
-		Used to define the options XML, XML_DICT and XML_SCG.
-	
-		--- Code
-		#define XML_FORMAT_XML 2
-		#define XML_FORMAT_XML_DICT 5
-		#define XML_FORMAT_XML_SCH 6
-		---	
-*/	
-typedef uint8_t XML_FORMAT;
-#define XML_FORMAT_XML 2
-#define XML_FORMAT_XML_DICT 5
-#define XML_FORMAT_XML_SCH 6
 
 DllEntry char* LkLogin(char** error, char* credentialOptions, const char* const customVars, uint32_t receiveTimeout);
 DllEntry void LkLogout(char** error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout);
@@ -64,5 +41,5 @@ DllEntry char* LkDictionaries(char** error, char* connectionInfo, const char* co
 DllEntry char* LkExecute(char** error, char* connectionInfo, const char* const statement, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkGetVersion(char** error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkSchemas(char** error, char* connectionInfo, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout);
-DllEntry char* LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout);
+DllEntry char* LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkPropertiesOptions, XML_FORMAT xmlFormat, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkResetCommonBlocks(char** error, char* connectionInfo, uint32_t receiveTimeout);

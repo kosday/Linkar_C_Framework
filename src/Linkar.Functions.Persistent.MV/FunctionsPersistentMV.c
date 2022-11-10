@@ -893,6 +893,7 @@ DllEntry char* LkExecute(char** error, char* connectionInfo, const char* const s
 		OTHERLANGUAGES - Languages list separated by commas.
 		TABLEROWSEPARATOR - It is the decimal char that you use to separate the rows in the output table format. By default 11.
 		TABLECOLSEPARATOR - It is the decimal char that you use to separate the columns in the output table format. By default 9.
+		CONVERTNUMBOOLJSON - Switch to create numeric and boolean data in JSON strings. Default is false.
 	
 	Example:
 		--- Code

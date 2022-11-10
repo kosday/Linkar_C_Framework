@@ -19,35 +19,12 @@
 	DllEntry char* LkExecute(char** error, char* connectionInfo, const char* const statement, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkGetVersion(char** error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkSchemas(char** error, char* connectionInfo, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout);
-	DllEntry char* LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout);
+	DllEntry char* LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkPropertiesOptions, JSON_FORMAT jsonFormat, const char* const customVars, uint32_t receiveTimeout);
 	DllEntry char* LkResetCommonBlocks(char** error, char* connectionInfo, uint32_t receiveTimeout);
 	---
 */
 #include "CompilerOptions.h"
 #include "Types.h"
-
-/*
-	typedef: JSON_FORMAT
-	JSON output formats for Read, Update, New and Select
-	There are 3 possible options: JSON, JSON_DICT, and JSON_SCG.
-	
-		--- Code
-		typedef uint8_t JSON_FORMAT;	
-		---
-		
-	Defined constants of JSON_FORMAT::
-		Used to define the options JSON, JSON_DICT and JSON_SCG.
-	
-		--- Code
-		#define JSON_FORMAT_JSON 3
-		#define JSON_FORMAT_JSON_DICT 7
-		#define JSON_FORMAT_JSON_SCH 8
-		---	
-*/	
-typedef uint8_t JSON_FORMAT;
-#define JSON_FORMAT_JSON 3
-#define JSON_FORMAT_JSON_DICT 7
-#define JSON_FORMAT_JSON_SCH 8
 
 DllEntry char* LkLogin(char** error, char* credentialOptions, const char* const customVars, uint32_t receiveTimeout);
 DllEntry void LkLogout(char** error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout);
@@ -64,5 +41,5 @@ DllEntry char* LkDictionaries(char** error, char* connectionInfo, const char* co
 DllEntry char* LkExecute(char** error, char* connectionInfo, const char* const statement, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkGetVersion(char** error, char* connectionInfo, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkSchemas(char** error, char* connectionInfo, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout);
-DllEntry char* LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkSchemasOptions, const char* const customVars, uint32_t receiveTimeout);
+DllEntry char* LkProperties(char** error, char* connectionInfo, const char* const filename, const char* const lkPropertiesOptions, JSON_FORMAT jsonFormat, const char* const customVars, uint32_t receiveTimeout);
 DllEntry char* LkResetCommonBlocks(char** error, char* connectionInfo, uint32_t receiveTimeout);

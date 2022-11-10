@@ -42,6 +42,7 @@ cd Linkar.Strings
 
 echo "Compiling x64 Static LinkarStrings.c"
 cc $COMPILER_OPTIONS_STATIC_LIB_x64 -o LinkarStrings.o LinkarStrings.c
+ar rcs $BIN_DIR_A_x64/libLinkar.Strings.a LinkarStrings.o 
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.a LinkarStrings.o 
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.a LinkarStrings.o 
 ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Direct.MV.a LinkarStrings.o 
@@ -57,6 +58,7 @@ ar rcs $BIN_DIR_A_x64/libLinkar.Functions.Persistent.TABLE.a LinkarStrings.o
 echo ""
 echo "Compiling x86 Static LinkarStrings.c"
 gcc $COMPILER_OPTIONS_STATIC_LIB_x86 -o LinkarStrings.o LinkarStrings.c
+ar rcs $BIN_DIR_A_x86/libLinkar.Strings.a LinkarStrings.o 
 ar rcs $BIN_DIR_A_x86/libLinkar.Functions.a LinkarStrings.o 
 ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.a LinkarStrings.o 
 ar rcs $BIN_DIR_A_x86/libLinkar.Functions.Direct.MV.a LinkarStrings.o 

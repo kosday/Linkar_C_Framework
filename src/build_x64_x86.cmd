@@ -7,7 +7,7 @@ echo.
 if "%VSCMD_ARG_TGT_ARCH%"=="x64" goto RUN_X64
 if "%VSCMD_ARG_TGT_ARCH%"=="x86" goto RUN_X86
 echo NO detected VSCMD_ARG_TGT_ARCH environment variable. Are you sure you are runing this script under
-echo "x64 Native Tools Command Prompt for VS 2019" or "x86 Native Tools Command Prompt for VS 2019" ?
+echo "x64 Native Tools Command Prompt for VS 2019" or "x86 Native Tools Command Prompt for VS 2019 ?"
 pause
 goto END
 
